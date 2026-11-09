@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>부가가치세 안내 | 해인세무회계</title>
+<meta name="description" content="사업자 유형별 부가가치세 신고 일정과 준비서류를 확인하실 수 있습니다.">
+<meta property="og:title" content="부가가치세 안내 | 해인세무회계">
+<meta property="og:description" content="사업자 유형별 부가가치세 신고 일정과 준비서류를 확인하실 수 있습니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ywkim-boop.github.io/guide2/bugase.html">
+<meta property="og:image" content="https://ywkim-boop.github.io/guide2/bugase-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<style>
+  :root{
+    --navy:#0d2547; --navy-soft:#e8edf5; --ink:#1f2937; --muted:#6b7280;
+    --line:#d9dee7; --bg:#f4f6fa; --card:#ffffff; --accent:#c2410c; --ok:#15803d; --red:#b91c1c;
+    --hl:#fff8e1;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"맑은 고딕","Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:15px;line-height:1.65;-webkit-text-size-adjust:100%}
+  header{background:var(--navy);color:#fff;padding:22px 16px 18px}
+  header .firm{font-size:13px;opacity:.85;letter-spacing:.5px}
+  header h1{margin:4px 0 2px;font-size:24px;font-weight:900;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+  header p{margin:0;font-size:13.5px;opacity:.9}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px 40px}
+  section{background:var(--card);border-radius:12px;padding:18px 16px;margin-top:14px;box-shadow:0 1px 3px rgba(13,37,71,.06)}
+  h2{margin:0 0 10px;font-size:17px;font-weight:800;color:var(--navy);border-left:6px solid var(--navy);padding-left:10px;line-height:1.3}
+  h3{margin:16px 0 6px;font-size:15px;color:var(--navy)}
+  p{margin:0 0 8px}
+  .hint{font-size:13px;color:var(--muted);margin:0 0 10px}
+  .first{background:var(--hl);border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:14px}
+  .first b{color:var(--navy)}
+  .red{color:var(--red);font-weight:700}
+  .warn{color:var(--accent);font-weight:700}
+
+  /* 표 (남색 선 심플 스타일) */
+  table{width:100%;border-collapse:collapse;border-top:2px solid var(--navy);border-bottom:2px solid var(--navy);font-size:14px}
+  th{text-align:left;color:var(--navy);font-weight:800;padding:8px 6px;border-bottom:1px solid var(--navy);white-space:nowrap}
+  td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td:first-child{color:#4b5563;font-weight:700}
+  td.num,th.num{text-align:right;white-space:nowrap}
+  tr.hl td{background:var(--hl)}
+  .tblwrap{overflow-x:auto}
+
+  /* 기한 계산 */
+  .calc{display:grid;gap:10px;margin-bottom:12px}
+  .fld{display:grid;gap:4px;font-weight:700;font-size:14px;color:var(--navy)}
+  .fld input{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+  .opt{display:flex;gap:8px;align-items:flex-start;font-size:14px}
+  .opt input{width:18px;height:18px;margin-top:3px;accent-color:var(--navy);flex:0 0 auto}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:4px 0 4px;text-align:center}
+  .steps div{background:var(--navy-soft);border-radius:10px;padding:10px 4px;font-size:12.5px;line-height:1.4}
+  .steps b{display:block;font-size:15px;color:var(--navy)}
+  .steps .main{background:var(--navy);color:#fff}.steps .main b{color:#fff}
+  #timeline{display:none}
+  #timeline.on{display:block}
+  .dday{display:inline-block;font-size:12px;font-weight:800;padding:1px 8px;border-radius:99px;background:var(--navy);color:#fff;white-space:nowrap}
+  .dday.late{background:var(--red)}
+  .dday.done{background:#9ca3af}
+  td .law{display:block;font-size:12px;color:var(--muted);font-weight:400}
+  td .shift{display:block;font-size:12px;color:var(--accent);font-weight:400}
+
+  /* 체크리스트 */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+  .chip{border:1.5px solid var(--line);background:#fff;padding:8px 12px;border-radius:10px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
+  .chip.on{border-color:var(--navy);background:var(--navy-soft);color:var(--navy);font-weight:700}
+  .chip.on::before{content:"✓ "}
+  .progress{display:flex;align-items:center;gap:10px;margin:10px 0 6px}
+  .bar{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
+  .count{font-size:13px;font-weight:700;color:var(--ok);white-space:nowrap}
+  .group{display:none}.group.on{display:block}
+  .tag{font-size:11.5px;font-weight:700;background:var(--navy-soft);color:var(--navy);padding:2px 8px;border-radius:99px;margin-left:6px;vertical-align:middle}
+  .tag.must{background:#fde8e8;color:var(--red)}
+  label.item{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+  label.item:last-child{border-bottom:0}
+  label.item input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--ok);flex:0 0 auto}
+  label.item .t{font-weight:700}
+  label.item .d{display:block;font-size:13px;color:var(--muted);font-weight:400}
+  label.item input:checked + span .t{color:var(--muted);text-decoration:line-through}
+  .btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .btn{border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:8px;font:inherit;font-size:13.5px;cursor:pointer;color:var(--ink)}
+
+  /* 접이식 안내 */
+  details{border-top:1px solid var(--line)}
+  details:last-of-type{border-bottom:1px solid var(--line)}
+  summary{list-style:none;cursor:pointer;padding:13px 4px;font-weight:800;color:var(--navy);display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"＋";font-weight:400;color:var(--muted)}
+  details[open] summary::after{content:"－"}
+  details .body{padding:0 2px 16px}
+  .kv{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:14px;padding:6px 0;border-bottom:1px dashed var(--line)}
+  .kv:last-child{border-bottom:0}
+  .kv span:last-child{text-align:right;font-weight:700}
+  .box{background:var(--navy-soft);border-radius:10px;padding:12px 14px;margin:10px 0;font-size:14px}
+  .faq b{display:block;color:var(--navy);margin-top:12px}
+  .faq b:first-child{margin-top:0}
+  .faq p{font-size:14px}
+  .laws{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .laws span{font-size:12px;background:var(--navy-soft);color:var(--navy);padding:3px 8px;border-radius:6px}
+
+  .send{display:grid;gap:8px;margin-top:6px}
+  .send a,.send div{display:flex;gap:10px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink)}
+  .send b{color:var(--navy)}
+  footer{background:var(--navy);color:#fff;padding:20px 16px;font-size:13.5px}
+  footer .in{max-width:760px;margin:0 auto}
+  footer b{font-size:15px}
+  footer a{color:#fff}
+  footer .note{opacity:.7;font-size:12px;margin-top:8px}
+  @media (max-width:420px){ .steps{grid-template-columns:repeat(2,1fr)} }
+  .fld select{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+  .fld .amt{font-size:12.5px;color:var(--muted);font-weight:400;min-height:1em}
+  .fld small{font-size:12.5px;color:var(--muted);font-weight:400}
+  .opt.off{opacity:.45}
+  .res{margin-top:14px}
+  .res table{font-size:14px}
+  .res td.num{text-align:right;white-space:nowrap;font-weight:700;color:var(--ink)}
+  .res tr.total td{font-weight:800;color:var(--navy);font-size:16px;border-top:2px solid var(--navy)}
+  .res tr.sub td{color:var(--muted);font-weight:400;font-size:13px}
+  .res .big{background:var(--navy);color:#fff;border-radius:12px;padding:14px 16px;margin-bottom:10px}
+  .res .big small{display:block;opacity:.8;font-size:13px}
+  .res .big b{font-size:24px;font-weight:900}
+  .res .big.free{background:var(--ok)}
+  .calc-note{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.6}
+  ul.plain{margin:6px 0 10px;padding-left:18px;font-size:14px}
+  .seg{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--navy);border-radius:10px;overflow:hidden;margin-bottom:12px}
+  .seg.seg3{grid-template-columns:1fr 1fr 1fr}
+  .seg button{font:inherit;font-size:14.5px;padding:10px 4px;border:0;background:#fff;color:var(--navy);cursor:pointer}
+  .seg button+button{border-left:1px solid var(--navy-soft)}
+  .seg button.on{background:var(--navy);color:#fff;font-weight:800}
+  .tag{white-space:nowrap}
+  .tag.nx{display:table;margin:0 0 4px}
+  .links{display:grid;gap:8px}
+  .links a{display:flex;align-items:center;gap:12px;padding:14px;border:1.5px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);background:#fff}
+  .links a:active{background:var(--navy-soft)}
+  .links .ic{font-size:22px;flex:0 0 auto}
+  .links b{display:block;color:var(--navy);font-size:15px}
+  .links small{display:block;color:var(--muted);font-size:12.5px}
+  .links .go{margin-left:auto;font-size:24px;color:var(--navy);flex:0 0 auto}
+  .navwrap{padding-top:0}
+  @media print{ .navwrap{display:none} }
+  @media print{
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{background:#fff}
+    .chips,.btns,.progress,.calc{display:none!important}
+    section{box-shadow:none;border:1px solid var(--line);break-inside:avoid}
+    details .body{display:block}
+  }
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="firm">해인세무회계 · 대표세무사 김윤완</div>
+  <h1>부가가치세 안내</h1>
+  <p>신고 일정과 사무실에 보내 주실 자료를 안내해 드립니다.</p>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <h2>우리 사업장 신고 일정</h2>
+    <p class="hint">사업자 유형을 선택하시면 앞으로 1년간의 일정이 표시됩니다.</p>
+    <div class="seg seg3" id="seg">
+      <button data-t="ind" class="on">개인 일반</button>
+      <button data-t="corp">법인</button>
+      <button data-t="simple">간이과세자</button>
+    </div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>구분</th><th>기한</th></tr></thead>
+      <tbody id="tl"></tbody>
+    </table></div>
+    <p class="hint" id="segNote" style="margin-top:8px"></p>
+    <p class="hint">기한이 토·일요일·공휴일이면 다음 날로 연장됩니다. 설·추석 연휴와 대체공휴일(2026~2032년)도 반영했습니다. 정부가 따로 정하는 임시공휴일은 반영되지 않습니다.</p>
+    <div class="box"><b>자료는 여유 있게 보내 주세요</b> — 신고기한 직전에 자료가 몰리면 검토 시간이 부족합니다. 담당자가 안내드린 날짜까지 보내 주세요.</div>
+  </section>
+
+  <section id="list">
+    <h2>준비하실 서류</h2>
+    <p class="hint">카드매출·현금영수증·전자세금계산서는 사무실에서 홈택스로 조회합니다. 그 밖의 자료만 보내 주시면 됩니다.</p>
+    <div class="chips" id="chips">
+      <button class="chip" data-g="food">음식점</button>
+      <button class="chip" data-g="online">온라인·배달 판매</button>
+      <button class="chip" data-g="rent">부동산 임대</button>
+      <button class="chip" data-g="export">수출·영세율</button>
+      <button class="chip" data-g="asset">차량·시설 구입</button>
+    </div>
+    <div class="progress"><div class="bar"><i id="bar"></i></div><span class="count" id="count">0 / 0</span></div>
+
+    <div class="group on" data-group="common">
+      <h3>모든 분 공통</h3>
+      <label class="item"><input type="checkbox" data-id="c1"><span><span class="t">종이 세금계산서·계산서</span><span class="d">전자로 발행·수취하지 않은 것 — 매출·매입 모두</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c2"><span><span class="t">홈택스에 등록 안 된 카드의 사업 관련 사용내역</span><span class="d">카드사 홈페이지에서 엑셀로 다운로드</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c3"><span><span class="t">현금매출 내역</span><span class="d">현금영수증을 발행하지 않은 현금 판매·계좌이체 매출</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c4"><span><span class="t">사업용 통장 입출금 내역 (엑셀)</span><span class="d">해당 신고기간분</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c5"><span><span class="t">개인과의 거래 계약서</span><span class="d">세금계산서 없이 사업자가 아닌 개인과 거래한 경우</span></span></label>
+    </div>
+
+    <div class="group" data-group="food">
+      <h3>음식점<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="f1"><span><span class="t">농·축·수산물 구입 증빙</span><span class="d">계산서, 카드영수증, 현금영수증 — 의제매입세액공제용</span></span></label>
+      <label class="item"><input type="checkbox" data-id="f2"><span><span class="t">현금·계좌이체로 산 식재료 내역</span><span class="d">시장 등에서 증빙 없이 산 경우 — 거래처·금액 메모</span></span></label>
+    </div>
+
+    <div class="group" data-group="online">
+      <h3>온라인·배달 판매<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="o1"><span><span class="t">배달앱 정산내역</span><span class="d">배달의민족·쿠팡이츠·요기요 등 — 기간별 매출·수수료 정산서</span></span></label>
+      <label class="item"><input type="checkbox" data-id="o2"><span><span class="t">오픈마켓·쇼핑몰 정산내역</span><span class="d">스마트스토어·쿠팡·11번가 등 — 판매·수수료 내역</span></span></label>
+      <label class="item"><input type="checkbox" data-id="o3"><span><span class="t">PG사·간편결제 정산내역</span><span class="d">자체 쇼핑몰 결제대행, 카카오페이·네이버페이 등</span></span></label>
+    </div>
+
+    <div class="group" data-group="rent">
+      <h3>부동산 임대<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="r1"><span><span class="t">새로 맺거나 갱신한 임대차계약서</span><span class="d">보증금·월세가 바뀐 경우 — 간주임대료 계산용</span></span></label>
+      <label class="item"><input type="checkbox" data-id="r2"><span><span class="t">공실·임대료 미수 내역</span><span class="d">비어 있던 기간, 받지 못한 월세</span></span></label>
+    </div>
+
+    <div class="group" data-group="export">
+      <h3>수출·영세율<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="e1"><span><span class="t">수출신고필증</span><span class="d">관세사 또는 유니패스 발급</span></span></label>
+      <label class="item"><input type="checkbox" data-id="e2"><span><span class="t">외화입금증명서</span><span class="d">은행 발급 — 용역·무형 수출 등</span></span></label>
+      <label class="item"><input type="checkbox" data-id="e3"><span><span class="t">내국신용장·구매확인서</span><span class="d">국내에서 수출업체에 공급한 경우</span></span></label>
+    </div>
+
+    <div class="group" data-group="asset">
+      <h3>차량·시설 구입<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="a1"><span><span class="t">구입 계약서와 세금계산서</span><span class="d">차량, 기계, 인테리어 공사 등</span></span></label>
+      <label class="item"><input type="checkbox" data-id="a2"><span><span class="t">자동차등록증</span><span class="d">차량 구입 시 — 매입세액 공제 가능 여부 확인용</span></span></label>
+    </div>
+
+    <div class="btns">
+      <button class="btn" id="reset">체크 초기화</button>
+      <button class="btn" onclick="window.print()">인쇄 / PDF 저장</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>알아두실 내용</h2>
+    <p class="hint">제목을 누르면 내용이 펼쳐집니다. (2026년 11월 현행 법령 기준)</p>
+
+    <details>
+      <summary>과세기간과 신고 방법</summary>
+      <div class="body"><div class="tblwrap"><table>
+        <thead><tr><th>구분</th><th>개인 일반</th><th>법인</th></tr></thead>
+        <tbody>
+          <tr><td>1~3월분</td><td>4월 고지 납부</td><td>4/25 예정신고</td></tr>
+          <tr><td>1~6월분</td><td>7/25 확정신고</td><td>7/25 확정신고</td></tr>
+          <tr><td>7~9월분</td><td>10월 고지 납부</td><td>10/25 예정신고</td></tr>
+          <tr><td>7~12월분</td><td>1/25 확정신고</td><td>1/25 확정신고</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box">· <b>개인 일반과세자</b>는 4월·10월에 직전 기 세액의 절반이 고지됩니다. 고지액이 50만원 미만이면 고지하지 않습니다. 예정신고기간 실적이 직전 기의 <b>3분의 1에 못 미치거나</b> 시설투자 등으로 조기환급을 받으려면 예정신고를 선택할 수 있습니다.<br>· <b>직전 기 공급가액 1억 5천만원 미만 법인</b>도 개인처럼 예정고지를 받습니다.<br>· <b>간이과세자</b>는 1년 단위(1~12월)로 다음 해 1월 25일까지 신고하고, 7월에 예정부과(고지)됩니다. 상반기에 세금계산서를 발급했다면 7월에 예정신고를 해야 합니다.</div></div>
+    </details>
+
+    <details>
+      <summary>매입세액 공제가 안 되는 경우</summary>
+      <div class="body"><div class="tblwrap"><table>
+        <thead><tr><th>구분</th><th>예시</th></tr></thead>
+        <tbody>
+          <tr><td>비영업용 승용차</td><td>일반 승용차의 구입·렌트·유류비·수리비 (경차, 9인승 이상 승합차, 화물차 등은 공제 가능)</td></tr>
+          <tr><td>기업업무추진비(접대비)</td><td>거래처 식사·선물 비용</td></tr>
+          <tr><td>사업과 무관한 지출</td><td>가사용·개인 용도 지출</td></tr>
+          <tr><td>면세사업 관련</td><td>면세 매출에 대응하는 매입</td></tr>
+          <tr><td>증빙 없는 지출</td><td>간이영수증, 간이과세자(영수증 발급)에게 산 것 등</td></tr>
+          <tr><td>토지 관련 지출</td><td>토지 조성·취득 관련 비용, 건물 철거비 등</td></tr>
+          <tr><td>사업자등록 전 매입</td><td>공급시기가 속한 과세기간이 끝난 후 20일이 지나 등록 신청한 경우</td></tr>
+        </tbody>
+      </table></div>
+      <p class="hint" style="margin-top:8px">공제가 안 되는 지출도 소득세·법인세에서는 경비가 될 수 있으니 영수증은 모두 보관해 주세요.</p></div>
+    </details>
+
+    <details>
+      <summary>기한을 넘기면</summary>
+      <div class="body">
+        <div class="kv"><span>무신고가산세</span><span>납부세액의 20% (부정 40%)</span></div>
+        <div class="kv"><span>과소신고가산세</span><span>10% (부정 40%)</span></div>
+        <div class="kv"><span>납부지연가산세</span><span>미납세액 × 일수 × 0.022%</span></div>
+        <div class="kv"><span>세금계산서 관련 가산세</span><span>미발급·지연발급 등 별도</span></div>
+        <div class="box">기한 안에 신고만 해도 무신고가산세는 피할 수 있습니다. 자료가 늦어지면 먼저 담당자에게 알려 주세요.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>자주 묻는 질문</summary>
+      <div class="body faq">
+        <b>Q. 간이과세자 기준은 얼마인가요?</b>
+        <p>개인사업자로서 직전 연도 공급대가(부가세 포함 매출)가 <b>1억 400만원 미만</b>이면 간이과세자가 됩니다. 부동산임대업·과세유흥업은 4,800만원 미만이며, 일부 업종·지역은 간이과세가 배제됩니다.</p>
+        <b>Q. 개인 카드로 산 것도 공제되나요?</b>
+        <p>대표자 본인 명의 카드로 사업용으로 산 것은 공제될 수 있습니다. 홈택스에 사업용 카드로 등록해 두시면 자동으로 모이고, 등록 안 된 카드는 사용내역을 따로 보내 주세요.</p>
+        <b>Q. 현금으로 받은 매출도 신고해야 하나요?</b>
+        <p>네. 현금영수증 발행 여부와 관계없이 모든 매출은 신고 대상입니다. 누락되면 나중에 가산세와 함께 추징될 수 있습니다.</p>
+        <b>Q. 차량 기름값은 공제되나요?</b>
+        <p>경차, 9인승 이상 승합차, 화물차 등은 공제됩니다. 일반 승용차는 부가세 공제는 안 되지만 소득세·법인세 경비로는 반영할 수 있습니다.</p>
+        <b>Q. 시설을 사서 환급받을 수 있나요?</b>
+        <p>인테리어·기계 등 시설투자가 있으면 조기환급을 신청할 수 있습니다. 계약 단계에서 미리 알려 주시면 일정에 맞춰 준비해 드립니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>적용 법령 근거</summary>
+      <div class="body"><div class="laws">
+        <span>부가가치세법 §39 공제하지 아니하는 매입세액</span><span>§48 예정신고·예정고지</span><span>§49 확정신고</span><span>§59 환급</span><span>§66 간이과세자 예정부과</span><span>§67 간이과세자 신고</span><span>시행령 §90 예정고지 법인 기준</span><span>국세기본법 §5 기한의 특례</span><span>§47의2~§47의4 가산세</span><span>부가가치세법 시행령 §109 간이과세 기준</span>
+      </div></div>
+    </details>
+  </section>
+
+  <section>
+    <h2>서류 보내는 방법</h2>
+    <div class="send">
+      <a href="mailto:nooae1385@daum.net"><span>✉️</span><span><b>이메일</b><br>nooae1385@daum.net</span></a>
+      <div><span>📠</span><span><b>팩스</b><br>051-314-1386</span></div>
+      <a href="tel:0513141384"><span>☎️</span><span><b>전화 문의</b><br>051-314-1384~5</span></a>
+    </div>
+    <div class="box">자료가 아직 다 준비되지 않았어도 준비된 것부터 먼저 보내 주세요. 빠진 자료는 담당자가 확인해서 다시 안내드립니다.</div>
+  </section>
+
+</div>
+
+<div class="wrap navwrap">
+  <section>
+    <h2>다른 안내 바로가기</h2>
+    <div class="links">
+      <a href="sugim.html"><span class="ic">🤝</span><span><b>거래처 수임등록 안내</b><small>처음 기장을 맡기실 때</small></span><span class="go">›</span></a>
+      <a href="jongso.html"><span class="ic">📒</span><span><b>종합소득세 안내</b><small>5월 신고 준비서류</small></span><span class="go">›</span></a>
+      <a href="beopin.html"><span class="ic">🏢</span><span><b>법인세 안내</b><small>결산 · 신고 준비서류</small></span><span class="go">›</span></a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="in">
+    <b>해인세무회계</b> · 대표세무사 김윤완<br>
+    ☎ <a href="tel:0513141384">051-314-1384~5</a> · 팩스 051-314-1386<br>
+    ✉ <a href="mailto:nooae1385@daum.net">nooae1385@daum.net</a>
+    <div class="note">이 안내는 일반적인 준비서류이며, 업종과 개별 상황에 따라 추가 서류를 요청드릴 수 있습니다.</div>
+  </div>
+</footer>
+
+<script>
+
+// ---- 공통: 날짜·휴일·체크리스트 ----
+var WD = ["일","월","화","수","목","금","토"];
+var FIXED = ["01-01","03-01","05-01","05-05","06-06","08-15","10-03","10-09","12-25"];
+var HOL = ["2026-01-01", "2026-02-16", "2026-02-17", "2026-02-18", "2026-03-01", "2026-03-02", "2026-05-01", "2026-05-05", "2026-05-24", "2026-05-25", "2026-06-03", "2026-06-06", "2026-08-15", "2026-08-17", "2026-09-24", "2026-09-25", "2026-09-26", "2026-10-03", "2026-10-05", "2026-10-09", "2026-12-25", "2027-01-01", "2027-02-06", "2027-02-07", "2027-02-08", "2027-02-09", "2027-03-01", "2027-05-01", "2027-05-03", "2027-05-05", "2027-05-13", "2027-06-06", "2027-08-15", "2027-08-16", "2027-09-14", "2027-09-15", "2027-09-16", "2027-10-03", "2027-10-04", "2027-10-09", "2027-10-11", "2027-12-25", "2027-12-27", "2028-01-01", "2028-01-26", "2028-01-27", "2028-01-28", "2028-03-01", "2028-04-12", "2028-05-01", "2028-05-02", "2028-05-05", "2028-06-06", "2028-08-15", "2028-10-02", "2028-10-03", "2028-10-04", "2028-10-05", "2028-10-09", "2028-12-25", "2029-01-01", "2029-02-12", "2029-02-13", "2029-02-14", "2029-03-01", "2029-05-01", "2029-05-05", "2029-05-07", "2029-05-20", "2029-05-21", "2029-06-06", "2029-08-15", "2029-09-21", "2029-09-22", "2029-09-23", "2029-09-24", "2029-10-03", "2029-10-09", "2029-12-25", "2030-01-01", "2030-02-02", "2030-02-03", "2030-02-04", "2030-02-05", "2030-03-01", "2030-05-01", "2030-05-05", "2030-05-06", "2030-05-09", "2030-06-06", "2030-08-15", "2030-09-11", "2030-09-12", "2030-09-13", "2030-10-03", "2030-10-09", "2030-12-25", "2031-01-01", "2031-01-22", "2031-01-23", "2031-01-24", "2031-03-01", "2031-03-03", "2031-05-01", "2031-05-05", "2031-05-28", "2031-06-06", "2031-08-15", "2031-09-30", "2031-10-01", "2031-10-02", "2031-10-03", "2031-10-09", "2031-12-25", "2032-01-01", "2032-02-10", "2032-02-11", "2032-02-12", "2032-03-01", "2032-05-01", "2032-05-03", "2032-05-05", "2032-05-16", "2032-05-17", "2032-06-06", "2032-08-15", "2032-08-16", "2032-09-18", "2032-09-19", "2032-09-20", "2032-09-21", "2032-10-03", "2032-10-04", "2032-10-09", "2032-10-11", "2032-12-25", "2032-12-27"];  // 2026~2032 설·추석·부처님오신날·대체공휴일·선거일 (관공서의 공휴일에 관한 규정 §2·§3)
+function pad(n){ return (n < 10 ? "0" : "") + n; }
+function fmt(d){ return d.getFullYear() + "." + (d.getMonth()+1) + "." + d.getDate() + "(" + WD[d.getDay()] + ")"; }
+function isOff(d){ var w = d.getDay(); return w === 0 || w === 6 || (FIXED.indexOf(pad(d.getMonth()+1) + "-" + pad(d.getDate())) > -1 || HOL.indexOf(d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate())) > -1); }
+function shift(d){ var x = new Date(d.getTime()); while (isOff(x)) x.setDate(x.getDate() + 1); return x; }
+function today0(){ var t = new Date(); t.setHours(0,0,0,0); return t; }
+function ddayHtml(due){
+  var diff = Math.round((due - today0()) / 86400000);
+  var txt = diff > 0 ? "D-" + diff : (diff === 0 ? "D-DAY" : "지남");
+  return "<span class='dday" + (diff < 0 ? " done" : "") + "'>" + txt + "</span>";
+}
+function shiftNote(base, due){ return due.getTime() !== base.getTime() ? "<span class='shift'>원래 " + fmt(base) + " → 휴일 연장</span>" : ""; }
+function store(KEY){
+  var s = {};
+  try { s = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch(e) {}
+  s.save = function(){ try { var o = {}; for (var k in s) if (k !== "save") o[k] = s[k]; localStorage.setItem(KEY, JSON.stringify(o)); } catch(e) {} };
+  return s;
+}
+function initChecklist(st){
+  st.checks = st.checks || {}; st.groups = st.groups || [];
+  var chips = document.querySelectorAll(".chip");
+  function update(){
+    var total = 0, done = 0;
+    document.querySelectorAll(".group.on input").forEach(function(b){ total++; if (b.checked) done++; });
+    document.getElementById("count").textContent = done + " / " + total + " 준비";
+    document.getElementById("bar").style.width = (total ? done / total * 100 : 0) + "%";
+  }
+  function apply(){
+    chips.forEach(function(c){ c.classList.toggle("on", st.groups.indexOf(c.dataset.g) > -1); });
+    document.querySelectorAll(".group").forEach(function(g){ var k = g.dataset.group; g.classList.toggle("on", k === "common" || st.groups.indexOf(k) > -1); });
+    update();
+  }
+  chips.forEach(function(c){ c.addEventListener("click", function(){ var i = st.groups.indexOf(c.dataset.g); if (i > -1) st.groups.splice(i,1); else st.groups.push(c.dataset.g); st.save(); apply(); }); });
+  var boxes = document.querySelectorAll("label.item input");
+  boxes.forEach(function(b){ b.checked = !!st.checks[b.dataset.id]; b.addEventListener("change", function(){ st.checks[b.dataset.id] = b.checked; st.save(); update(); }); });
+  document.getElementById("reset").addEventListener("click", function(){ st.checks = {}; boxes.forEach(function(b){ b.checked = false; }); st.save(); update(); });
+  apply();
+  window.addEventListener("beforeprint", function(){ document.querySelectorAll("details").forEach(function(d){ d.setAttribute("open",""); }); });
+}
+
+(function(){
+  var st = store("hain-bugase-v1");
+  st.type = st.type || "ind";
+  var NOTE = {
+    ind: "개인 일반과세자는 4월·10월에 직전 기 세액의 50%가 고지됩니다 (50만원 미만이면 고지 없음).",
+    corp: "직전 기 공급가액 1억 5천만원 미만 법인은 4월·10월에 예정고지를 받습니다.",
+    simple: "간이과세자는 7월에 예정부과(고지)됩니다. 상반기에 세금계산서를 발급했다면 7월 25일까지 예정신고해야 합니다."
+  };
+  function schedule(type){
+    var t = today0(), y = t.getFullYear(), rows = [];
+    for (var yy = y - 1; yy <= y + 1; yy++) {
+      if (type === "simple") {
+        rows.push({t:yy + "년 상반기 예정부과", sub:"1~6월분 · 고지 납부", base:new Date(yy, 6, 25)});
+        rows.push({t:yy + "년 확정신고", sub:"1~12월분", base:new Date(yy + 1, 0, 25), main:true});
+      } else {
+        var pre = type === "ind" ? "예정고지 납부" : "예정신고";
+        rows.push({t:yy + "년 1기 " + (type === "ind" ? "예정고지" : "예정신고"), sub:"1~3월분 · " + pre, base:new Date(yy, 3, 25)});
+        rows.push({t:yy + "년 1기 확정신고", sub:"1~6월분", base:new Date(yy, 6, 25), main:true});
+        rows.push({t:yy + "년 2기 " + (type === "ind" ? "예정고지" : "예정신고"), sub:"7~9월분 · " + pre, base:new Date(yy, 9, 25)});
+        rows.push({t:yy + "년 2기 확정신고", sub:"7~12월분", base:new Date(yy + 1, 0, 25), main:true});
+      }
+    }
+    var limit = new Date(t.getFullYear() + 1, t.getMonth(), t.getDate());
+    return rows.map(function(r){ r.due = shift(r.base); return r; })
+               .filter(function(r){ return r.due >= t && r.due <= limit; })
+               .sort(function(a,b){ return a.due - b.due; });
+  }
+  function render(){
+    document.querySelectorAll("#seg button").forEach(function(b){ b.classList.toggle("on", b.dataset.t === st.type); });
+    var rows = schedule(st.type), html = "";
+    rows.forEach(function(r, i){
+      html += "<tr" + (i === 0 ? " class='hl'" : "") + "><td>" + (i === 0 ? "<span class='tag must nx'>다음 일정</span>" : "") + r.t + "<span class='law'>" + r.sub + "</span></td>"
+           +  "<td style='white-space:nowrap'><b>" + fmt(r.due) + "</b><br>" + ddayHtml(r.due) + shiftNote(r.base, r.due) + "</td></tr>";
+    });
+    document.getElementById("tl").innerHTML = html;
+    document.getElementById("segNote").textContent = NOTE[st.type];
+  }
+  document.querySelectorAll("#seg button").forEach(function(b){ b.addEventListener("click", function(){ st.type = b.dataset.t; st.save(); render(); }); });
+  render();
+  initChecklist(st);
+})();
+</script>
+</body>
+</html>

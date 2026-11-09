@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>증여세 안내 | 해인세무회계</title>
+<meta name="description" content="증여일을 입력하면 신고기한이 계산되고, 증여세 신고에 필요한 서류를 상황별로 확인할 수 있습니다.">
+<meta property="og:title" content="증여세 안내 | 해인세무회계">
+<meta property="og:description" content="증여일을 입력하면 신고기한이 계산되고, 증여세 신고에 필요한 서류를 상황별로 확인할 수 있습니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ywkim-boop.github.io/guide2/jeungyeo.html">
+<meta property="og:image" content="https://ywkim-boop.github.io/guide2/jeungyeo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<style>
+  :root{
+    --navy:#0d2547; --navy-soft:#e8edf5; --ink:#1f2937; --muted:#6b7280;
+    --line:#d9dee7; --bg:#f4f6fa; --card:#ffffff; --accent:#c2410c; --ok:#15803d; --red:#b91c1c;
+    --hl:#fff8e1;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"맑은 고딕","Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:15px;line-height:1.65;-webkit-text-size-adjust:100%}
+  header{background:var(--navy);color:#fff;padding:22px 16px 18px}
+  header .firm{font-size:13px;opacity:.85;letter-spacing:.5px}
+  header h1{margin:4px 0 2px;font-size:24px;font-weight:900;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+  header p{margin:0;font-size:13.5px;opacity:.9}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px 40px}
+  section{background:var(--card);border-radius:12px;padding:18px 16px;margin-top:14px;box-shadow:0 1px 3px rgba(13,37,71,.06)}
+  h2{margin:0 0 10px;font-size:17px;font-weight:800;color:var(--navy);border-left:6px solid var(--navy);padding-left:10px;line-height:1.3}
+  h3{margin:16px 0 6px;font-size:15px;color:var(--navy)}
+  p{margin:0 0 8px}
+  .hint{font-size:13px;color:var(--muted);margin:0 0 10px}
+  .first{background:var(--hl);border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:14px}
+  .first b{color:var(--navy)}
+  .red{color:var(--red);font-weight:700}
+  .warn{color:var(--accent);font-weight:700}
+
+  /* 표 (남색 선 심플 스타일) */
+  table{width:100%;border-collapse:collapse;border-top:2px solid var(--navy);border-bottom:2px solid var(--navy);font-size:14px}
+  th{text-align:left;color:var(--navy);font-weight:800;padding:8px 6px;border-bottom:1px solid var(--navy);white-space:nowrap}
+  td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td:first-child{color:#4b5563;font-weight:700}
+  td.num,th.num{text-align:right;white-space:nowrap}
+  tr.hl td{background:var(--hl)}
+  .tblwrap{overflow-x:auto}
+
+  /* 기한 계산 */
+  .calc{display:grid;gap:10px;margin-bottom:12px}
+  .fld{display:grid;gap:4px;font-weight:700;font-size:14px;color:var(--navy)}
+  .fld input{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+  .opt{display:flex;gap:8px;align-items:flex-start;font-size:14px}
+  .opt input{width:18px;height:18px;margin-top:3px;accent-color:var(--navy);flex:0 0 auto}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:4px 0 4px;text-align:center}
+  .steps div{background:var(--navy-soft);border-radius:10px;padding:10px 4px;font-size:12.5px;line-height:1.4}
+  .steps b{display:block;font-size:15px;color:var(--navy)}
+  .steps .main{background:var(--navy);color:#fff}.steps .main b{color:#fff}
+  #timeline{display:none}
+  #timeline.on{display:block}
+  .dday{display:inline-block;font-size:12px;font-weight:800;padding:1px 8px;border-radius:99px;background:var(--navy);color:#fff;white-space:nowrap}
+  .dday.late{background:var(--red)}
+  .dday.done{background:#9ca3af}
+  td .law{display:block;font-size:12px;color:var(--muted);font-weight:400}
+  td .shift{display:block;font-size:12px;color:var(--accent);font-weight:400}
+
+  /* 체크리스트 */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+  .chip{border:1.5px solid var(--line);background:#fff;padding:8px 12px;border-radius:10px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
+  .chip.on{border-color:var(--navy);background:var(--navy-soft);color:var(--navy);font-weight:700}
+  .chip.on::before{content:"✓ "}
+  .progress{display:flex;align-items:center;gap:10px;margin:10px 0 6px}
+  .bar{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
+  .count{font-size:13px;font-weight:700;color:var(--ok);white-space:nowrap}
+  .group{display:none}.group.on{display:block}
+  .tag{font-size:11.5px;font-weight:700;background:var(--navy-soft);color:var(--navy);padding:2px 8px;border-radius:99px;margin-left:6px;vertical-align:middle}
+  .tag.must{background:#fde8e8;color:var(--red)}
+  label.item{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+  label.item:last-child{border-bottom:0}
+  label.item input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--ok);flex:0 0 auto}
+  label.item .t{font-weight:700}
+  label.item .d{display:block;font-size:13px;color:var(--muted);font-weight:400}
+  label.item input:checked + span .t{color:var(--muted);text-decoration:line-through}
+  .btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .btn{border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:8px;font:inherit;font-size:13.5px;cursor:pointer;color:var(--ink)}
+
+  /* 접이식 안내 */
+  details{border-top:1px solid var(--line)}
+  details:last-of-type{border-bottom:1px solid var(--line)}
+  summary{list-style:none;cursor:pointer;padding:13px 4px;font-weight:800;color:var(--navy);display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"＋";font-weight:400;color:var(--muted)}
+  details[open] summary::after{content:"－"}
+  details .body{padding:0 2px 16px}
+  .kv{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:14px;padding:6px 0;border-bottom:1px dashed var(--line)}
+  .kv:last-child{border-bottom:0}
+  .kv span:last-child{text-align:right;font-weight:700}
+  .box{background:var(--navy-soft);border-radius:10px;padding:12px 14px;margin:10px 0;font-size:14px}
+  .faq b{display:block;color:var(--navy);margin-top:12px}
+  .faq b:first-child{margin-top:0}
+  .faq p{font-size:14px}
+  .laws{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .laws span{font-size:12px;background:var(--navy-soft);color:var(--navy);padding:3px 8px;border-radius:6px}
+
+  .send{display:grid;gap:8px;margin-top:6px}
+  .send a,.send div{display:flex;gap:10px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink)}
+  .send b{color:var(--navy)}
+  footer{background:var(--navy);color:#fff;padding:20px 16px;font-size:13.5px}
+  footer .in{max-width:760px;margin:0 auto}
+  footer b{font-size:15px}
+  footer a{color:#fff}
+  footer .note{opacity:.7;font-size:12px;margin-top:8px}
+  @media (max-width:420px){ .steps{grid-template-columns:repeat(2,1fr)} }
+  .fld select{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+  .fld .amt{font-size:12.5px;color:var(--muted);font-weight:400;min-height:1em}
+  .fld small{font-size:12.5px;color:var(--muted);font-weight:400}
+  .opt.off{opacity:.45}
+  .res{margin-top:14px}
+  .res table{font-size:14px}
+  .res td.num{text-align:right;white-space:nowrap;font-weight:700;color:var(--ink)}
+  .res tr.total td{font-weight:800;color:var(--navy);font-size:16px;border-top:2px solid var(--navy)}
+  .res tr.sub td{color:var(--muted);font-weight:400;font-size:13px}
+  .res .big{background:var(--navy);color:#fff;border-radius:12px;padding:14px 16px;margin-bottom:10px}
+  .res .big small{display:block;opacity:.8;font-size:13px}
+  .res .big b{font-size:24px;font-weight:900}
+  .res .big.free{background:var(--ok)}
+  .calc-note{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.6}
+  .links{display:grid;gap:8px}
+  .links a{display:flex;align-items:center;gap:12px;padding:14px;border:1.5px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);background:#fff}
+  .links a:active{background:var(--navy-soft)}
+  .links .ic{font-size:22px;flex:0 0 auto}
+  .links b{display:block;color:var(--navy);font-size:15px}
+  .links small{display:block;color:var(--muted);font-size:12.5px}
+  .links .go{margin-left:auto;font-size:24px;color:var(--navy);flex:0 0 auto}
+  .navwrap{padding-top:0}
+  @media print{ .navwrap{display:none} }
+  @media print{
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{background:#fff}
+    .chips,.btns,.progress,.calc{display:none!important}
+    section{box-shadow:none;border:1px solid var(--line);break-inside:avoid}
+    details .body{display:block}
+  }
+  .elig{background:var(--navy-soft);border-radius:10px;padding:10px 14px;margin-top:8px;font-size:14px}
+  .elig .ok{color:var(--ok);font-weight:700}.elig .no{color:var(--red);font-weight:700}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="firm">해인세무회계 · 세무사 김윤완</div>
+  <h1>증여세 안내</h1>
+  <p>증여하기 전·후에 확인하실 내용과 준비서류를 안내해 드립니다.</p>
+</header>
+
+<div class="wrap">
+
+  <!-- 1. 핵심 요약 -->
+  <section>
+    <h2>먼저 확인하세요</h2>
+    <div class="first">증여세는 <b>받는 사람(수증자)</b>이 냅니다. 증여받은 날이 속하는 달의 말일부터 <b>3개월 이내</b>에 신고·납부하셔야 하며, 기한 내 신고하면 세액의 <b>3%</b>가 공제됩니다.</div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>누구에게 받나요</th><th class="num">10년간 공제 한도</th></tr></thead>
+      <tbody>
+        <tr><td>배우자</td><td class="num">6억원</td></tr>
+        <tr><td>부모·조부모 (성년 자녀)</td><td class="num">5,000만원</td></tr>
+        <tr><td>부모·조부모 (미성년 자녀)</td><td class="num">2,000만원</td></tr>
+        <tr class="hl"><td>부모·조부모 (혼인·출산 시 추가)</td><td class="num">+1억원</td></tr>
+        <tr><td>자녀·손자녀</td><td class="num">5,000만원</td></tr>
+        <tr><td>그 밖의 친족 (4촌 이내 혈족, 3촌 이내 인척)</td><td class="num">1,000만원</td></tr>
+      </tbody>
+    </table></div>
+    <p class="hint" style="margin-top:8px">· 공제는 <b>받는 사람 기준 10년 합계</b>입니다. 예) 아버지에게 3천만원, 어머니에게 2천만원을 받으면 합쳐서 5천만원 공제가 끝납니다.<br>· 부모님 두 분에게 받은 증여는 10년간 합산해서 세금을 계산합니다.</p>
+  </section>
+
+  <!-- 2. 기한 계산 -->
+  <section>
+    <h2>내 신고기한 계산</h2>
+    <div class="calc">
+      <label class="fld">증여일 (증여받은 날)
+        <input type="date" id="giftDate">
+      </label>
+      <p class="hint" style="margin:-4px 0 0">부동산은 소유권이전 등기접수일, 현금은 이체받은 날이 증여일입니다.</p>
+      <label class="opt"><input type="checkbox" id="realty"> 부동산(또는 차량 등)을 증여받았습니다 — 취득세 기한 표시</label>
+      <label class="opt"><input type="checkbox" id="burden"> 대출·전세보증금을 함께 넘겨받았습니다 (부담부증여)</label>
+    </div>
+    <div id="timeline">
+      <div class="tblwrap"><table>
+        <thead><tr><th>할 일</th><th>기한</th></tr></thead>
+        <tbody id="tl"></tbody>
+      </table></div>
+      <p class="hint" style="margin-top:8px">기한이 토·일요일·공휴일이면 다음 날로 연장됩니다. 설·추석 연휴와 대체공휴일(2026~2032년)도 반영했습니다. 정부가 따로 정하는 임시공휴일은 반영되지 않습니다.</p>
+    </div>
+
+    <h3>혼인·출산 공제 대상인지 확인 <span class="tag">선택</span></h3>
+    <p class="hint">부모·조부모에게 받는 경우에 해당합니다. 해당하는 날짜만 입력하세요.</p>
+    <div class="calc">
+      <label class="fld">혼인신고일 (예정일도 가능)
+        <input type="date" id="marryDate">
+      </label>
+      <label class="fld">자녀 출생일 (또는 입양신고일)
+        <input type="date" id="birthDate">
+      </label>
+    </div>
+    <div id="elig"></div>
+    <p class="warn" style="margin-top:10px;font-size:14px">기한을 넘기면 신고세액공제(3%)를 못 받고 가산세가 붙습니다. 증여 계획이 생기면 증여 전에 먼저 상담해 주세요.</p>
+  </section>
+
+  <!-- 3. 체크리스트 -->
+  <section id="list">
+    <h2>준비하실 서류</h2>
+    <p class="hint">해당하는 경우를 선택하시면 필요한 서류가 추가됩니다.</p>
+    <div class="chips" id="chips">
+      <button class="chip" data-g="cash">현금</button>
+      <button class="chip" data-g="re">부동산</button>
+      <button class="chip" data-g="stock">주식</button>
+      <button class="chip" data-g="burden">대출·보증금 승계 (부담부증여)</button>
+      <button class="chip" data-g="marry">혼인·출산 공제</button>
+    </div>
+    <div class="progress"><div class="bar"><i id="bar"></i></div><span class="count" id="count">0 / 0</span></div>
+
+    <div class="group on" data-group="common">
+      <h3>모든 분 공통</h3>
+      <label class="item"><input type="checkbox" data-id="c1"><span><span class="t">증여계약서<span class="tag must">필수</span></span><span class="d">부동산은 시·군·구청 검인을 받은 계약서</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c2"><span><span class="t">가족관계증명서<span class="tag must">필수</span></span><span class="d">주민센터·정부24 — 주는 분과 받는 분의 관계 확인용</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c3"><span><span class="t">주는 분·받는 분 신분증 사본</span><span class="d">앞면 사진 1장씩</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c4"><span><span class="t">받는 분 주민등록등본</span><span class="d">주민센터·정부24</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c5"><span><span class="t">10년 이내 이전 증여 내역</span><span class="d">같은 분(부모님은 두 분 합산)에게 받은 증여 — 이전 증여세 신고서가 있으면 함께, 신고하지 않은 증여도 알려 주세요</span></span></label>
+    </div>
+
+    <div class="group" data-group="cash">
+      <h3>현금을 받는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="m1"><span><span class="t">계좌이체 내역</span><span class="d">주는 분 계좌 → 받는 분 <b>본인 명의</b> 계좌로 이체한 내역</span></span></label>
+      <label class="item"><input type="checkbox" data-id="m2"><span><span class="t">받는 분 통장 사본</span><span class="d">통장 앞면 또는 계좌 확인서</span></span></label>
+    </div>
+
+    <div class="group" data-group="re">
+      <h3>부동산을 받는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="r1"><span><span class="t">감정평가서</span><span class="d">받으신 경우 — 증여일 전 6개월~후 3개월 이내 평가분</span></span></label>
+      <label class="item"><input type="checkbox" data-id="r2"><span><span class="t">임대차계약서</span><span class="d">세입자가 있는 경우 — 보증금·월세 확인</span></span></label>
+      <label class="item"><input type="checkbox" data-id="r3"><span><span class="t">취득세 납부영수증</span><span class="d">증여 등기 시 납부한 취득세</span></span></label>
+    </div>
+
+    <div class="group" data-group="stock">
+      <h3>주식을 받는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="s1"><span><span class="t">증권 잔고·입고 내역</span><span class="d">상장주식 — 증권사 발급, 대체 입고일 확인</span></span></label>
+      <label class="item"><input type="checkbox" data-id="s2"><span><span class="t">재무제표·법인세 신고서 (최근 3년)</span><span class="d">비상장주식 — 회사 기장 사무실에 요청</span></span></label>
+      <label class="item"><input type="checkbox" data-id="s3"><span><span class="t">주주명부·주식변동상황명세서</span><span class="d">비상장주식 — 주주 구성 확인용</span></span></label>
+    </div>
+
+    <div class="group" data-group="burden">
+      <h3>대출·보증금을 넘겨받는 경우 (부담부증여)<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="b1"><span><span class="t">대출 잔액증명서</span><span class="d">은행 — 증여일 기준</span></span></label>
+      <label class="item"><input type="checkbox" data-id="b2"><span><span class="t">채무인수 확인 서류</span><span class="d">은행 채무인수(차주변경) 약정서 또는 보증금 승계가 적힌 임대차계약서</span></span></label>
+      <label class="item"><input type="checkbox" data-id="b3"><span><span class="t">주는 분이 처음 취득할 때 계약서·취득세 영수증</span><span class="d">넘겨준 채무만큼은 주는 분에게 양도소득세가 나옵니다 — 그 계산용</span></span></label>
+      <label class="item"><input type="checkbox" data-id="b4"><span><span class="t">받는 분 소득 증빙</span><span class="d">원천징수영수증·소득금액증명 — 대출을 직접 갚을 능력 확인용</span></span></label>
+    </div>
+
+    <div class="group" data-group="marry">
+      <h3>혼인·출산 공제를 받는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="w1"><span><span class="t">혼인관계증명서 (상세)</span><span class="d">혼인신고일 확인용 — 혼인 전 증여는 신고 후 제출</span></span></label>
+      <label class="item"><input type="checkbox" data-id="w2"><span><span class="t">자녀 기본증명서 또는 가족관계증명서</span><span class="d">출산 공제 — 자녀 출생일(입양신고일) 확인용</span></span></label>
+    </div>
+
+    <div class="btns">
+      <button class="btn" id="reset">체크 초기화</button>
+      <button class="btn" onclick="window.print()">인쇄 / PDF 저장</button>
+    </div>
+  </section>
+
+  <!-- 4. 알아두실 내용 -->
+  <section>
+    <h2>알아두실 내용</h2>
+    <p class="hint">제목을 누르면 내용이 펼쳐집니다. (2026년 11월 현행 법령 기준)</p>
+
+    <details>
+      <summary>증여세 계산 구조</summary>
+      <div class="body"><div class="tblwrap"><table>
+        <thead><tr><th>단계</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td>증여재산가액</td><td>이번에 받은 재산의 평가액</td></tr>
+          <tr><td>(−) 넘겨받은 채무</td><td>부담부증여로 인수한 대출·보증금</td></tr>
+          <tr><td>(+) 10년 내 합산</td><td>같은 분에게 10년 이내 받은 증여 (1천만원 이상인 경우)</td></tr>
+          <tr><td>(−) 증여재산공제</td><td>관계별 공제 + 혼인·출산 공제</td></tr>
+          <tr><td>(×) 세율</td><td>= 산출세액 (손자녀는 할증)</td></tr>
+          <tr><td>(−) 기납부세액</td><td>10년 내 합산분에 이미 낸 증여세</td></tr>
+          <tr><td>(−) 신고세액공제 3%</td><td>신고기한 내 신고 시</td></tr>
+          <tr class="hl"><td>납부세액</td><td>분납·연부연납 가능</td></tr>
+        </tbody>
+      </table></div></div>
+    </details>
+
+    <details>
+      <summary>혼인·출산 증여재산공제 (1억원)</summary>
+      <div class="body">
+        <div class="kv"><span>받는 분</span><span>부모·조부모에게 받는 자녀</span></div>
+        <div class="kv"><span>혼인 공제 기간</span><span>혼인신고일 전후 2년 이내</span></div>
+        <div class="kv"><span>출산 공제 기간</span><span>자녀 출생일(입양신고일)부터 2년 이내</span></div>
+        <div class="kv"><span>공제 한도</span><span>혼인·출산 합쳐서 평생 1억원</span></div>
+        <div class="box">일반 공제(5천만원)와 별도로 받을 수 있어, 결혼하는 자녀는 부모에게 최대 <b>1억 5천만원</b>까지 세금 없이 받을 수 있습니다.<br><br>혼인 전에 공제를 받고 <b>2년 안에 혼인하지 않으면</b> 다시 신고해야 합니다. 정해진 기한 안에 수정신고하면 가산세는 면제되고 이자상당액만 붙습니다.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>증여재산 평가 방법</summary>
+      <div class="body">
+        <p style="font-size:14px">원칙은 <b>시가</b>입니다. 증여일 <b>전 6개월 ~ 후 3개월</b> 이내에 매매·감정·수용·경매 가액이 있으면 그 가격을 적용하고, 없으면 아래 방법으로 평가합니다. 아파트는 비슷한 세대의 거래가격이 시가로 적용될 수 있습니다.</p>
+        <div class="tblwrap"><table>
+          <thead><tr><th>재산 종류</th><th>평가 방법</th></tr></thead>
+          <tbody>
+            <tr><td>토지</td><td>개별공시지가</td></tr>
+            <tr><td>주택</td><td>공동주택가격 / 개별주택가격</td></tr>
+            <tr><td>일반건물·오피스텔·상업용</td><td>국세청 기준시가</td></tr>
+            <tr><td>임대 중인 부동산</td><td>임대료 환산가액과 위 평가액 중 큰 금액</td></tr>
+            <tr><td>상장주식</td><td>증여일 전후 2개월 종가 평균</td></tr>
+            <tr><td>비상장주식</td><td>순손익가치·순자산가치 가중평균 (별도 정밀평가)</td></tr>
+          </tbody>
+        </table></div>
+        <div class="box">부동산은 <b>어떤 가격으로 평가하느냐</b>에 따라 세금 차이가 큽니다. 감정평가를 받을지 증여 전에 먼저 상담해 주세요.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>증여세 세율</summary>
+      <div class="body"><div class="tblwrap"><table>
+        <thead><tr><th>과세표준</th><th class="num">세율</th><th class="num">누진공제</th></tr></thead>
+        <tbody>
+          <tr><td>1억원 이하</td><td class="num">10%</td><td class="num">0원</td></tr>
+          <tr><td>1억원 초과 ~ 5억원 이하</td><td class="num">20%</td><td class="num">1,000만원</td></tr>
+          <tr><td>5억원 초과 ~ 10억원 이하</td><td class="num">30%</td><td class="num">6,000만원</td></tr>
+          <tr><td>10억원 초과 ~ 30억원 이하</td><td class="num">40%</td><td class="num">1억 6,000만원</td></tr>
+          <tr><td>30억원 초과</td><td class="num">50%</td><td class="num">4억 6,000만원</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box"><b>손자녀 할증</b> — 자녀를 건너뛰고 손자녀가 받으면 산출세액에 30% 가산 (미성년 손자녀가 20억원 초과로 받으면 40%). 자녀가 먼저 사망한 경우의 손자녀는 할증 제외.</div></div>
+    </details>
+
+    <details>
+      <summary>부담부증여 (대출·보증금 함께 증여)</summary>
+      <div class="body">
+        <p style="font-size:14px">대출이나 전세보증금을 함께 넘겨받으면, 그 금액만큼은 <b>받는 분은 증여세</b>에서 빠지는 대신 <b>주는 분이 판 것으로 보아 양도소득세</b>를 냅니다.</p>
+        <div class="kv"><span>받는 분</span><span>(재산 − 채무)에 증여세</span></div>
+        <div class="kv"><span>주는 분</span><span>채무 부분에 양도소득세</span></div>
+        <div class="kv"><span>신고기한</span><span>둘 다 증여월 말일부터 3개월</span></div>
+        <div class="box">가족 간 부담부증여는 세무서가 <b>대출을 실제로 받는 분이 갚는지</b> 계속 확인합니다. 이자와 원금은 반드시 받는 분 본인 소득으로 갚으셔야 합니다.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>신고·납부 방법</summary>
+      <div class="body">
+        <div class="kv"><span>신고기한</span><span>증여월 말일부터 3개월</span></div>
+        <div class="kv"><span>신고하는 사람</span><span>받는 분 (수증자)</span></div>
+        <div class="kv"><span>신고기관</span><span>받는 분 주소지 관할 세무서</span></div>
+        <div class="kv"><span>신고세액공제</span><span>산출세액의 3%</span></div>
+        <div class="kv"><span>분납</span><span>1,000만원 초과 시 2개월 내</span></div>
+        <div class="kv"><span>연부연납</span><span>2,000만원 초과, 담보 제공 시 최장 5년</span></div>
+        <div class="kv"><span>무(과소)신고가산세</span><span>10~20% (부정 40%)</span></div>
+        <div class="kv"><span>납부지연가산세</span><span>미납세액 × 일수 × 0.022%</span></div>
+        <div class="box"><span class="red">함께 챙기세요</span> — 부동산을 받으면 <b>취득세</b>(증여월 말일부터 3개월 이내, 등기 전 납부)도 따로 내야 합니다.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>자주 묻는 질문</summary>
+      <div class="body faq">
+        <b>Q. 생활비·학비를 받는 것도 증여세가 나오나요?</b>
+        <p>필요할 때마다 받아서 생활비·교육비로 바로 쓰는 돈은 증여세가 없습니다. 다만 받은 돈을 모아서 예금·주식·부동산을 사면 증여세 대상이 됩니다.</p>
+        <b>Q. 부모님께 돈을 빌리는 건 괜찮나요?</b>
+        <p>빌린 돈이라도 증빙이 없으면 증여로 보일 수 있습니다. <b>차용증</b>을 작성하고, 약정한 이자와 원금을 <b>계좌이체</b>로 갚은 기록을 남겨 두세요. 금액과 이자율은 미리 상담해 드립니다.</p>
+        <b>Q. 신고하지 않으면 어떻게 되나요?</b>
+        <p>나중에 집을 사거나 큰돈을 쓸 때 자금출처 조사로 드러나는 경우가 많습니다. 이때 증여세에 가산세까지 붙습니다. 공제 범위 안이라 세금이 없더라도 <b>신고해 두면</b> 자금출처를 증명하는 근거가 됩니다.</p>
+        <b>Q. 증여를 취소하고 돌려주면요?</b>
+        <p>현금이 아닌 재산은 신고기한 안에 돌려주면 처음부터 증여가 없던 것으로 봅니다. 신고기한이 지난 뒤 3개월 안에 돌려주면 돌려주는 것에는 증여세가 없지만, 처음 증여분은 과세됩니다. <b>현금은 돌려줘도 취소가 안 됩니다.</b></p>
+        <b>Q. 아버지·어머니께 따로 받으면 공제를 두 번 받나요?</b>
+        <p>아닙니다. 부모님 두 분은 한 사람처럼 10년간 합쳐서 계산하고, 공제 5천만원(미성년 2천만원)도 한 번만 적용됩니다.</p>
+        <b>Q. 손자녀에게 바로 주면 유리한가요?</b>
+        <p>세금이 30% 할증되지만, 자녀를 거쳐 두 번 증여하는 것보다 전체 세금이 줄어들 수 있습니다. 사례별로 비교해 드립니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>적용 법령 근거</summary>
+      <div class="body"><div class="laws">
+        <span>상증법 §4 과세대상·반환</span><span>§46 비과세 증여재산</span><span>§47 과세가액·10년 합산</span><span>§53 증여재산공제</span><span>§53의2 혼인·출산공제</span><span>§56 세율</span><span>§57 세대생략할증</span><span>§60 평가원칙</span><span>§68 신고</span><span>§69 신고세액공제</span><span>§70 분납</span><span>§71 연부연납</span><span>시행령 §49 평가기간</span><span>지방세법 §20 취득세 신고</span><span>소득세법 §105 부담부증여 양도세 신고</span>
+      </div></div>
+    </details>
+  </section>
+
+  <!-- 5. 보내는 방법 -->
+  <section id="gcalc">
+    <h2>증여세 간이 계산기</h2>
+    <p class="hint">금액을 입력하면 예상 증여세를 바로 계산합니다. 대략적인 참고용 계산입니다.</p>
+    <div class="calc">
+      <label class="fld">누구에게 받나요
+        <select id="gRel">
+          <option value="p">부모·조부모 → 성년 자녀·손자녀</option>
+          <option value="pm">부모·조부모 → 미성년 자녀·손자녀</option>
+          <option value="s">배우자</option>
+          <option value="c">자녀·손자녀 → 부모·조부모</option>
+          <option value="r">그 밖의 친족 (4촌 이내 혈족, 3촌 이내 인척)</option>
+          <option value="o">친족이 아닌 사람</option>
+        </select>
+      </label>
+      <label class="fld">이번에 받는 재산 (원)
+        <input type="text" inputmode="numeric" id="gAmt" placeholder="예: 100,000,000">
+        <span class="amt" data-for="gAmt"></span>
+      </label>
+      <label class="fld">함께 넘겨받는 대출·보증금 (원)
+        <small>부담부증여인 경우만 — 없으면 비워 두세요</small>
+        <input type="text" inputmode="numeric" id="gDebt" placeholder="0">
+        <span class="amt" data-for="gDebt"></span>
+      </label>
+      <label class="fld">10년 내 같은 분에게 이미 받은 금액 (원)
+        <small>부모님은 아버지·어머니 합산</small>
+        <input type="text" inputmode="numeric" id="gPrior" placeholder="0">
+        <span class="amt" data-for="gPrior"></span>
+      </label>
+      <label class="fld">그때 낸 증여세 (원)
+        <input type="text" inputmode="numeric" id="gPriorTax" placeholder="0">
+        <span class="amt" data-for="gPriorTax"></span>
+      </label>
+      <label class="opt" id="gMarryWrap"><input type="checkbox" id="gMarry"> 혼인·출산 공제를 받습니다 (최대 1억원)</label>
+      <label class="opt" id="gGrandWrap"><input type="checkbox" id="gGrand"> 손자녀가 받습니다 (세대생략 할증)</label>
+    </div>
+    <div class="res" id="gRes"></div>
+    <p class="calc-note">· 다른 분(예: 조부모)에게 받으면서 이미 쓴 공제가 있으면 실제 공제는 더 적을 수 있습니다.<br>· 감정평가수수료 공제, 취득세, 부담부증여 시 주는 분의 양도소득세는 포함되지 않았습니다.<br>· 정확한 세액은 재산 평가 후 담당 세무사가 계산해 드립니다.</p>
+  </section>
+
+  <section>
+    <h2>서류 보내는 방법</h2>
+    <div class="send">
+      <a href="mailto:ctawan0103@naver.com"><span>✉️</span><span><b>이메일</b><br>ctawan0103@naver.com</span></a>
+      <a href="tel:01023142930"><span>📱</span><span><b>전화 · 문자 · 카카오톡</b><br>010-2314-2930 — 서류는 휴대폰으로 찍어서 보내셔도 됩니다</span></a>
+      <div><span>📠</span><span><b>팩스</b><br>0504-144-2930</span></div>
+    </div>
+    <div class="box"><b>증여 전에 상담하세요</b> — 증여 시기, 평가 방법, 부담부증여 여부에 따라 세금 차이가 큽니다. 계약서 작성이나 등기 전에 먼저 연락 주시면 가장 유리한 방법을 안내해 드립니다.</div>
+  </section>
+</div>
+
+<div class="wrap navwrap">
+  <section>
+    <h2>다른 안내 바로가기</h2>
+    <div class="links">
+      <a href="yangdo.html"><span class="ic">🏠</span><span><b>양도소득세 안내</b><small>부동산을 파셨을 때</small></span><span class="go">›</span></a>
+      <a href="sangsok.html"><span class="ic">📋</span><span><b>상속세 안내</b><small>상속이 생겼을 때</small></span><span class="go">›</span></a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="in">
+    <b>해인세무회계</b> · 세무사 김윤완<br>
+    ☎ <a href="tel:01023142930">010-2314-2930</a> · 팩스 0504-144-2930<br>
+    ✉ <a href="mailto:ctawan0103@naver.com">ctawan0103@naver.com</a>
+    <div class="note">이 안내는 증여세 신고를 준비하시는 분들의 이해를 돕기 위한 일반 안내이며 법적 효력은 없습니다. 실제 공제 적용 여부와 납부세액은 재산 종류·평가방법·증여 이력 등에 따라 달라지므로 담당 세무사와 상담하시기 바랍니다.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY = "hain-jeungyeo-v1";
+  var state = {checks:{}, groups:[], date:"", realty:false, burden:false, marry:"", birth:""};
+  try { var s = localStorage.getItem(KEY); if (s) { var p = JSON.parse(s); for (var k in p) state[k] = p[k]; } } catch(e) {}
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} }
+
+  var WD = ["일","월","화","수","목","금","토"];
+  var FIXED = ["01-01","03-01","05-01","05-05","06-06","08-15","10-03","10-09","12-25"];
+var HOL = ["2026-01-01", "2026-02-16", "2026-02-17", "2026-02-18", "2026-03-01", "2026-03-02", "2026-05-01", "2026-05-05", "2026-05-24", "2026-05-25", "2026-06-03", "2026-06-06", "2026-08-15", "2026-08-17", "2026-09-24", "2026-09-25", "2026-09-26", "2026-10-03", "2026-10-05", "2026-10-09", "2026-12-25", "2027-01-01", "2027-02-06", "2027-02-07", "2027-02-08", "2027-02-09", "2027-03-01", "2027-05-01", "2027-05-03", "2027-05-05", "2027-05-13", "2027-06-06", "2027-08-15", "2027-08-16", "2027-09-14", "2027-09-15", "2027-09-16", "2027-10-03", "2027-10-04", "2027-10-09", "2027-10-11", "2027-12-25", "2027-12-27", "2028-01-01", "2028-01-26", "2028-01-27", "2028-01-28", "2028-03-01", "2028-04-12", "2028-05-01", "2028-05-02", "2028-05-05", "2028-06-06", "2028-08-15", "2028-10-02", "2028-10-03", "2028-10-04", "2028-10-05", "2028-10-09", "2028-12-25", "2029-01-01", "2029-02-12", "2029-02-13", "2029-02-14", "2029-03-01", "2029-05-01", "2029-05-05", "2029-05-07", "2029-05-20", "2029-05-21", "2029-06-06", "2029-08-15", "2029-09-21", "2029-09-22", "2029-09-23", "2029-09-24", "2029-10-03", "2029-10-09", "2029-12-25", "2030-01-01", "2030-02-02", "2030-02-03", "2030-02-04", "2030-02-05", "2030-03-01", "2030-05-01", "2030-05-05", "2030-05-06", "2030-05-09", "2030-06-06", "2030-08-15", "2030-09-11", "2030-09-12", "2030-09-13", "2030-10-03", "2030-10-09", "2030-12-25", "2031-01-01", "2031-01-22", "2031-01-23", "2031-01-24", "2031-03-01", "2031-03-03", "2031-05-01", "2031-05-05", "2031-05-28", "2031-06-06", "2031-08-15", "2031-09-30", "2031-10-01", "2031-10-02", "2031-10-03", "2031-10-09", "2031-12-25", "2032-01-01", "2032-02-10", "2032-02-11", "2032-02-12", "2032-03-01", "2032-05-01", "2032-05-03", "2032-05-05", "2032-05-16", "2032-05-17", "2032-06-06", "2032-08-15", "2032-08-16", "2032-09-18", "2032-09-19", "2032-09-20", "2032-09-21", "2032-10-03", "2032-10-04", "2032-10-09", "2032-10-11", "2032-12-25", "2032-12-27"];  // 2026~2032 설·추석·부처님오신날·대체공휴일·선거일 (관공서의 공휴일에 관한 규정 §2·§3)
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  function fmt(d){ return d.getFullYear() + "." + (d.getMonth()+1) + "." + d.getDate() + "(" + WD[d.getDay()] + ")"; }
+  function isOff(d){ var w = d.getDay(); return w === 0 || w === 6 || (FIXED.indexOf(pad(d.getMonth()+1) + "-" + pad(d.getDate())) > -1 || HOL.indexOf(d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate())) > -1); }
+  function shift(d){ var x = new Date(d.getTime()); while (isOff(x)) x.setDate(x.getDate() + 1); return x; }
+  function monthEnd(d, n){ return new Date(d.getFullYear(), d.getMonth() + n + 1, 0); }
+  function addYears(d, n){
+    var last = new Date(d.getFullYear() + n, d.getMonth() + 1, 0).getDate();
+    return new Date(d.getFullYear() + n, d.getMonth(), Math.min(d.getDate(), last));
+  }
+  function parse(v){ if (!v) return null; var p = v.split("-"); return new Date(+p[0], +p[1]-1, +p[2]); }
+  var $ = function(id){ return document.getElementById(id); };
+  var gEl = $("giftDate"), rEl = $("realty"), bEl = $("burden"), mEl = $("marryDate"), cEl = $("birthDate");
+  gEl.value = state.date || ""; rEl.checked = !!state.realty; bEl.checked = !!state.burden; mEl.value = state.marry || ""; cEl.value = state.birth || "";
+
+  function calc(){
+    state.date = gEl.value; state.realty = rEl.checked; state.burden = bEl.checked; state.marry = mEl.value; state.birth = cEl.value; save();
+    var gift = parse(gEl.value), tl = $("timeline");
+    var today = new Date(); today.setHours(0,0,0,0);
+
+    // 기한 표
+    if (!gift) { tl.classList.remove("on"); }
+    else {
+      var rows = [{t:"증여세 신고·납부 (받는 분)", law:"상증법 §68 · 증여월 말일부터 3개월", base:monthEnd(gift,3), main:true}];
+      if (rEl.checked) rows.push({t:"취득세 신고·납부 (받는 분)", law:"지방세법 §20 · 증여월 말일부터 3개월 (등기 전 납부)", base:monthEnd(gift,3)});
+      if (bEl.checked) rows.push({t:"양도소득세 신고·납부 (주는 분)", law:"소득세법 §105 · 증여월 말일부터 3개월", base:monthEnd(gift,3)});
+      var html = "";
+      rows.forEach(function(r){
+        r.due = shift(r.base);
+        var diff = Math.round((r.due - today) / 86400000);
+        var dd = diff > 0 ? "D-" + diff : (diff === 0 ? "D-DAY" : (-diff) + "일 경과");
+        var sh = r.due.getTime() !== r.base.getTime() ? "<span class='shift'>원래 " + fmt(r.base) + " → 휴일 연장</span>" : "";
+        html += "<tr" + (r.main ? " class='hl'" : "") + "><td>" + r.t + "<span class='law'>" + r.law + "</span></td>"
+             +  "<td style='white-space:nowrap'><b>" + fmt(r.due) + "</b><br><span class='dday" + (diff < 0 ? " late" : "") + "'>" + dd + "</span>" + sh + "</td></tr>";
+      });
+      $("tl").innerHTML = html;
+      tl.classList.add("on");
+    }
+
+    // 혼인·출산 공제 확인 (상증법 §53의2)
+    var out = "", m = parse(mEl.value), b = parse(cEl.value);
+    if (m) {
+      var ms = addYears(m, -2), me = addYears(m, 2);
+      var txt = "혼인 공제 가능 기간: <b>" + fmt(ms) + " ~ " + fmt(me) + "</b>";
+      if (gift) txt += gift >= ms && gift <= me ? "<br><span class='ok'>✓ 입력하신 증여일은 혼인 공제 대상 기간입니다</span>" : "<br><span class='no'>✗ 입력하신 증여일은 혼인 공제 기간을 벗어납니다</span>";
+      out += "<div class='elig'>" + txt + "</div>";
+    }
+    if (b) {
+      var be = addYears(b, 2);
+      var txt2 = "출산 공제 가능 기간: <b>" + fmt(b) + " ~ " + fmt(be) + "</b>";
+      if (gift) txt2 += gift >= b && gift <= be ? "<br><span class='ok'>✓ 입력하신 증여일은 출산 공제 대상 기간입니다</span>" : "<br><span class='no'>✗ 입력하신 증여일은 출산 공제 기간을 벗어납니다</span>";
+      out += "<div class='elig'>" + txt2 + "</div>";
+    }
+    if (m || b) out += "<p class='hint' style='margin-top:6px'>혼인·출산 공제는 합쳐서 평생 1억원까지입니다.</p>";
+    $("elig").innerHTML = out;
+  }
+  [gEl, rEl, bEl, mEl, cEl].forEach(function(el){ el.addEventListener("change", calc); el.addEventListener("input", calc); });
+  calc();
+
+  // 체크리스트
+  var chips = document.querySelectorAll(".chip");
+  function applyGroups(){
+    chips.forEach(function(c){ c.classList.toggle("on", state.groups.indexOf(c.dataset.g) > -1); });
+    document.querySelectorAll(".group").forEach(function(g){
+      var k = g.dataset.group;
+      g.classList.toggle("on", k === "common" || state.groups.indexOf(k) > -1);
+    });
+    update();
+  }
+  chips.forEach(function(c){
+    c.addEventListener("click", function(){
+      var i = state.groups.indexOf(c.dataset.g);
+      if (i > -1) state.groups.splice(i, 1); else state.groups.push(c.dataset.g);
+      save(); applyGroups();
+    });
+  });
+  var boxes = document.querySelectorAll("label.item input");
+  boxes.forEach(function(x){
+    x.checked = !!state.checks[x.dataset.id];
+    x.addEventListener("change", function(){ state.checks[x.dataset.id] = x.checked; save(); update(); });
+  });
+  function update(){
+    var total = 0, done = 0;
+    document.querySelectorAll(".group.on input").forEach(function(x){ total++; if (x.checked) done++; });
+    $("count").textContent = done + " / " + total + " 준비";
+    $("bar").style.width = (total ? done / total * 100 : 0) + "%";
+  }
+  $("reset").addEventListener("click", function(){
+    state.checks = {}; boxes.forEach(function(x){ x.checked = false; }); save(); update();
+  });
+  applyGroups();
+  window.addEventListener("beforeprint", function(){ document.querySelectorAll("details").forEach(function(d){ d.setAttribute("open",""); }); });
+})();
+</script>
+<script>
+// ---- 공통: 금액 입력·표시 ----
+function wonVal(el){ return +((el.value || "").replace(/[^0-9]/g, "")) || 0; }
+function comma(n){ return Math.round(n).toLocaleString("ko-KR"); }
+function hanWon(n){
+  n = Math.round(n); if (!n) return "";
+  var eok = Math.floor(n / 100000000), man = Math.floor((n % 100000000) / 10000), won = n % 10000, s = [];
+  if (eok) s.push(eok.toLocaleString("ko-KR") + "억");
+  if (man) s.push(man.toLocaleString("ko-KR") + "만");
+  if (won) s.push(won.toLocaleString("ko-KR"));
+  return s.join(" ") + "원";
+}
+function bindMoney(el, onChange){
+  var hint = document.querySelector(".amt[data-for='" + el.id + "']");
+  function fmtIt(){
+    var v = wonVal(el);
+    el.value = v ? comma(v) : "";
+    if (hint) hint.textContent = hanWon(v);
+    onChange();
+  }
+  el.addEventListener("input", fmtIt);
+  fmtIt.silent = true;
+  var v0 = wonVal(el); el.value = v0 ? comma(v0) : ""; if (hint) hint.textContent = hanWon(v0);
+}
+// 누진세율 계산: brackets = [[상한, 세율, 누진공제], ...]
+function progTax(base, br){
+  for (var i = 0; i < br.length; i++) if (base <= br[i][0]) return base * br[i][1] - br[i][2];
+  return 0;
+}
+function rowsHtml(rows){
+  return "<div class='tblwrap'><table><tbody>" + rows.map(function(r){
+    return "<tr class='" + (r[2] || "") + "'><td>" + r[0] + "</td><td class='num'>" + r[1] + "</td></tr>";
+  }).join("") + "</tbody></table></div>";
+}
+
+// ---- 증여세 간이계산 (상증법 §47·§53·§53의2·§55·§56·§57·§69) ----
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var RATE = [[1e8,.1,0],[5e8,.2,1e7],[1e9,.3,6e7],[3e9,.4,1.6e8],[Infinity,.5,4.6e8]];
+  var LIMIT = {p:5e7, pm:2e7, s:6e8, c:5e7, r:1e7, o:0};
+  var NAME = {p:"직계존속 공제 (성년)", pm:"직계존속 공제 (미성년)", s:"배우자 공제", c:"직계비속 공제", r:"기타친족 공제", o:"공제 없음"};
+  var KEY = "hain-gift-calc-v1";
+  var ids = ["gRel","gAmt","gDebt","gPrior","gPriorTax","gMarry","gGrand"];
+  try { var s = JSON.parse(localStorage.getItem(KEY) || "{}");
+    ids.forEach(function(i){ if (s[i] !== undefined) { if ($(i).type === "checkbox") $(i).checked = s[i]; else $(i).value = s[i]; } });
+  } catch(e) {}
+  function save(){ var o = {}; ids.forEach(function(i){ o[i] = $(i).type === "checkbox" ? $(i).checked : $(i).value; }); try { localStorage.setItem(KEY, JSON.stringify(o)); } catch(e) {} }
+
+  function calc(){
+    save();
+    var rel = $("gRel").value, parent = (rel === "p" || rel === "pm");
+    $("gMarryWrap").classList.toggle("off", !parent); $("gMarry").disabled = !parent;
+    $("gGrandWrap").classList.toggle("off", !parent); $("gGrand").disabled = !parent;
+    var amt = wonVal($("gAmt")), debt = wonVal($("gDebt")), prior = wonVal($("gPrior")), priorTax = wonVal($("gPriorTax"));
+    var out = $("gRes");
+    if (!amt) { out.innerHTML = "<p class='hint'>이번에 받는 재산 금액을 입력하시면 계산 결과가 나옵니다.</p>"; return; }
+
+    var net = Math.max(0, amt - debt);
+    var add = (prior > 0 && prior + net >= 1e7) ? prior : 0;               // §47② 10년 합산
+    var gross = net + add;
+    var ded = Math.min(LIMIT[rel], gross);                                  // §53
+    var md = (parent && $("gMarry").checked) ? Math.min(1e8, gross - ded) : 0; // §53의2
+    var base = Math.max(0, gross - ded - md);
+    var rows = [["이번에 받는 재산", comma(amt) + "원"]];
+    if (debt) rows.push(["(−) 넘겨받는 채무", comma(debt) + "원"]);
+    if (add) rows.push(["(+) 10년 내 합산", comma(add) + "원"]);
+    rows.push(["증여세 과세가액", comma(gross) + "원", "total"]);
+    rows.push(["(−) " + NAME[rel], comma(ded) + "원"]);
+    if (md) rows.push(["(−) 혼인·출산 공제", comma(md) + "원"]);
+    rows.push(["과세표준", comma(base) + "원", "total"]);
+
+    if (base < 5e5) {                                                      // §55② 과세최저한
+      out.innerHTML = "<div class='big free'><small>예상 증여세</small><b>0원</b></div><p class='hint'>공제 범위 안이라 낼 세금이 없습니다. 그래도 <b>신고해 두시면</b> 나중에 자금출처를 증명하는 근거가 됩니다.</p>" + rowsHtml(rows);
+      return;
+    }
+    var calcTax = Math.floor(progTax(base, RATE));
+    var sur = 0;
+    if (parent && $("gGrand").checked) sur = Math.floor(calcTax * ((rel === "pm" && amt > 2e9) ? 0.4 : 0.3)); // §57
+    var credit = Math.min(priorTax, calcTax + sur);
+    var after = calcTax + sur - credit;
+    var report = Math.floor(after * 0.03);                                  // §69 신고세액공제
+    var pay = after - report;
+
+    rows.push(["산출세액", comma(calcTax) + "원"]);
+    if (sur) rows.push(["(+) 세대생략 할증", comma(sur) + "원"]);
+    if (credit) rows.push(["(−) 이미 낸 증여세", comma(credit) + "원"]);
+    rows.push(["(−) 신고세액공제 3%", comma(report) + "원"]);
+    rows.push(["납부할 증여세", comma(pay) + "원", "total"]);
+    out.innerHTML = "<div class='big'><small>예상 증여세 (기한 내 신고 시)</small><b>" + comma(pay) + "원</b><small>" + hanWon(pay) + "</small></div>" + rowsHtml(rows)
+      + (pay > 1e7 ? "<p class='hint' style='margin-top:8px'>납부할 세액이 1천만원을 넘어 일부를 2개월 뒤에 나눠 낼 수 있습니다." + (pay > 2e7 ? " 2천만원 초과로 담보를 제공하면 최장 5년 연부연납도 가능합니다." : "") + "</p>" : "");
+  }
+  ["gAmt","gDebt","gPrior","gPriorTax"].forEach(function(i){ bindMoney($(i), calc); });
+  ["gRel","gMarry","gGrand"].forEach(function(i){ $(i).addEventListener("change", calc); });
+  calc();
+})();
+</script>
+</body>
+</html>

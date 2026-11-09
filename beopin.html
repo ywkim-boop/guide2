@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>법인세 안내 | 해인세무회계</title>
+<meta name="description" content="법인세 신고 일정과 결산에 필요한 준비서류를 확인하실 수 있습니다.">
+<meta property="og:title" content="법인세 안내 | 해인세무회계">
+<meta property="og:description" content="법인세 신고 일정과 결산에 필요한 준비서류를 확인하실 수 있습니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ywkim-boop.github.io/guide2/beopin.html">
+<meta property="og:image" content="https://ywkim-boop.github.io/guide2/beopin-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<style>
+  :root{
+    --navy:#0d2547; --navy-soft:#e8edf5; --ink:#1f2937; --muted:#6b7280;
+    --line:#d9dee7; --bg:#f4f6fa; --card:#ffffff; --accent:#c2410c; --ok:#15803d; --red:#b91c1c;
+    --hl:#fff8e1;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"맑은 고딕","Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:15px;line-height:1.65;-webkit-text-size-adjust:100%}
+  header{background:var(--navy);color:#fff;padding:22px 16px 18px}
+  header .firm{font-size:13px;opacity:.85;letter-spacing:.5px}
+  header h1{margin:4px 0 2px;font-size:24px;font-weight:900;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+  header p{margin:0;font-size:13.5px;opacity:.9}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px 40px}
+  section{background:var(--card);border-radius:12px;padding:18px 16px;margin-top:14px;box-shadow:0 1px 3px rgba(13,37,71,.06)}
+  h2{margin:0 0 10px;font-size:17px;font-weight:800;color:var(--navy);border-left:6px solid var(--navy);padding-left:10px;line-height:1.3}
+  h3{margin:16px 0 6px;font-size:15px;color:var(--navy)}
+  p{margin:0 0 8px}
+  .hint{font-size:13px;color:var(--muted);margin:0 0 10px}
+  .first{background:var(--hl);border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:14px}
+  .first b{color:var(--navy)}
+  .red{color:var(--red);font-weight:700}
+  .warn{color:var(--accent);font-weight:700}
+
+  /* 표 (남색 선 심플 스타일) */
+  table{width:100%;border-collapse:collapse;border-top:2px solid var(--navy);border-bottom:2px solid var(--navy);font-size:14px}
+  th{text-align:left;color:var(--navy);font-weight:800;padding:8px 6px;border-bottom:1px solid var(--navy);white-space:nowrap}
+  td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td:first-child{color:#4b5563;font-weight:700}
+  td.num,th.num{text-align:right;white-space:nowrap}
+  tr.hl td{background:var(--hl)}
+  .tblwrap{overflow-x:auto}
+
+  /* 기한 계산 */
+  .calc{display:grid;gap:10px;margin-bottom:12px}
+  .fld{display:grid;gap:4px;font-weight:700;font-size:14px;color:var(--navy)}
+  .fld input{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+  .opt{display:flex;gap:8px;align-items:flex-start;font-size:14px}
+  .opt input{width:18px;height:18px;margin-top:3px;accent-color:var(--navy);flex:0 0 auto}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:4px 0 4px;text-align:center}
+  .steps div{background:var(--navy-soft);border-radius:10px;padding:10px 4px;font-size:12.5px;line-height:1.4}
+  .steps b{display:block;font-size:15px;color:var(--navy)}
+  .steps .main{background:var(--navy);color:#fff}.steps .main b{color:#fff}
+  #timeline{display:none}
+  #timeline.on{display:block}
+  .dday{display:inline-block;font-size:12px;font-weight:800;padding:1px 8px;border-radius:99px;background:var(--navy);color:#fff;white-space:nowrap}
+  .dday.late{background:var(--red)}
+  .dday.done{background:#9ca3af}
+  td .law{display:block;font-size:12px;color:var(--muted);font-weight:400}
+  td .shift{display:block;font-size:12px;color:var(--accent);font-weight:400}
+
+  /* 체크리스트 */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+  .chip{border:1.5px solid var(--line);background:#fff;padding:8px 12px;border-radius:10px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
+  .chip.on{border-color:var(--navy);background:var(--navy-soft);color:var(--navy);font-weight:700}
+  .chip.on::before{content:"✓ "}
+  .progress{display:flex;align-items:center;gap:10px;margin:10px 0 6px}
+  .bar{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
+  .count{font-size:13px;font-weight:700;color:var(--ok);white-space:nowrap}
+  .group{display:none}.group.on{display:block}
+  .tag{font-size:11.5px;font-weight:700;background:var(--navy-soft);color:var(--navy);padding:2px 8px;border-radius:99px;margin-left:6px;vertical-align:middle}
+  .tag.must{background:#fde8e8;color:var(--red)}
+  label.item{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+  label.item:last-child{border-bottom:0}
+  label.item input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--ok);flex:0 0 auto}
+  label.item .t{font-weight:700}
+  label.item .d{display:block;font-size:13px;color:var(--muted);font-weight:400}
+  label.item input:checked + span .t{color:var(--muted);text-decoration:line-through}
+  .btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .btn{border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:8px;font:inherit;font-size:13.5px;cursor:pointer;color:var(--ink)}
+
+  /* 접이식 안내 */
+  details{border-top:1px solid var(--line)}
+  details:last-of-type{border-bottom:1px solid var(--line)}
+  summary{list-style:none;cursor:pointer;padding:13px 4px;font-weight:800;color:var(--navy);display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"＋";font-weight:400;color:var(--muted)}
+  details[open] summary::after{content:"－"}
+  details .body{padding:0 2px 16px}
+  .kv{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:14px;padding:6px 0;border-bottom:1px dashed var(--line)}
+  .kv:last-child{border-bottom:0}
+  .kv span:last-child{text-align:right;font-weight:700}
+  .box{background:var(--navy-soft);border-radius:10px;padding:12px 14px;margin:10px 0;font-size:14px}
+  .faq b{display:block;color:var(--navy);margin-top:12px}
+  .faq b:first-child{margin-top:0}
+  .faq p{font-size:14px}
+  .laws{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .laws span{font-size:12px;background:var(--navy-soft);color:var(--navy);padding:3px 8px;border-radius:6px}
+
+  .send{display:grid;gap:8px;margin-top:6px}
+  .send a,.send div{display:flex;gap:10px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink)}
+  .send b{color:var(--navy)}
+  footer{background:var(--navy);color:#fff;padding:20px 16px;font-size:13.5px}
+  footer .in{max-width:760px;margin:0 auto}
+  footer b{font-size:15px}
+  footer a{color:#fff}
+  footer .note{opacity:.7;font-size:12px;margin-top:8px}
+  @media (max-width:420px){ .steps{grid-template-columns:repeat(2,1fr)} }
+  .fld select{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+  .fld .amt{font-size:12.5px;color:var(--muted);font-weight:400;min-height:1em}
+  .fld small{font-size:12.5px;color:var(--muted);font-weight:400}
+  .opt.off{opacity:.45}
+  .res{margin-top:14px}
+  .res table{font-size:14px}
+  .res td.num{text-align:right;white-space:nowrap;font-weight:700;color:var(--ink)}
+  .res tr.total td{font-weight:800;color:var(--navy);font-size:16px;border-top:2px solid var(--navy)}
+  .res tr.sub td{color:var(--muted);font-weight:400;font-size:13px}
+  .res .big{background:var(--navy);color:#fff;border-radius:12px;padding:14px 16px;margin-bottom:10px}
+  .res .big small{display:block;opacity:.8;font-size:13px}
+  .res .big b{font-size:24px;font-weight:900}
+  .res .big.free{background:var(--ok)}
+  .calc-note{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.6}
+  ul.plain{margin:6px 0 10px;padding-left:18px;font-size:14px}
+  .seg{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--navy);border-radius:10px;overflow:hidden;margin-bottom:12px}
+  .seg.seg3{grid-template-columns:1fr 1fr 1fr}
+  .seg button{font:inherit;font-size:14.5px;padding:10px 4px;border:0;background:#fff;color:var(--navy);cursor:pointer}
+  .seg button+button{border-left:1px solid var(--navy-soft)}
+  .seg button.on{background:var(--navy);color:#fff;font-weight:800}
+  .links{display:grid;gap:8px}
+  .links a{display:flex;align-items:center;gap:12px;padding:14px;border:1.5px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);background:#fff}
+  .links a:active{background:var(--navy-soft)}
+  .links .ic{font-size:22px;flex:0 0 auto}
+  .links b{display:block;color:var(--navy);font-size:15px}
+  .links small{display:block;color:var(--muted);font-size:12.5px}
+  .links .go{margin-left:auto;font-size:24px;color:var(--navy);flex:0 0 auto}
+  .navwrap{padding-top:0}
+  @media print{ .navwrap{display:none} }
+  @media print{
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{background:#fff}
+    .chips,.btns,.progress,.calc{display:none!important}
+    section{box-shadow:none;border:1px solid var(--line);break-inside:avoid}
+    details .body{display:block}
+  }
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="firm">해인세무회계 · 대표세무사 김윤완</div>
+  <h1>법인세 안내</h1>
+  <p>법인 결산에 필요한 서류를 빠짐없이 준비해 주시기 바랍니다.</p>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <h2>신고 일정</h2>
+    <div class="calc">
+      <label class="fld">사업연도 종료월 (결산월)
+        <select id="fyEnd">
+          <option value="12" selected>12월 (대부분의 법인)</option>
+          <option value="3">3월</option><option value="6">6월</option><option value="9">9월</option>
+          <option value="1">1월</option><option value="2">2월</option><option value="4">4월</option><option value="5">5월</option>
+          <option value="7">7월</option><option value="8">8월</option><option value="10">10월</option><option value="11">11월</option>
+        </select>
+      </label>
+      <label class="opt"><input type="checkbox" id="sincere"> 성실신고확인 대상 법인입니다 (신고기한 1개월 연장)</label>
+    </div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>구분</th><th>기한</th></tr></thead>
+      <tbody id="tl"></tbody>
+    </table></div>
+    <div class="first" style="margin-top:12px">모든 제출 서류는 <b id="baseDay">사업연도 종료일</b> 기준으로 준비해 주세요.</div>
+    <p class="hint">결산 자료는 담당자가 안내드린 날짜까지 보내 주세요. 신고기한 한 달 전쯤에는 자료가 모두 있어야 검토가 가능합니다.</p>
+  </section>
+
+  <section id="list">
+    <h2>준비하실 서류</h2>
+    <p class="hint">해당하는 경우를 선택하시면 필요한 서류가 추가됩니다. 업종별로 추가되는 서류는 별도로 연락드립니다.</p>
+    <div class="chips" id="chips">
+      <button class="chip" data-g="loan">대출 있음</button>
+      <button class="chip" data-g="stock">재고 있음</button>
+      <button class="chip" data-g="car">법인 차량</button>
+      <button class="chip" data-g="bill">어음 거래</button>
+      <button class="chip" data-g="grant">연구개발·보조금</button>
+      <button class="chip" data-g="trade">수출입·판매장려금</button>
+      <button class="chip" data-g="pension">퇴직연금</button>
+    </div>
+    <div class="progress"><div class="bar"><i id="bar"></i></div><span class="count" id="count">0 / 0</span></div>
+
+    <div class="group on" data-group="common">
+      <h3>모든 법인 공통</h3>
+      <label class="item"><input type="checkbox" data-id="c1"><span><span class="t">법인등기부등본</span><span class="d">인터넷등기소 발급</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c2"><span><span class="t">주주 이동·변동 상황</span><span class="d">연중 변동이 있을 때 — 자본금 증자, 주식 양도 등</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c3"><span><span class="t">예금·부채 잔액증명서</span><span class="d">금융회사·증권사 — 사업연도 종료일 기준</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c4"><span><span class="t">이자소득 원천징수영수증<span class="tag must">중요</span></span><span class="d">금융기관에서 받은 이자 — 은행이 국세청에 통보하므로 누락하면 법인세를 더 낼 수 있습니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c5"><span><span class="t">보험료 월별 납입내역서 · 보험증권</span><span class="d">차량·화재·상해보험 등 — 보장형·적립형 구분</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c6"><span><span class="t">보험사에서 받은 보험금 내역</span><span class="d">상해·차량·산재보험 등 약관에 따라 받은 보험금</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c7"><span><span class="t">거래처별 외상잔액 내역</span><span class="d">받을 돈·줄 돈 — 사업연도 종료일 기준</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c8"><span><span class="t">미제출 경비 영수증</span><span class="d">법인카드 사용내역 포함 — 아직 보내지 않은 것 모두</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c9"><span><span class="t">법인통장 거래내역 (엑셀)</span><span class="d">엑셀로 변환해 이메일로 보내 주세요 — nooae1385@daum.net</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c10"><span><span class="t">4대보험 납입내역 (1~12월)</span><span class="d">건강보험·국민연금·고용·산재 모두</span></span></label>
+    </div>
+
+    <div class="group" data-group="loan">
+      <h3>대출이 있는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="l1"><span><span class="t">대출금 이자납입내역서</span><span class="d">납입 일자와 <b>이자율이 반드시 표기</b>된 것</span></span></label>
+    </div>
+
+    <div class="group" data-group="stock">
+      <h3>재고가 있는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="s1"><span><span class="t">재고자산명세서</span><span class="d">원재료, 상품, 재공품, 제품 등 — 사업연도 종료일 기준 수량·금액</span></span></label>
+    </div>
+
+    <div class="group" data-group="car">
+      <h3>법인 차량이 있는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="v1"><span><span class="t">차량 할부금 상환스케줄표</span><span class="d">캐피탈·카드사 등 발급</span></span></label>
+      <label class="item"><input type="checkbox" data-id="v2"><span><span class="t">업무용 차량 운행일지</span><span class="d">업무용 승용차 비용 인정에 필요</span></span></label>
+    </div>
+
+    <div class="group" data-group="bill">
+      <h3>어음 거래가 있는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="b1"><span><span class="t">어음 사본</span><span class="d">거래처별 받을어음·지급어음 — 만기일자 표시</span></span></label>
+    </div>
+
+    <div class="group" data-group="grant">
+      <h3>연구개발·보조금이 있는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="g1"><span><span class="t">연구개발비 내역</span><span class="d">연구전담부서·연구원 인건비, 재료비 등 — 세액공제 검토용</span></span></label>
+      <label class="item"><input type="checkbox" data-id="g2"><span><span class="t">국가보조금 내역</span><span class="d">클린사업장 시설 보조금, 노동부 고용장려금 등</span></span></label>
+    </div>
+
+    <div class="group" data-group="trade">
+      <h3>수출입·판매장려금이 있는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="t1"><span><span class="t">관세환급금 내역</span><span class="d">일자별</span></span></label>
+      <label class="item"><input type="checkbox" data-id="t2"><span><span class="t">판매장려금 내역</span><span class="d">거래처별</span></span></label>
+    </div>
+
+    <div class="group" data-group="pension">
+      <h3>퇴직연금에 가입한 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="p1"><span><span class="t">퇴직연금 입금내역</span><span class="d">금융기관 발급 — 사업연도 중 납입액</span></span></label>
+    </div>
+
+    <div class="btns">
+      <button class="btn" id="reset">체크 초기화</button>
+      <button class="btn" onclick="window.print()">인쇄 / PDF 저장</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>알아두실 내용</h2>
+    <p class="hint">제목을 누르면 내용이 펼쳐집니다. (2026년 11월 현행 법령 기준)</p>
+
+    <details>
+      <summary>법인세 세율</summary>
+      <div class="body"><div class="tblwrap"><table>
+        <thead><tr><th>과세표준</th><th class="num">세율</th></tr></thead>
+        <tbody>
+          <tr><td>2억원 이하</td><td class="num">10%</td></tr>
+          <tr><td>2억원 초과 ~ 200억원 이하</td><td class="num">20%</td></tr>
+          <tr><td>200억원 초과 ~ 3천억원 이하</td><td class="num">22%</td></tr>
+          <tr><td>3천억원 초과</td><td class="num">25%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box">· 위 세율은 <b>2026년 1월 1일 이후 시작하는 사업연도</b>부터 적용됩니다. 그 전에 시작한 사업연도는 종전 세율(9·19·21·24%)입니다.<br>· 부동산임대업이 주업인 소규모 법인 등 일부 성실신고확인 법인은 200억원 이하 구간에 20%가 적용됩니다.<br>· 지방소득세가 별도로 붙습니다.</div></div>
+    </details>
+
+    <details>
+      <summary>신고·납부 방법</summary>
+      <div class="body">
+        <div class="kv"><span>신고기한</span><span>결산월 말일부터 3개월</span></div>
+        <div class="kv"><span>성실신고확인 법인</span><span>결산월 말일부터 4개월</span></div>
+        <div class="kv"><span>중간예납</span><span>사업연도 개시 후 6개월 경과일부터 2개월 내</span></div>
+        <div class="kv"><span>분납</span><span>1,000만원 초과 시 1개월(중소기업 2개월) 내</span></div>
+        <div class="kv"><span>법인지방소득세</span><span>결산월 말일부터 4개월 (성실신고 5개월)</span></div>
+        <div class="box">결손이 나도 법인세 신고는 반드시 해야 합니다. 재무제표와 세무조정계산서를 붙이지 않으면 신고로 인정되지 않습니다.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>자주 묻는 질문</summary>
+      <div class="body faq">
+        <b>Q. 이자소득 원천징수영수증은 왜 꼭 필요한가요?</b>
+        <p>은행은 법인에 지급한 이자와 미리 뗀 세금을 국세청에 통보합니다. 이 자료가 빠지면 이미 낸 세금을 공제받지 못하거나 수입 누락으로 볼 수 있습니다.</p>
+        <b>Q. 대표이사가 법인 돈을 개인적으로 쓴 경우는요?</b>
+        <p>업무와 관계없이 대표자가 가져간 돈은 가지급금으로 처리되어 인정이자와 세금 부담이 생깁니다. 해당 내역이 있으면 결산 전에 미리 알려 주세요. 정리 방법을 함께 검토해 드립니다.</p>
+        <b>Q. 법인 차량 운행일지를 꼭 써야 하나요?</b>
+        <p>업무용 승용차 비용을 경비로 인정받으려면 업무전용 자동차보험 가입과 운행기록이 필요합니다. 운행기록이 없으면 차량 1대당 연 1,500만원(부동산임대업이 주업인 소규모 법인 등은 500만원)까지만 경비로 인정됩니다.</p>
+        <b>Q. 자료가 다 준비되지 않았는데요.</b>
+        <p>준비된 것부터 먼저 보내 주세요. 빠진 자료는 담당자가 확인해서 다시 요청드립니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>적용 법령 근거</summary>
+      <div class="body"><div class="laws">
+        <span>법인세법 §55 세율</span><span>§60 과세표준 신고</span><span>§60의2 성실신고확인</span><span>§63 중간예납</span><span>§64 분납</span><span>부칙(2025.12.23) §5 세율 적용례</span><span>지방세법 §103의23 법인지방소득세</span><span>국세기본법 §5 기한의 특례</span>
+      </div></div>
+    </details>
+  </section>
+
+  <section>
+    <h2>서류 보내는 방법</h2>
+    <div class="send">
+      <a href="mailto:nooae1385@daum.net"><span>✉️</span><span><b>이메일</b><br>nooae1385@daum.net</span></a>
+      <div><span>📠</span><span><b>팩스</b><br>051-314-1386</span></div>
+      <a href="tel:0513141384"><span>☎️</span><span><b>전화 문의</b><br>051-314-1384~5</span></a>
+    </div>
+    <div class="box">자료가 아직 다 준비되지 않았어도 준비된 것부터 먼저 보내 주세요. 빠진 자료는 담당자가 확인해서 다시 안내드립니다.</div>
+  </section>
+
+</div>
+
+<div class="wrap navwrap">
+  <section>
+    <h2>다른 안내 바로가기</h2>
+    <div class="links">
+      <a href="sugim.html"><span class="ic">🤝</span><span><b>거래처 수임등록 안내</b><small>처음 기장을 맡기실 때</small></span><span class="go">›</span></a>
+      <a href="bugase.html"><span class="ic">🧾</span><span><b>부가가치세 안내</b><small>신고 일정 · 준비서류</small></span><span class="go">›</span></a>
+      <a href="jongso.html"><span class="ic">📒</span><span><b>종합소득세 안내</b><small>5월 신고 준비서류</small></span><span class="go">›</span></a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="in">
+    <b>해인세무회계</b> · 대표세무사 김윤완<br>
+    ☎ <a href="tel:0513141384">051-314-1384~5</a> · 팩스 051-314-1386<br>
+    ✉ <a href="mailto:nooae1385@daum.net">nooae1385@daum.net</a>
+    <div class="note">이 안내는 일반적인 준비서류이며, 업종과 개별 상황에 따라 추가 서류를 요청드릴 수 있습니다.</div>
+  </div>
+</footer>
+
+<script>
+
+// ---- 공통: 날짜·휴일·체크리스트 ----
+var WD = ["일","월","화","수","목","금","토"];
+var FIXED = ["01-01","03-01","05-01","05-05","06-06","08-15","10-03","10-09","12-25"];
+var HOL = ["2026-01-01", "2026-02-16", "2026-02-17", "2026-02-18", "2026-03-01", "2026-03-02", "2026-05-01", "2026-05-05", "2026-05-24", "2026-05-25", "2026-06-03", "2026-06-06", "2026-08-15", "2026-08-17", "2026-09-24", "2026-09-25", "2026-09-26", "2026-10-03", "2026-10-05", "2026-10-09", "2026-12-25", "2027-01-01", "2027-02-06", "2027-02-07", "2027-02-08", "2027-02-09", "2027-03-01", "2027-05-01", "2027-05-03", "2027-05-05", "2027-05-13", "2027-06-06", "2027-08-15", "2027-08-16", "2027-09-14", "2027-09-15", "2027-09-16", "2027-10-03", "2027-10-04", "2027-10-09", "2027-10-11", "2027-12-25", "2027-12-27", "2028-01-01", "2028-01-26", "2028-01-27", "2028-01-28", "2028-03-01", "2028-04-12", "2028-05-01", "2028-05-02", "2028-05-05", "2028-06-06", "2028-08-15", "2028-10-02", "2028-10-03", "2028-10-04", "2028-10-05", "2028-10-09", "2028-12-25", "2029-01-01", "2029-02-12", "2029-02-13", "2029-02-14", "2029-03-01", "2029-05-01", "2029-05-05", "2029-05-07", "2029-05-20", "2029-05-21", "2029-06-06", "2029-08-15", "2029-09-21", "2029-09-22", "2029-09-23", "2029-09-24", "2029-10-03", "2029-10-09", "2029-12-25", "2030-01-01", "2030-02-02", "2030-02-03", "2030-02-04", "2030-02-05", "2030-03-01", "2030-05-01", "2030-05-05", "2030-05-06", "2030-05-09", "2030-06-06", "2030-08-15", "2030-09-11", "2030-09-12", "2030-09-13", "2030-10-03", "2030-10-09", "2030-12-25", "2031-01-01", "2031-01-22", "2031-01-23", "2031-01-24", "2031-03-01", "2031-03-03", "2031-05-01", "2031-05-05", "2031-05-28", "2031-06-06", "2031-08-15", "2031-09-30", "2031-10-01", "2031-10-02", "2031-10-03", "2031-10-09", "2031-12-25", "2032-01-01", "2032-02-10", "2032-02-11", "2032-02-12", "2032-03-01", "2032-05-01", "2032-05-03", "2032-05-05", "2032-05-16", "2032-05-17", "2032-06-06", "2032-08-15", "2032-08-16", "2032-09-18", "2032-09-19", "2032-09-20", "2032-09-21", "2032-10-03", "2032-10-04", "2032-10-09", "2032-10-11", "2032-12-25", "2032-12-27"];  // 2026~2032 설·추석·부처님오신날·대체공휴일·선거일 (관공서의 공휴일에 관한 규정 §2·§3)
+function pad(n){ return (n < 10 ? "0" : "") + n; }
+function fmt(d){ return d.getFullYear() + "." + (d.getMonth()+1) + "." + d.getDate() + "(" + WD[d.getDay()] + ")"; }
+function isOff(d){ var w = d.getDay(); return w === 0 || w === 6 || (FIXED.indexOf(pad(d.getMonth()+1) + "-" + pad(d.getDate())) > -1 || HOL.indexOf(d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate())) > -1); }
+function shift(d){ var x = new Date(d.getTime()); while (isOff(x)) x.setDate(x.getDate() + 1); return x; }
+function today0(){ var t = new Date(); t.setHours(0,0,0,0); return t; }
+function ddayHtml(due){
+  var diff = Math.round((due - today0()) / 86400000);
+  var txt = diff > 0 ? "D-" + diff : (diff === 0 ? "D-DAY" : "지남");
+  return "<span class='dday" + (diff < 0 ? " done" : "") + "'>" + txt + "</span>";
+}
+function shiftNote(base, due){ return due.getTime() !== base.getTime() ? "<span class='shift'>원래 " + fmt(base) + " → 휴일 연장</span>" : ""; }
+function store(KEY){
+  var s = {};
+  try { s = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch(e) {}
+  s.save = function(){ try { var o = {}; for (var k in s) if (k !== "save") o[k] = s[k]; localStorage.setItem(KEY, JSON.stringify(o)); } catch(e) {} };
+  return s;
+}
+function initChecklist(st){
+  st.checks = st.checks || {}; st.groups = st.groups || [];
+  var chips = document.querySelectorAll(".chip");
+  function update(){
+    var total = 0, done = 0;
+    document.querySelectorAll(".group.on input").forEach(function(b){ total++; if (b.checked) done++; });
+    document.getElementById("count").textContent = done + " / " + total + " 준비";
+    document.getElementById("bar").style.width = (total ? done / total * 100 : 0) + "%";
+  }
+  function apply(){
+    chips.forEach(function(c){ c.classList.toggle("on", st.groups.indexOf(c.dataset.g) > -1); });
+    document.querySelectorAll(".group").forEach(function(g){ var k = g.dataset.group; g.classList.toggle("on", k === "common" || st.groups.indexOf(k) > -1); });
+    update();
+  }
+  chips.forEach(function(c){ c.addEventListener("click", function(){ var i = st.groups.indexOf(c.dataset.g); if (i > -1) st.groups.splice(i,1); else st.groups.push(c.dataset.g); st.save(); apply(); }); });
+  var boxes = document.querySelectorAll("label.item input");
+  boxes.forEach(function(b){ b.checked = !!st.checks[b.dataset.id]; b.addEventListener("change", function(){ st.checks[b.dataset.id] = b.checked; st.save(); update(); }); });
+  document.getElementById("reset").addEventListener("click", function(){ st.checks = {}; boxes.forEach(function(b){ b.checked = false; }); st.save(); update(); });
+  apply();
+  window.addEventListener("beforeprint", function(){ document.querySelectorAll("details").forEach(function(d){ d.setAttribute("open",""); }); });
+}
+
+(function(){
+  var st = store("hain-beopin-v1");
+  var sel = document.getElementById("fyEnd"), sc = document.getElementById("sincere");
+  if (st.fy) sel.value = st.fy; sc.checked = !!st.sincere;
+  function render(){
+    st.fy = sel.value; st.sincere = sc.checked; st.save();
+    var m = +sel.value - 1, t = today0();
+    // 다음 신고 대상 사업연도 종료일: 신고기한이 아직 안 지난 가장 이른 종료일
+    var y = t.getFullYear() - 1, fyEndDate, due;
+    for (var i = 0; i < 3; i++, y++) {
+      fyEndDate = new Date(y, m + 1, 0);
+      due = new Date(y, m + 1 + (sc.checked ? 4 : 3), 0);
+      if (shift(due) >= t) break;
+    }
+    var start = new Date(fyEndDate.getFullYear(), fyEndDate.getMonth() - 11, 1);
+    var midStart = new Date(fyEndDate.getFullYear(), fyEndDate.getMonth() + 1, 1);
+    var mid = new Date(midStart.getFullYear(), midStart.getMonth() + 8, 0);
+    document.getElementById("baseDay").textContent = fmt(fyEndDate).replace(/\(.\)/, "") + " (사업연도 종료일)";
+    var rows = [
+      {t:"사업연도 종료 (결산일)", sub:fmt(start).replace(/\(.\)/,"") + " ~ " + fmt(fyEndDate).replace(/\(.\)/,""), base:fyEndDate, plain:true},
+      {t:"법인세 신고·납부", sub:"결산월 말일부터 " + (sc.checked ? "4" : "3") + "개월 · 법인세법 §60", base:due, main:true},
+      {t:"법인지방소득세 신고·납부", sub:"결산월 말일부터 " + (sc.checked ? "5" : "4") + "개월 · 지방세법 §103의23", base:new Date(fyEndDate.getFullYear(), fyEndDate.getMonth() + 1 + (sc.checked ? 5 : 4), 0)},
+      {t:"다음 사업연도 중간예납", sub:"개시 후 6개월 경과일부터 2개월 · §63", base:mid}
+    ];
+    var html = "";
+    rows.forEach(function(r){
+      var d = r.plain ? r.base : shift(r.base);
+      html += "<tr" + (r.main ? " class='hl'" : "") + "><td>" + r.t + "<span class='law'>" + r.sub + "</span></td><td style='white-space:nowrap'><b>" + fmt(d) + "</b><br>" + (r.plain ? "" : ddayHtml(d) + shiftNote(r.base, d)) + "</td></tr>";
+    });
+    document.getElementById("tl").innerHTML = html;
+  }
+  sel.addEventListener("change", render); sc.addEventListener("change", render);
+  render();
+  initChecklist(st);
+})();
+</script>
+</body>
+</html>

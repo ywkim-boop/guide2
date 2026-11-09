@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>양도소득세 안내 | 해인세무회계</title>
+<meta property="og:title" content="양도소득세 안내 | 해인세무회계">
+<meta property="og:description" content="양도일을 입력하면 신고기한이 계산되고, 필요한 서류를 상황별로 확인할 수 있습니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ywkim-boop.github.io/guide2/yangdo.html">
+<meta property="og:image" content="https://ywkim-boop.github.io/guide2/yangdo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="description" content="양도일을 입력하면 신고기한이 계산되고, 필요한 서류를 상황별로 확인할 수 있습니다.">
+<style>
+  :root{
+    --navy:#0d2547; --navy-soft:#e8edf5; --ink:#1f2937; --muted:#6b7280;
+    --line:#d9dee7; --bg:#f4f6fa; --card:#ffffff; --accent:#c2410c; --ok:#15803d;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"맑은 고딕","Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:15px;line-height:1.65;-webkit-text-size-adjust:100%}
+  header{background:var(--navy);color:#fff;padding:22px 16px 18px}
+  header .firm{font-size:13px;opacity:.85;letter-spacing:.5px}
+  header h1{margin:4px 0 2px;font-size:24px;font-weight:900;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+  header p{margin:0;font-size:13.5px;opacity:.9}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px 40px}
+  nav.tabs{display:flex;gap:6px;overflow-x:auto;padding:14px 0 4px;scrollbar-width:none}
+  nav.tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--muted);padding:8px 14px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer}
+  .tab.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:700}
+  .tab .soon{font-size:11px;margin-left:4px;opacity:.75}
+  .panel{display:none}.panel.on{display:block}
+  section{background:var(--card);border-radius:12px;padding:18px 16px;margin-top:14px;box-shadow:0 1px 3px rgba(13,37,71,.06)}
+  h2{margin:0 0 10px;font-size:17px;font-weight:800;color:var(--navy);border-left:6px solid var(--navy);padding-left:10px;line-height:1.3}
+  h3{margin:16px 0 6px;font-size:15px;color:var(--navy)}
+  .deadline{background:var(--navy-soft);border-radius:10px;padding:14px}
+  .deadline .big{font-size:16px;font-weight:800;color:var(--navy)}
+  .deadline .ex{font-size:13.5px;color:var(--muted);margin-top:2px}
+  .deadline.done{background:#eaf6ee}
+  .deadline .dday{display:inline-block;margin-top:6px;font-size:13px;font-weight:800;padding:2px 10px;border-radius:99px;background:var(--navy);color:#fff}
+  .deadline .dday.late{background:#b91c1c}
+  .calc{display:grid;gap:10px;margin-bottom:12px}
+  .fld{display:grid;gap:4px;font-weight:700;font-size:14px;color:var(--navy)}
+  .fld input{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+  .opt{display:flex;gap:8px;align-items:center;font-size:14px}
+  .opt input{width:18px;height:18px;accent-color:var(--navy)}
+  ul.plain{margin:10px 0 0;padding-left:18px}
+  ul.plain li{margin:3px 0}
+  .warn{color:var(--accent);font-weight:700}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1.5px solid var(--line);background:#fff;padding:8px 12px;border-radius:10px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
+  .chip.on{border-color:var(--navy);background:var(--navy-soft);color:var(--navy);font-weight:700}
+  .chip.on::before{content:"✓ "}
+  .hint{font-size:13px;color:var(--muted);margin:0 0 10px}
+  .progress{display:flex;align-items:center;gap:10px;margin:4px 0 6px}
+  .bar{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
+  .count{font-size:13px;font-weight:700;color:var(--ok);white-space:nowrap}
+  .group{display:none}.group.on{display:block}
+  .group h3 .tag{font-size:11.5px;font-weight:700;background:var(--navy-soft);color:var(--navy);padding:2px 8px;border-radius:99px;margin-left:6px;vertical-align:middle}
+  label.item{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+  label.item:last-child{border-bottom:0}
+  label.item input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--ok);flex:0 0 auto}
+  label.item .t{font-weight:700}
+  label.item .d{display:block;font-size:13px;color:var(--muted);font-weight:400}
+  label.item input:checked + span .t{color:var(--muted);text-decoration:line-through}
+  table{width:100%;border-collapse:collapse;border-top:2px solid var(--navy);border-bottom:2px solid var(--navy);font-size:14px}
+  th{text-align:left;color:var(--navy);font-weight:800;padding:8px 6px;border-bottom:1px solid var(--navy)}
+  td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td:first-child{color:#4b5563;font-weight:700;white-space:nowrap}
+  .yes{color:var(--ok);font-weight:700}.no{color:#b91c1c;font-weight:700}
+  .office li{margin:3px 0}
+  .send{display:grid;gap:8px;margin-top:6px}
+  .send a,.send div{display:flex;gap:10px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink)}
+  .send b{color:var(--navy)}
+  .btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .btn{border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:8px;font:inherit;font-size:13.5px;cursor:pointer}
+  .soonbox{text-align:center;color:var(--muted);padding:30px 10px}
+  footer{background:var(--navy);color:#fff;padding:20px 16px;font-size:13.5px}
+  footer .in{max-width:760px;margin:0 auto}
+  footer b{font-size:15px}
+  footer a{color:#fff}
+  footer .note{opacity:.7;font-size:12px;margin-top:8px}
+  .fld select{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+  .fld .amt{font-size:12.5px;color:var(--muted);font-weight:400;min-height:1em}
+  .fld small{font-size:12.5px;color:var(--muted);font-weight:400}
+  .opt.off{opacity:.45}
+  .res{margin-top:14px}
+  .res table{font-size:14px}
+  .res td.num{text-align:right;white-space:nowrap;font-weight:700;color:var(--ink)}
+  .res tr.total td{font-weight:800;color:var(--navy);font-size:16px;border-top:2px solid var(--navy)}
+  .res tr.sub td{color:var(--muted);font-weight:400;font-size:13px}
+  .res .big{background:var(--navy);color:#fff;border-radius:12px;padding:14px 16px;margin-bottom:10px}
+  .res .big small{display:block;opacity:.8;font-size:13px}
+  .res .big b{font-size:24px;font-weight:900}
+  .res .big.free{background:var(--ok)}
+  .calc-note{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.6}
+  .tblwrap{overflow-x:auto}
+  .links{display:grid;gap:8px}
+  .links a{display:flex;align-items:center;gap:12px;padding:14px;border:1.5px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);background:#fff}
+  .links a:active{background:var(--navy-soft)}
+  .links .ic{font-size:22px;flex:0 0 auto}
+  .links b{display:block;color:var(--navy);font-size:15px}
+  .links small{display:block;color:var(--muted);font-size:12.5px}
+  .links .go{margin-left:auto;font-size:24px;color:var(--navy);flex:0 0 auto}
+  .navwrap{padding-top:0}
+  @media print{ .navwrap{display:none} }
+  @media print{
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{background:#fff}
+    nav.tabs,.chips,.btns,.hint,.progress{display:none!important}
+    section{box-shadow:none;border:1px solid var(--line);break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="firm">해인세무회계 · 세무사 김윤완</div>
+  <h1>양도소득세 안내</h1>
+  <p>상황에 맞는 서류를 확인하시고, 준비하신 서류는 체크해 두세요.</p>
+</header>
+
+<div class="wrap">
+  <div class="panel on" id="p-transfer">
+
+    <section>
+      <h2>내 신고기한 계산</h2>
+      <div class="calc">
+        <label class="fld">양도일 (잔금 받은 날)
+          <input type="date" id="sellDate">
+        </label>
+        <label class="opt"><input type="checkbox" id="burden"> 부담부증여입니다 (채무를 함께 넘기는 증여)</label>
+      </div>
+      <div class="deadline" id="result">
+        <div class="big" id="dl">양도일을 입력하시면 신고기한이 표시됩니다</div>
+        <div class="ex" id="dlEx">원칙: 양도일이 속하는 달의 말일부터 2개월 이내</div>
+      </div>
+      <ul class="plain">
+        <li><b>양도일</b>은 원칙적으로 <b>잔금 받은 날</b>입니다. 잔금 전에 소유권이전등기를 먼저 했다면 <b>등기접수일</b>이 양도일입니다.</li>
+        <li>부담부증여(채무를 함께 넘기는 증여)는 <b>3개월 이내</b>입니다.</li>
+        <li>손해를 보고 판 경우에도 예정신고는 해야 합니다. 1세대 1주택이라도 판 가격이 <b>12억원을 넘으면</b> 신고 대상입니다.</li>
+        <li>기한이 토·일요일·공휴일이면 그다음 날까지입니다. 설·추석 연휴와 대체공휴일(2026~2032년)도 반영했습니다. 정부가 따로 정하는 임시공휴일은 반영되지 않습니다.</li>
+        <li class="warn">기한을 넘기면 가산세가 붙습니다. 잔금일이 정해지면 바로 연락 주세요.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>해당하는 경우를 선택하세요</h2>
+      <p class="hint">여러 개 선택할 수 있습니다. 선택한 항목의 서류가 아래에 추가됩니다.</p>
+      <div class="chips" id="chips">
+        <button class="chip" data-g="house">1주택 비과세·일시적 2주택</button>
+        <button class="chip" data-g="multi">2주택 이상 보유</button>
+        <button class="chip" data-g="gift">상속·증여로 받은 부동산</button>
+        <button class="chip" data-g="presale">분양권·조합원입주권</button>
+        <button class="chip" data-g="biz">상가·임대용 건물·토지</button>
+        <button class="chip" data-g="farm">농지 (자경감면 포함)</button>
+      </div>
+    </section>
+
+    <section id="list">
+      <h2>준비하실 서류</h2>
+      <div class="progress"><div class="bar"><i id="bar"></i></div><span class="count" id="count">0 / 0</span></div>
+
+      <div class="group on" data-group="common">
+        <h3>모든 분 공통</h3>
+        <label class="item"><input type="checkbox" data-id="c1"><span><span class="t">파실 때 매매계약서</span><span class="d">부동산거래계약 신고필증 포함</span></span></label>
+        <label class="item"><input type="checkbox" data-id="c2"><span><span class="t">사실 때 매매계약서 (또는 분양계약서)</span><span class="d">분실하셨다면 버리지 말고 먼저 연락 주세요. 대체 방법을 검토합니다.</span></span></label>
+        <label class="item"><input type="checkbox" data-id="c3"><span><span class="t">취득세 영수증</span><span class="d">사실 때 납부한 취득세 납부확인서</span></span></label>
+        <label class="item"><input type="checkbox" data-id="c4"><span><span class="t">법무사 수수료 영수증</span><span class="d">사실 때 소유권이전등기 비용</span></span></label>
+        <label class="item"><input type="checkbox" data-id="c5"><span><span class="t">중개수수료 영수증</span><span class="d">사실 때와 파실 때 모두</span></span></label>
+        <label class="item"><input type="checkbox" data-id="c6"><span><span class="t">보유 중 공사비 증빙</span><span class="d">샷시·발코니 확장 등 공사 계약서, 세금계산서·카드·현금영수증, 영수증이 없으면 계좌이체 내역</span></span></label>
+        <label class="item"><input type="checkbox" data-id="c7"><span><span class="t">신분증 사본</span><span class="d">앞면 사진 1장</span></span></label>
+      </div>
+
+      <div class="group" data-group="house">
+        <h3>1주택 비과세·일시적 2주택<span class="tag">선택</span></h3>
+        <label class="item"><input type="checkbox" data-id="h1"><span><span class="t">주민등록등본</span><span class="d">세대원 전체가 나오도록</span></span></label>
+        <label class="item"><input type="checkbox" data-id="h2"><span><span class="t">주민등록초본 (주소 변동 이력 전체 포함)</span><span class="d">거주 기간 확인용 — 발급 시 "주소 변동 사항 전체 포함" 선택</span></span></label>
+        <label class="item"><input type="checkbox" data-id="h3"><span><span class="t">가족관계증명서</span><span class="d">세대 구성 확인용</span></span></label>
+        <label class="item"><input type="checkbox" data-id="h4"><span><span class="t">세대원 전원의 다른 주택 보유 내역 메모</span><span class="d">배우자·함께 사는 가족 명의 주택, 분양권, 입주권, 오피스텔 포함</span></span></label>
+        <label class="item"><input type="checkbox" data-id="h5"><span><span class="t">새로 산 주택의 매매계약서</span><span class="d">일시적 2주택인 경우 — 취득일 확인용</span></span></label>
+        <label class="item"><input type="checkbox" data-id="h6"><span><span class="t">임대주택 등록 서류</span><span class="d">임대주택을 함께 보유한 경우 — 임대사업자등록증, 사업자등록증, 임대차계약서</span></span></label>
+      </div>
+
+      <div class="group" data-group="multi">
+        <h3>2주택 이상 보유<span class="tag">선택</span></h3>
+        <label class="item"><input type="checkbox" data-id="m1"><span><span class="t">세대원 전원의 보유 주택 목록</span><span class="d">주택별 주소·명의자·취득일 — 분양권, 입주권, 주거용 오피스텔 포함</span></span></label>
+        <label class="item"><input type="checkbox" data-id="m2"><span><span class="t">주민등록등본 · 가족관계증명서</span><span class="d">세대 구성 확인용</span></span></label>
+        <label class="item"><input type="checkbox" data-id="m3"><span><span class="t">임대주택 등록 서류</span><span class="d">임대 등록한 주택이 있는 경우 — 임대사업자등록증, 사업자등록증, 임대차계약서</span></span></label>
+        <label class="item"><input type="checkbox" data-id="m4"><span><span class="t">상속받은 주택 관련 서류</span><span class="d">상속으로 받은 주택이 있는 경우 — 상속 시기·지분 확인용</span></span></label>
+        <label class="item"><input type="checkbox" data-id="m5"><span><span class="t">오피스텔 사용 현황</span><span class="d">오피스텔이 있는 경우 — 임대차계약서, 임차인 전입 여부</span></span></label>
+      </div>
+
+      <div class="group" data-group="gift">
+        <h3>상속·증여로 받은 부동산<span class="tag">선택</span></h3>
+        <label class="item"><input type="checkbox" data-id="g1"><span><span class="t">상속세·증여세 신고서 사본</span><span class="d">신고하신 경우 — 당시 신고한 가액이 취득가액이 됩니다</span></span></label>
+        <label class="item"><input type="checkbox" data-id="g2"><span><span class="t">감정평가서</span><span class="d">감정평가를 받으신 경우</span></span></label>
+        <label class="item"><input type="checkbox" data-id="g3"><span><span class="t">상속재산 분할협의서</span><span class="d">상속인끼리 나눈 경우</span></span></label>
+        <label class="item"><input type="checkbox" data-id="g4"><span><span class="t">돌아가신 분의 기본증명서·가족관계증명서</span><span class="d">상속 개시일과 상속인 확인용</span></span></label>
+      </div>
+
+      <div class="group" data-group="presale">
+        <h3>분양권·조합원입주권<span class="tag">선택</span></h3>
+        <label class="item"><input type="checkbox" data-id="s1"><span><span class="t">분양계약서 + 옵션 계약서</span><span class="d">발코니 확장·유상옵션 계약서 포함</span></span></label>
+        <label class="item"><input type="checkbox" data-id="s2"><span><span class="t">분양대금 납부 내역</span><span class="d">계약금·중도금·잔금 납부 영수증 또는 이체 내역</span></span></label>
+        <label class="item"><input type="checkbox" data-id="s3"><span><span class="t">프리미엄 지급 증빙</span><span class="d">분양권을 사서 취득한 경우 — 계약서와 이체 내역</span></span></label>
+        <label class="item"><input type="checkbox" data-id="s4"><span><span class="t">관리처분계획 관련 서류</span><span class="d">조합원입주권 — 조합에서 받은 권리가액(종전자산 평가액) 안내문</span></span></label>
+        <label class="item"><input type="checkbox" data-id="s5"><span><span class="t">추가분담금(청산금) 납부·수령 내역</span><span class="d">조합원입주권 — 납부했거나 돌려받은 금액</span></span></label>
+      </div>
+
+      <div class="group" data-group="biz">
+        <h3>상가·임대용 건물·토지<span class="tag">선택</span></h3>
+        <label class="item"><input type="checkbox" data-id="b1"><span><span class="t">사업자등록증</span><span class="d">임대사업을 하신 경우</span></span></label>
+        <label class="item"><input type="checkbox" data-id="b2"><span><span class="t">감가상각 내역</span><span class="d">장부에 감가상각비를 비용으로 넣으셨다면 — 담당 기장 사무실에 요청</span></span></label>
+        <label class="item"><input type="checkbox" data-id="b3"><span><span class="t">건물분 부가가치세 관련 자료</span><span class="d">파실 때 세금계산서 발행 여부, 포괄양수도 계약 여부</span></span></label>
+        <label class="item"><input type="checkbox" data-id="b4"><span><span class="t">임대차계약서</span><span class="d">현재 및 과거 임대 현황</span></span></label>
+      </div>
+
+      <div class="group" data-group="farm">
+        <h3>농지 (자경감면 포함)<span class="tag">선택</span></h3>
+        <label class="item"><input type="checkbox" data-id="f0"><span><span class="t">농지 이용 현황 메모</span><span class="d">보유 기간 중 직접 경작 / 임대 / 휴경한 기간</span></span></label>
+        <label class="item"><input type="checkbox" data-id="f1"><span><span class="t">농지대장 (구 농지원부)</span><span class="d">주민센터 또는 정부24에서 발급</span></span></label>
+        <label class="item"><input type="checkbox" data-id="f2"><span><span class="t">직접 농사지은 증빙</span><span class="d">농협 조합원 증명, 농약·비료·종자 구입 영수증, 농산물 판매 내역, 직불금 수령 내역 등</span></span></label>
+        <label class="item"><input type="checkbox" data-id="f3"><span><span class="t">주민등록초본 (주소 변동 이력 전체 포함)</span><span class="d">농지 근처 거주 여부 확인용</span></span></label>
+      </div>
+
+      <div class="btns">
+        <button class="btn" id="reset">체크 초기화</button>
+        <button class="btn" onclick="window.print()">인쇄 / PDF 저장</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>사무실에서 직접 발급합니다</h2>
+      <p class="hint" style="margin-bottom:4px">아래 서류는 준비하지 않으셔도 됩니다.</p>
+      <ul class="plain office">
+        <li>등기사항전부증명서 (등기부등본)</li>
+        <li>건축물대장 · 토지대장</li>
+        <li>공시가격 확인 자료</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>비용으로 인정되는 것 / 안 되는 것</h2>
+      <table>
+        <thead><tr><th>구분</th><th>예시</th></tr></thead>
+        <tbody>
+          <tr><td class="yes">인정</td><td>발코니 확장, 샷시(창호) 교체, 보일러 교체 등 난방시설 공사, 취득세, 법무사 비용, 중개수수료</td></tr>
+          <tr><td class="no">불인정</td><td>도배·장판·페인트, 싱크대·조명 단순 교체, 일상적인 수리비, 대출 이자</td></tr>
+        </tbody>
+      </table>
+      <p class="hint" style="margin-top:10px">애매한 영수증도 버리지 마시고 모두 보내 주세요. 인정 여부는 세무사가 검토합니다.</p>
+    </section>
+
+    <section id="ycalc">
+      <h2>양도소득세 모의계산기</h2>
+      <p class="hint">금액과 날짜를 입력하면 예상 세액을 바로 계산합니다. 대략적인 참고용 계산입니다.</p>
+      <div class="calc">
+        <label class="fld">무엇을 파시나요
+          <select id="yType">
+            <option value="house">주택</option>
+            <option value="land">토지·건물·상가</option>
+            <option value="presale">분양권</option>
+          </select>
+        </label>
+        <label class="fld">산 날 (취득일)
+          <input type="date" id="yAcqDate">
+        </label>
+        <label class="fld">판 날 (양도일·잔금일)
+          <input type="date" id="ySellDate">
+        </label>
+        <label class="fld">판 가격 (양도가액, 원)
+          <input type="text" inputmode="numeric" id="ySell" placeholder="예: 500,000,000">
+          <span class="amt" data-for="ySell"></span>
+        </label>
+        <label class="fld">산 가격 (취득가액, 원)
+          <input type="text" inputmode="numeric" id="yAcq" placeholder="예: 300,000,000">
+          <span class="amt" data-for="yAcq"></span>
+        </label>
+        <label class="fld">필요경비 합계 (원)
+          <small>취득세·법무사비·중개수수료·샷시·발코니 확장 등</small>
+          <input type="text" inputmode="numeric" id="yExp" placeholder="예: 15,000,000">
+          <span class="amt" data-for="yExp"></span>
+        </label>
+        <label class="opt" id="y1hWrap"><input type="checkbox" id="y1h"> 1세대 1주택 비과세 요건을 갖췄습니다 (2년 이상 보유 등)</label>
+        <label class="fld" id="yLiveWrap">그 집에서 실제 거주한 기간 (년)
+          <input type="number" inputmode="numeric" id="yLive" min="0" max="50" placeholder="예: 5">
+        </label>
+      </div>
+      <div class="res" id="yRes"></div>
+      <p class="calc-note">· 지방소득세(10%)를 포함한 금액입니다. 기본공제 250만원은 올해 다른 양도가 없다고 보고 적용했습니다.<br>· 다주택 중과, 비사업용 토지, 자경농지 등 감면, 일시적 2주택·상속주택 특례, 조정대상지역 거주요건은 반영되지 않습니다.<br>· 정확한 세액은 서류 검토 후 담당 세무사가 계산해 드립니다.</p>
+    </section>
+
+    <section>
+      <h2>서류 보내는 방법</h2>
+      <div class="send">
+      <a href="mailto:ctawan0103@naver.com"><span>✉️</span><span><b>이메일</b><br>ctawan0103@naver.com</span></a>
+      <a href="tel:01023142930"><span>📱</span><span><b>전화 · 문자 · 카카오톡</b><br>010-2314-2930 — 서류는 휴대폰으로 찍어서 보내셔도 됩니다</span></a>
+      <div><span>📠</span><span><b>팩스</b><br>0504-144-2930</span></div>
+    </div>
+    </section>
+  </div>
+</div>
+
+<div class="wrap navwrap">
+  <section>
+    <h2>다른 안내 바로가기</h2>
+    <div class="links">
+      <a href="jeungyeo.html"><span class="ic">🎁</span><span><b>증여세 안내</b><small>재산을 주고받을 때</small></span><span class="go">›</span></a>
+      <a href="sangsok.html"><span class="ic">📋</span><span><b>상속세 안내</b><small>상속이 생겼을 때</small></span><span class="go">›</span></a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="in">
+    <b>해인세무회계</b> · 세무사 김윤완<br>
+    ☎ <a href="tel:01023142930">010-2314-2930</a> · 팩스 0504-144-2930<br>
+    ✉ <a href="mailto:ctawan0103@naver.com">ctawan0103@naver.com</a>
+    <div class="note">이 안내는 일반적인 준비서류이며, 개별 상황에 따라 추가 서류를 요청드릴 수 있습니다.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY = "hain-yangdo-v1";
+  var state = {checks:{}, groups:[], date:"", burden:false};
+  try { var s = localStorage.getItem(KEY); if (s) { var p = JSON.parse(s); for (var k in p) state[k] = p[k]; } } catch(e) {}
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} }
+
+  // ---- 신고기한 계산 (소득세법 §105①, 국세기본법 §5①) ----
+  var WD = ["일","월","화","수","목","금","토"];
+  // 양력 고정 공휴일 + 노동절(5/1)
+  var FIXED = ["01-01","03-01","05-01","05-05","06-06","08-15","10-03","10-09","12-25"];
+var HOL = ["2026-01-01", "2026-02-16", "2026-02-17", "2026-02-18", "2026-03-01", "2026-03-02", "2026-05-01", "2026-05-05", "2026-05-24", "2026-05-25", "2026-06-03", "2026-06-06", "2026-08-15", "2026-08-17", "2026-09-24", "2026-09-25", "2026-09-26", "2026-10-03", "2026-10-05", "2026-10-09", "2026-12-25", "2027-01-01", "2027-02-06", "2027-02-07", "2027-02-08", "2027-02-09", "2027-03-01", "2027-05-01", "2027-05-03", "2027-05-05", "2027-05-13", "2027-06-06", "2027-08-15", "2027-08-16", "2027-09-14", "2027-09-15", "2027-09-16", "2027-10-03", "2027-10-04", "2027-10-09", "2027-10-11", "2027-12-25", "2027-12-27", "2028-01-01", "2028-01-26", "2028-01-27", "2028-01-28", "2028-03-01", "2028-04-12", "2028-05-01", "2028-05-02", "2028-05-05", "2028-06-06", "2028-08-15", "2028-10-02", "2028-10-03", "2028-10-04", "2028-10-05", "2028-10-09", "2028-12-25", "2029-01-01", "2029-02-12", "2029-02-13", "2029-02-14", "2029-03-01", "2029-05-01", "2029-05-05", "2029-05-07", "2029-05-20", "2029-05-21", "2029-06-06", "2029-08-15", "2029-09-21", "2029-09-22", "2029-09-23", "2029-09-24", "2029-10-03", "2029-10-09", "2029-12-25", "2030-01-01", "2030-02-02", "2030-02-03", "2030-02-04", "2030-02-05", "2030-03-01", "2030-05-01", "2030-05-05", "2030-05-06", "2030-05-09", "2030-06-06", "2030-08-15", "2030-09-11", "2030-09-12", "2030-09-13", "2030-10-03", "2030-10-09", "2030-12-25", "2031-01-01", "2031-01-22", "2031-01-23", "2031-01-24", "2031-03-01", "2031-03-03", "2031-05-01", "2031-05-05", "2031-05-28", "2031-06-06", "2031-08-15", "2031-09-30", "2031-10-01", "2031-10-02", "2031-10-03", "2031-10-09", "2031-12-25", "2032-01-01", "2032-02-10", "2032-02-11", "2032-02-12", "2032-03-01", "2032-05-01", "2032-05-03", "2032-05-05", "2032-05-16", "2032-05-17", "2032-06-06", "2032-08-15", "2032-08-16", "2032-09-18", "2032-09-19", "2032-09-20", "2032-09-21", "2032-10-03", "2032-10-04", "2032-10-09", "2032-10-11", "2032-12-25", "2032-12-27"];  // 2026~2032 설·추석·부처님오신날·대체공휴일·선거일 (관공서의 공휴일에 관한 규정 §2·§3)
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  function fmt(d){ return d.getFullYear() + "년 " + (d.getMonth()+1) + "월 " + d.getDate() + "일(" + WD[d.getDay()] + ")"; }
+  function isOff(d){
+    var w = d.getDay();
+    return w === 0 || w === 6 || (FIXED.indexOf(pad(d.getMonth()+1) + "-" + pad(d.getDate())) > -1 || HOL.indexOf(d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate())) > -1);
+  }
+  var dateEl = document.getElementById("sellDate"), burdenEl = document.getElementById("burden");
+  dateEl.value = state.date || ""; burdenEl.checked = !!state.burden;
+
+  function calc(){
+    state.date = dateEl.value; state.burden = burdenEl.checked; save();
+    var box = document.getElementById("result"), dl = document.getElementById("dl"), ex = document.getElementById("dlEx");
+    if (!dateEl.value) {
+      box.classList.remove("done");
+      dl.textContent = "양도일을 입력하시면 신고기한이 표시됩니다";
+      ex.textContent = "원칙: 양도일이 속하는 달의 말일부터 2개월 이내";
+      return;
+    }
+    var p = dateEl.value.split("-"), y = +p[0], m = +p[1] - 1;
+    var months = burdenEl.checked ? 3 : 2;
+    var base = new Date(y, m + months + 1, 0);      // 양도월 말일 + N개월 → 그 달 말일
+    var due = new Date(base.getTime());
+    while (isOff(due)) due.setDate(due.getDate() + 1);
+
+    var today = new Date(); today.setHours(0,0,0,0);
+    var diff = Math.round((due - today) / 86400000);
+    var dday = diff > 0 ? "D-" + diff : (diff === 0 ? "D-DAY (오늘까지)" : "기한 " + (-diff) + "일 경과");
+
+    box.classList.add("done");
+    dl.innerHTML = "신고·납부 기한: " + fmt(due) + " 까지 <br><span class='dday" + (diff < 0 ? " late" : "") + "'>" + dday + "</span>";
+    var msg = "양도월 말일부터 " + months + "개월" + (burdenEl.checked ? " (부담부증여)" : "");
+    if (due.getTime() !== base.getTime()) msg += " · 원래 기한 " + fmt(base) + "이 휴일이라 다음 날로 연장";
+    if (diff < 0) msg += " · 기한이 지났습니다. 기한후신고로 가산세를 줄일 수 있으니 바로 연락 주세요.";
+    ex.textContent = msg;
+  }
+  dateEl.addEventListener("change", calc);
+  dateEl.addEventListener("input", calc);
+  burdenEl.addEventListener("change", calc);
+  calc();
+
+  // 상황 선택
+  var chips = document.querySelectorAll(".chip");
+  function applyGroups(){
+    chips.forEach(function(c){ c.classList.toggle("on", state.groups.indexOf(c.dataset.g) > -1); });
+    document.querySelectorAll(".group").forEach(function(g){
+      var k = g.dataset.group;
+      g.classList.toggle("on", k === "common" || state.groups.indexOf(k) > -1);
+    });
+    update();
+  }
+  chips.forEach(function(c){
+    c.addEventListener("click", function(){
+      var i = state.groups.indexOf(c.dataset.g);
+      if (i > -1) state.groups.splice(i, 1); else state.groups.push(c.dataset.g);
+      save(); applyGroups();
+    });
+  });
+
+  // 체크박스
+  var boxes = document.querySelectorAll("label.item input");
+  boxes.forEach(function(b){
+    b.checked = !!state.checks[b.dataset.id];
+    b.addEventListener("change", function(){ state.checks[b.dataset.id] = b.checked; save(); update(); });
+  });
+
+  function update(){
+    var total = 0, done = 0;
+    document.querySelectorAll(".group.on input").forEach(function(b){ total++; if (b.checked) done++; });
+    document.getElementById("count").textContent = done + " / " + total + " 준비";
+    document.getElementById("bar").style.width = (total ? done / total * 100 : 0) + "%";
+  }
+
+  document.getElementById("reset").addEventListener("click", function(){
+    state.checks = {}; boxes.forEach(function(b){ b.checked = false; }); save(); update();
+  });
+
+  applyGroups();
+})();
+</script>
+<script>
+// ---- 공통: 금액 입력·표시 ----
+function wonVal(el){ return +((el.value || "").replace(/[^0-9]/g, "")) || 0; }
+function comma(n){ return Math.round(n).toLocaleString("ko-KR"); }
+function hanWon(n){
+  n = Math.round(n); if (!n) return "";
+  var eok = Math.floor(n / 100000000), man = Math.floor((n % 100000000) / 10000), won = n % 10000, s = [];
+  if (eok) s.push(eok.toLocaleString("ko-KR") + "억");
+  if (man) s.push(man.toLocaleString("ko-KR") + "만");
+  if (won) s.push(won.toLocaleString("ko-KR"));
+  return s.join(" ") + "원";
+}
+function bindMoney(el, onChange){
+  var hint = document.querySelector(".amt[data-for='" + el.id + "']");
+  function fmtIt(){
+    var v = wonVal(el);
+    el.value = v ? comma(v) : "";
+    if (hint) hint.textContent = hanWon(v);
+    onChange();
+  }
+  el.addEventListener("input", fmtIt);
+  fmtIt.silent = true;
+  var v0 = wonVal(el); el.value = v0 ? comma(v0) : ""; if (hint) hint.textContent = hanWon(v0);
+}
+// 누진세율 계산: brackets = [[상한, 세율, 누진공제], ...]
+function progTax(base, br){
+  for (var i = 0; i < br.length; i++) if (base <= br[i][0]) return base * br[i][1] - br[i][2];
+  return 0;
+}
+function rowsHtml(rows){
+  return "<div class='tblwrap'><table><tbody>" + rows.map(function(r){
+    return "<tr class='" + (r[2] || "") + "'><td>" + r[0] + "</td><td class='num'>" + r[1] + "</td></tr>";
+  }).join("") + "</tbody></table></div>";
+}
+
+// ---- 양도소득세 모의계산 (소득세법 §55·§89·§95·§103·§104) ----
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var BASIC = [[14e6,.06,0],[5e7,.15,126e4],[8.8e7,.24,576e4],[1.5e8,.35,1544e4],[3e8,.38,1994e4],[5e8,.40,2594e4],[1e9,.42,3594e4],[Infinity,.45,6594e4]];
+  var KEY = "hain-yangdo-calc-v1";
+  var ids = ["yType","yAcqDate","ySellDate","ySell","yAcq","yExp","y1h","yLive"];
+  try { var s = JSON.parse(localStorage.getItem(KEY) || "{}");
+    ids.forEach(function(i){ if (s[i] !== undefined) { if ($(i).type === "checkbox") $(i).checked = s[i]; else $(i).value = s[i]; } });
+  } catch(e) {}
+  // 기한 계산에 넣은 양도일을 기본값으로
+  if (!$("ySellDate").value && $("sellDate") && $("sellDate").value) $("ySellDate").value = $("sellDate").value;
+  function save(){ var o = {}; ids.forEach(function(i){ o[i] = $(i).type === "checkbox" ? $(i).checked : $(i).value; }); try { localStorage.setItem(KEY, JSON.stringify(o)); } catch(e) {} }
+  function parse(v){ if (!v) return null; var p = v.split("-"); return new Date(+p[0], +p[1]-1, +p[2]); }
+  function fullYears(a, b){
+    var y = b.getFullYear() - a.getFullYear();
+    var ann = new Date(a.getFullYear() + y, a.getMonth(), a.getDate());
+    if (b < ann) y--;
+    return Math.max(0, y);
+  }
+
+  function calc(){
+    save();
+    var type = $("yType").value, isHouse = type === "house";
+    $("y1hWrap").style.display = isHouse ? "" : "none";
+    $("yLiveWrap").style.display = isHouse && $("y1h").checked ? "" : "none";
+    var out = $("yRes");
+    var acqD = parse($("yAcqDate").value), sellD = parse($("ySellDate").value);
+    var sell = wonVal($("ySell")), acq = wonVal($("yAcq")), exp = wonVal($("yExp"));
+    if (!acqD || !sellD || !sell) { out.innerHTML = "<p class='hint'>산 날, 판 날, 판 가격을 입력하시면 계산 결과가 나옵니다.</p>"; return; }
+    if (sellD <= acqD) { out.innerHTML = "<p class='hint'>판 날이 산 날보다 뒤여야 합니다.</p>"; return; }
+
+    var yrs = fullYears(acqD, sellD);
+    var one = isHouse && $("y1h").checked;
+    var live = one ? Math.max(0, Math.floor(+$("yLive").value || 0)) : 0;
+    var gain = sell - acq - exp;
+    var rows = [["판 가격", comma(sell) + "원"], ["(−) 산 가격", comma(acq) + "원"], ["(−) 필요경비", comma(exp) + "원"], ["양도차익", comma(gain) + "원", "total"]];
+
+    if (gain <= 0) {
+      out.innerHTML = "<div class='big free'><small>예상 양도소득세</small><b>0원</b></div><p class='hint'>양도차익이 없어 세금이 나오지 않습니다. 손해를 본 경우에도 신고는 하셔야 합니다.</p>" + rowsHtml(rows);
+      return;
+    }
+    // 1세대 1주택 비과세 / 고가주택
+    var taxGain = gain;
+    if (one) {
+      if (sell <= 12e8) {
+        out.innerHTML = "<div class='big free'><small>예상 양도소득세</small><b>비과세 예상</b></div><p class='hint'>1세대 1주택이고 판 가격이 12억원 이하라 비과세로 예상됩니다. 비과세 요건(보유·거주기간, 다른 주택 여부)은 서류로 꼭 확인해 드립니다.</p>" + rowsHtml(rows);
+        return;
+      }
+      taxGain = Math.floor(gain * (sell - 12e8) / sell);
+      rows.push(["12억원 초과분 과세 양도차익", comma(taxGain) + "원", "sub"]);
+    }
+    // 장기보유특별공제 (§95②)
+    var ltRate = 0, ltLabel = "";
+    if (type !== "presale" && yrs >= 3) {
+      if (one && live >= 2) {
+        var h = Math.min(yrs * 0.04, 0.40);
+        var l = live >= 3 ? Math.min(live * 0.04, 0.40) : 0.08;
+        ltRate = h + l; ltLabel = "보유 " + Math.round(h*100) + "% + 거주 " + Math.round(l*100) + "%";
+      } else {
+        ltRate = Math.min(yrs * 0.02, 0.30); ltLabel = "보유 " + yrs + "년 " + Math.round(ltRate*100) + "%";
+      }
+    }
+    var lt = Math.floor(taxGain * ltRate);
+    var income = taxGain - lt;
+    var base = Math.max(0, income - 250e4);
+    // 세율 (§104①)
+    var basicTax = progTax(base, BASIC), flat = 0, rateLabel;
+    if (yrs < 1) flat = (type === "land") ? 0.5 : 0.7;
+    else if (yrs < 2) flat = (type === "land") ? 0.4 : 0.6;
+    else if (type === "presale") flat = 0.6;
+    var tax;
+    if (flat) { var ft = base * flat; tax = Math.max(ft, type === "presale" ? 0 : basicTax); rateLabel = (tax === ft ? "단일세율 " + Math.round(flat*100) + "%" : "기본세율 (단일세율보다 큼)"); }
+    else { tax = basicTax; rateLabel = "기본세율 6~45%"; }
+    tax = Math.floor(tax);
+    var local = Math.floor(tax * 0.1);
+
+    rows.push(["(−) 장기보유특별공제", (lt ? comma(lt) + "원" : "해당 없음")]);
+    if (lt) rows.push([ltLabel, "", "sub"]);
+    rows.push(["양도소득금액", comma(income) + "원"]);
+    rows.push(["(−) 기본공제", comma(Math.min(250e4, income)) + "원"]);
+    rows.push(["과세표준", comma(base) + "원", "total"]);
+    rows.push(["보유기간 / 적용세율", yrs + "년 / " + rateLabel]);
+    rows.push(["양도소득세", comma(tax) + "원"]);
+    rows.push(["지방소득세 (10%)", comma(local) + "원"]);
+    rows.push(["합계", comma(tax + local) + "원", "total"]);
+    out.innerHTML = "<div class='big'><small>예상 납부세액 (지방소득세 포함)</small><b>" + comma(tax + local) + "원</b><small>" + hanWon(tax + local) + "</small></div>" + rowsHtml(rows);
+  }
+  ["ySell","yAcq","yExp"].forEach(function(i){ bindMoney($(i), calc); });
+  ["yType","yAcqDate","ySellDate","y1h","yLive"].forEach(function(i){ $(i).addEventListener("change", calc); $(i).addEventListener("input", calc); });
+  calc();
+})();
+</script>
+</body>
+</html>
