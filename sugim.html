@@ -132,6 +132,13 @@
   .howto li{margin:4px 0}
   .search{background:var(--navy);color:#fff;border-radius:8px;padding:8px 12px;font-size:14px}
   .search b{color:#ffe08a}
+  details{border-top:1px solid var(--line)}
+  details:last-of-type{border-bottom:1px solid var(--line)}
+  summary{list-style:none;cursor:pointer;padding:13px 4px;font-weight:800;color:var(--navy);display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"＋";font-weight:400;color:var(--muted)}
+  details[open] summary::after{content:"－"}
+  details .body{padding:0 2px 16px}
   label.done{display:flex;gap:10px;align-items:center;margin-top:14px;padding:12px 14px;border-radius:10px;background:#eaf6ee;color:var(--ok);font-weight:800;cursor:pointer}
   label.done input{width:22px;height:22px;accent-color:var(--ok)}
   .form-sample{position:relative;border:2px solid var(--ink);background:#fff;padding:40px 12px 10px;margin:12px 0;overflow:hidden}
@@ -269,6 +276,47 @@
     <label class="done"><input type="checkbox" data-done="3"> 사업용계좌 신고를 마쳤습니다 (또는 대상 아님 확인)</label>
   </section>
 
+  <!-- 꼭 알아두실 의무 -->
+  <section>
+    <h2>개업 후 꼭 알아두실 의무</h2>
+    <p class="hint">해당 여부는 담당자가 확인해 드립니다. 제목을 누르면 내용이 펼쳐집니다.</p>
+
+    <details>
+      <summary>전자세금계산서 발급</summary>
+      <div class="body">
+        <p class="corp-only" style="font-size:14px">법인은 <b>처음부터</b> 세금계산서를 전자로 발급해야 합니다.</p>
+        <p class="ind-only" style="font-size:14px">개인사업자는 직전 연도 공급가액(면세 포함)이 <b>8천만원 이상</b>이면 다음 해 <b>7월 1일부터</b> 전자로 발급해야 합니다. 대상이 되면 세무서에서 미리 통지합니다.</p>
+        <div class="kv"><span>발급 시기</span><span>공급한 날 (월합계는 다음 달 10일까지)</span></div>
+        <div class="kv"><span>국세청 전송</span><span>발급일 다음 날까지</span></div>
+        <div class="kv"><span>늦게 발급 (확정신고기한 내)</span><span>공급가액의 1% 가산세</span></div>
+        <div class="kv"><span>발급하지 않음</span><span>공급가액의 2% 가산세</span></div>
+        <div class="box">홈택스에서 직접 발급할 수 있습니다. 발급용 인증서 준비와 발급 방법은 담당자가 안내해 드립니다.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>현금영수증 가맹점 · 의무발행</summary>
+      <div class="body">
+        <p style="font-size:14px">주로 소비자를 상대하는 업종은 <b>현금영수증 가맹점 가입</b>이 의무입니다. 병의원·학원·전문직 등 <b>의무발행업종</b>은 건당 <b>10만원 이상</b> 현금(계좌이체 포함)을 받으면 손님이 요청하지 않아도 발급해야 합니다.</p>
+        <div class="kv"><span>의무발행업종 미발급</span><span>미발급금액의 20% 가산세</span></div>
+        <div class="kv"><span>10일 이내 자진 발급·신고</span><span>10%로 감경</span></div>
+        <div class="kv"><span>요청받고 발급 거부</span><span>거부금액의 5% 가산세</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>직원을 채용하면</summary>
+      <div class="body">
+        <ul class="plain">
+          <li>채용 <b>전에</b> 담당자에게 알려 주세요 — 근로계약서, 급여 조건, 4대보험 가입 여부를 함께 정합니다.</li>
+          <li>입사·퇴사 시 4대보험 취득·상실 신고가 필요합니다.</li>
+          <li>급여를 주면 원천징수한 세금을 다음 달 10일까지 신고·납부합니다 (요건이 되면 반기별 납부 신청 가능).</li>
+          <li class="ind-only">직원이 있으면 대표자도 직장 건강보험에 가입하게 됩니다.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
   <!-- STEP 4 CMS -->
   <section class="step" data-step="4">
     <div class="stephead"><span class="no" id="cmsNo">4</span><h2>기장료 CMS 자동이체 신청</h2><span class="tag must">필수</span></div>
@@ -323,6 +371,7 @@
       <a href="bugase.html"><span class="ic">🧾</span><span><b>부가가치세 안내</b><small>신고 일정 · 준비서류</small></span><span class="go">›</span></a>
       <a href="jongso.html"><span class="ic">📒</span><span><b>종합소득세 안내</b><small>5월 신고 준비서류</small></span><span class="go">›</span></a>
       <a href="beopin.html"><span class="ic">🏢</span><span><b>법인세 안내</b><small>결산 · 신고 준비서류</small></span><span class="go">›</span></a>
+      <a href="myeonse.html"><span class="ic">🏥</span><span><b>면세사업장 현황신고 안내</b><small>병의원·학원·주택임대 2월 신고</small></span><span class="go">›</span></a>
     </div>
   </section>
 </div>
