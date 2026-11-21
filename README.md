@@ -21,6 +21,7 @@
 | 양도소득세 | https://ywkim-boop.github.io/guide2/yangdo.html |
 | 증여세 | https://ywkim-boop.github.io/guide2/jeungyeo.html |
 | 상속세 | https://ywkim-boop.github.io/guide2/sangsok.html |
+| 양도·증여·상속세 간편계산 | https://ywkim-boop.github.io/guide2/calc.html |
 
 ## 수정 방법
 1. 이 화면에서 **Add file → Upload files**
