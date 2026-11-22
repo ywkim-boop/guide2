@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>연말정산 안내 | 해인세무회계</title>
+<meta name="description" content="2026년 귀속 연말정산 일정과 근로자별 준비서류, 공제 항목을 확인하실 수 있습니다.">
+<meta property="og:title" content="연말정산 안내 | 해인세무회계">
+<meta property="og:description" content="2026년 귀속 연말정산 일정과 근로자별 준비서류, 공제 항목을 확인하실 수 있습니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ywkim-boop.github.io/guide2/yeonmal.html">
+<meta property="og:image" content="https://ywkim-boop.github.io/guide2/yeonmal-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<style>
+  :root{
+    --navy:#0d2547; --navy-soft:#e8edf5; --ink:#1f2937; --muted:#6b7280;
+    --line:#d9dee7; --bg:#f4f6fa; --card:#ffffff; --accent:#c2410c; --ok:#15803d; --red:#b91c1c;
+    --hl:#fff8e1;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"맑은 고딕","Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:15px;line-height:1.65;-webkit-text-size-adjust:100%}
+  header{background:var(--navy);color:#fff;padding:22px 16px 18px}
+  header .firm{font-size:13px;opacity:.85;letter-spacing:.5px}
+  header h1{margin:4px 0 2px;font-size:24px;font-weight:900;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+  header p{margin:0;font-size:13.5px;opacity:.9}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px 40px}
+  section{background:var(--card);border-radius:12px;padding:18px 16px;margin-top:14px;box-shadow:0 1px 3px rgba(13,37,71,.06)}
+  h2{margin:0 0 10px;font-size:17px;font-weight:800;color:var(--navy);border-left:6px solid var(--navy);padding-left:10px;line-height:1.3}
+  h3{margin:16px 0 6px;font-size:15px;color:var(--navy)}
+  p{margin:0 0 8px}
+  .hint{font-size:13px;color:var(--muted);margin:0 0 10px}
+  .first{background:var(--hl);border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:14px}
+  .first b{color:var(--navy)}
+  .red{color:var(--red);font-weight:700}
+  .warn{color:var(--accent);font-weight:700}
+
+  /* 표 (남색 선 심플 스타일) */
+  table{width:100%;border-collapse:collapse;border-top:2px solid var(--navy);border-bottom:2px solid var(--navy);font-size:14px}
+  th{text-align:left;color:var(--navy);font-weight:800;padding:8px 6px;border-bottom:1px solid var(--navy);white-space:nowrap}
+  td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td:first-child{color:#4b5563;font-weight:700}
+  td.num,th.num{text-align:right;white-space:nowrap}
+  tr.hl td{background:var(--hl)}
+  .tblwrap{overflow-x:auto}
+
+  /* 기한 계산 */
+  .calc{display:grid;gap:10px;margin-bottom:12px}
+  .fld{display:grid;gap:4px;font-weight:700;font-size:14px;color:var(--navy)}
+  .fld input{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+  .opt{display:flex;gap:8px;align-items:flex-start;font-size:14px}
+  .opt input{width:18px;height:18px;margin-top:3px;accent-color:var(--navy);flex:0 0 auto}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:4px 0 4px;text-align:center}
+  .steps div{background:var(--navy-soft);border-radius:10px;padding:10px 4px;font-size:12.5px;line-height:1.4}
+  .steps b{display:block;font-size:15px;color:var(--navy)}
+  .steps .main{background:var(--navy);color:#fff}.steps .main b{color:#fff}
+  #timeline{display:none}
+  #timeline.on{display:block}
+  .dday{display:inline-block;font-size:12px;font-weight:800;padding:1px 8px;border-radius:99px;background:var(--navy);color:#fff;white-space:nowrap}
+  .dday.late{background:var(--red)}
+  .dday.done{background:#9ca3af}
+  td .law{display:block;font-size:12px;color:var(--muted);font-weight:400}
+  td .shift{display:block;font-size:12px;color:var(--accent);font-weight:400}
+
+  /* 체크리스트 */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+  .chip{border:1.5px solid var(--line);background:#fff;padding:8px 12px;border-radius:10px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
+  .chip.on{border-color:var(--navy);background:var(--navy-soft);color:var(--navy);font-weight:700}
+  .chip.on::before{content:"✓ "}
+  .progress{display:flex;align-items:center;gap:10px;margin:10px 0 6px}
+  .bar{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
+  .count{font-size:13px;font-weight:700;color:var(--ok);white-space:nowrap}
+  .group{display:none}.group.on{display:block}
+  .tag{font-size:11.5px;font-weight:700;background:var(--navy-soft);color:var(--navy);padding:2px 8px;border-radius:99px;margin-left:6px;vertical-align:middle}
+  .tag.must{background:#fde8e8;color:var(--red)}
+  label.item{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+  label.item:last-child{border-bottom:0}
+  label.item input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--ok);flex:0 0 auto}
+  label.item .t{font-weight:700}
+  label.item .d{display:block;font-size:13px;color:var(--muted);font-weight:400}
+  label.item input:checked + span .t{color:var(--muted);text-decoration:line-through}
+  .btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .btn{border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:8px;font:inherit;font-size:13.5px;cursor:pointer;color:var(--ink)}
+
+  /* 접이식 안내 */
+  details{border-top:1px solid var(--line)}
+  details:last-of-type{border-bottom:1px solid var(--line)}
+  summary{list-style:none;cursor:pointer;padding:13px 4px;font-weight:800;color:var(--navy);display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"＋";font-weight:400;color:var(--muted)}
+  details[open] summary::after{content:"－"}
+  details .body{padding:0 2px 16px}
+  .kv{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:14px;padding:6px 0;border-bottom:1px dashed var(--line)}
+  .kv:last-child{border-bottom:0}
+  .kv span:last-child{text-align:right;font-weight:700}
+  .box{background:var(--navy-soft);border-radius:10px;padding:12px 14px;margin:10px 0;font-size:14px}
+  .faq b{display:block;color:var(--navy);margin-top:12px}
+  .faq b:first-child{margin-top:0}
+  .faq p{font-size:14px}
+  .laws{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .laws span{font-size:12px;background:var(--navy-soft);color:var(--navy);padding:3px 8px;border-radius:6px}
+
+  .send{display:grid;gap:8px;margin-top:6px}
+  .send a,.send div{display:flex;gap:10px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink)}
+  .send b{color:var(--navy)}
+  footer{background:var(--navy);color:#fff;padding:20px 16px;font-size:13.5px}
+  footer .in{max-width:760px;margin:0 auto}
+  footer b{font-size:15px}
+  footer a{color:#fff}
+  footer .note{opacity:.7;font-size:12px;margin-top:8px}
+  @media (max-width:420px){ .steps{grid-template-columns:repeat(2,1fr)} }
+  .fld select{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+  .fld .amt{font-size:12.5px;color:var(--muted);font-weight:400;min-height:1em}
+  .fld small{font-size:12.5px;color:var(--muted);font-weight:400}
+  .opt.off{opacity:.45}
+  .res{margin-top:14px}
+  .res table{font-size:14px}
+  .res td.num{text-align:right;white-space:nowrap;font-weight:700;color:var(--ink)}
+  .res tr.total td{font-weight:800;color:var(--navy);font-size:16px;border-top:2px solid var(--navy)}
+  .res tr.sub td{color:var(--muted);font-weight:400;font-size:13px}
+  .res .big{background:var(--navy);color:#fff;border-radius:12px;padding:14px 16px;margin-bottom:10px}
+  .res .big small{display:block;opacity:.8;font-size:13px}
+  .res .big b{font-size:24px;font-weight:900}
+  .res .big.free{background:var(--ok)}
+  .calc-note{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.6}
+  ul.plain{margin:6px 0 10px;padding-left:18px;font-size:14px}
+  .seg{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--navy);border-radius:10px;overflow:hidden;margin-bottom:12px}
+  .seg.seg3{grid-template-columns:1fr 1fr 1fr}
+  .seg button{font:inherit;font-size:14.5px;padding:10px 4px;border:0;background:#fff;color:var(--navy);cursor:pointer}
+  .seg button+button{border-left:1px solid var(--navy-soft)}
+  .seg button.on{background:var(--navy);color:#fff;font-weight:800}
+  .links{display:grid;gap:8px}
+  .links a{display:flex;align-items:center;gap:12px;padding:14px;border:1.5px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);background:#fff}
+  .links a:active{background:var(--navy-soft)}
+  .links .ic{font-size:22px;flex:0 0 auto}
+  .links b{display:block;color:var(--navy);font-size:15px}
+  .links small{display:block;color:var(--muted);font-size:12.5px}
+  .links .go{margin-left:auto;font-size:24px;color:var(--navy);flex:0 0 auto}
+  .navwrap{padding-top:0}
+  @media print{ .navwrap{display:none} }
+  @media print{
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{background:#fff}
+    .chips,.btns,.progress,.calc{display:none!important}
+    section{box-shadow:none;border:1px solid var(--line);break-inside:avoid}
+    details .body{display:block}
+  }
+  .steps div{font-size:12px}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="firm">해인세무회계 · 대표세무사 김윤완</div>
+  <h1>연말정산 안내</h1>
+  <p id="sub">2026년 귀속 근로소득 연말정산 (2027년 1~3월 진행) 기준으로 안내해 드립니다.</p>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <h2>진행 일정</h2>
+    <div class="tblwrap"><table>
+      <thead><tr><th>구분</th><th>기한</th></tr></thead>
+      <tbody id="tl"></tbody>
+    </table></div>
+    <div class="first" style="margin-top:12px">회사 담당자께서는 직원분들 자료를 모아 <b id="dueTxt">1월 말</b>까지 사무실로 보내 주세요. 늦게 오면 2월 급여 반영이 어려울 수 있습니다.</div>
+    <p class="hint">간소화 자료는 1월 15일 무렵 열리지만, 병원·학교 등이 자료를 고쳐 올리는 경우가 있어 <b>1월 20일 이후 최종 자료</b>로 내려받는 것이 안전합니다.</p>
+  </section>
+
+  <section>
+    <h2>2026년 귀속부터 달라진 점</h2>
+    <div class="kv"><span>신용카드 공제 한도 — 20세 이하 자녀(손자녀 포함) 수에 따라 늘어남</span><span>최대 400만원</span></div>
+    <div class="kv"><span>초등 1~2학년(9세 미만) 예체능 학원·체육시설 수강료 교육비 공제</span><span>신설</span></div>
+    <div class="kv"><span>수영장·헬스장 이용료 신용카드 30% 공제 (총급여 7천만원 이하)</span><span>2025. 7. 1. 이후분</span></div>
+    <div class="kv"><span>월세 세액공제 — 다른 시·군·구에 따로 사는 배우자도 추가 공제</span><span>신설</span></div>
+    <div class="kv"><span>월세 — 기본공제 자녀 3명 이상이면 전용 100㎡ 이하까지 인정</span><span>확대</span></div>
+    <div class="kv"><span>결혼 세액공제 50만원 — 2026. 12. 31.까지 혼인신고분이 마지막</span><span>올해까지</span></div>
+  </section>
+
+  <section id="list">
+    <h2>보내 주실 서류</h2>
+    <p class="hint">해당하는 항목을 선택하면 필요한 서류가 추가됩니다. 근로자 1명마다 확인해 주세요.</p>
+    <div class="chips" id="chips">
+      <button class="chip" data-g="mid">중도 입사자</button>
+      <button class="chip" data-g="fam">부양가족 공제</button>
+      <button class="chip" data-g="dis">장애인 가족</button>
+      <button class="chip" data-g="rent">월세 거주</button>
+      <button class="chip" data-g="house">주택대출·청약</button>
+      <button class="chip" data-g="edu">교육비 (자료 누락분)</button>
+      <button class="chip" data-g="med">의료비 (자료 누락분)</button>
+      <button class="chip" data-g="give">기부금</button>
+      <button class="chip" data-g="marry">2026년 혼인신고</button>
+    </div>
+    <div class="progress"><div class="bar"><i id="bar"></i></div><span class="count" id="count">0 / 0</span></div>
+
+    <div class="group on" data-group="common">
+      <h3>회사에서 준비하실 것</h3>
+      <label class="item"><input type="checkbox" data-id="k1"><span><span class="t">근로자 명단 변동사항</span><span class="d">2026년 입사·퇴사자, 급여 변동(인상·상여·비과세 식대 등) — 사무실 급여자료와 다른 부분만</span></span></label>
+      <label class="item"><input type="checkbox" data-id="k2"><span><span class="t">근로자별 자료 취합</span><span class="d">아래 근로자 서류를 사람별로 묶어서 보내 주세요 (파일명에 이름)</span></span></label>
+      <h3>근로자 공통</h3>
+      <label class="item"><input type="checkbox" data-id="c1"><span><span class="t">소득·세액공제 신고서 및 부양가족 명세</span><span class="d">사무실에서 드리는 양식 — 쓰기 어려우면 비워 두고 서류만 보내셔도 됩니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c2"><span><span class="t">국세청 연말정산 간소화 자료 (PDF)</span><span class="d">홈택스에서 <b>"한 번에 내려받기"</b>한 PDF 원본 그대로 — 사진·캡처는 안 됩니다. 아래 "간소화 자료 받는 방법" 참고</span></span></label>
+    </div>
+
+    <div class="group" data-group="mid">
+      <h3>2026년 중간에 입사한 경우<span class="tag must">필수</span></h3>
+      <label class="item"><input type="checkbox" data-id="m1"><span><span class="t">전(前) 근무지 근로소득 원천징수영수증</span><span class="d">2026년에 다른 회사에서 받은 급여 — 없으면 합산이 안 되어 본인이 5월에 직접 종합소득세 신고를 해야 합니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="m2"><span><span class="t">간소화 자료는 월별로 출력</span><span class="d">입사 전 사용분은 공제가 안 되는 항목(카드·보험료·의료비·교육비 등)이 있어 월별 내역이 필요합니다</span></span></label>
+    </div>
+
+    <div class="group" data-group="fam">
+      <h3>부양가족을 공제받는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="f1"><span><span class="t">가족관계증명서</span><span class="d">주민등록등본에 없는 가족(따로 사는 부모님, 배우자의 부모님 등) 확인용 — 작년과 같으면 생략 가능</span></span></label>
+      <label class="item"><input type="checkbox" data-id="f2"><span><span class="t">주민등록등본</span><span class="d">함께 사는 가족, 세대주 여부 확인용</span></span></label>
+      <label class="item"><input type="checkbox" data-id="f3"><span><span class="t">가족 자료 제공 동의</span><span class="d">성인 가족의 간소화 자료는 가족이 홈택스에서 "자료제공 동의"를 해야 근로자 화면에 보입니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="f4"><span><span class="t">수급자증명서 · 가정위탁 확인서</span><span class="d">해당하는 경우만</span></span></label>
+    </div>
+
+    <div class="group" data-group="dis">
+      <h3>장애인 가족이 있는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="d1"><span><span class="t">장애인증명서 또는 장애인등록증 사본</span><span class="d">중증환자(암 등)로 공제받으려면 병원에서 발급하는 소득세법상 장애인증명서</span></span></label>
+    </div>
+
+    <div class="group" data-group="rent">
+      <h3>월세로 사는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="r1"><span><span class="t">임대차계약서 사본</span><span class="d">계약서 주소와 주민등록 주소가 같아야 합니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="r2"><span><span class="t">월세 이체내역 (계좌이체 확인증 등)</span><span class="d">공공임대(LH 등) 월세는 간소화 자료에 나오기도 합니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="r3"><span><span class="t">주민등록등본</span><span class="d">무주택 세대주 여부 확인용</span></span></label>
+    </div>
+
+    <div class="group" data-group="house">
+      <h3>주택 대출·청약저축이 있는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="h1"><span><span class="t">주택자금 상환증명서 · 장기주택저당차입금 이자상환증명서</span><span class="d">은행 발급 — 간소화 자료에 나오면 생략</span></span></label>
+      <label class="item"><input type="checkbox" data-id="h2"><span><span class="t">주택 등기사항증명서 · 공시가격 확인 자료</span><span class="d">장기주택저당차입금 이자 공제를 처음 받는 경우 (취득 당시 기준시가 6억원 이하 확인)</span></span></label>
+      <label class="item"><input type="checkbox" data-id="h3"><span><span class="t">주택청약저축 납입증명서 · 무주택확인서</span><span class="d">무주택확인서는 은행에 2027년 2월 말까지 내야 공제됩니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="h4"><span><span class="t">전세자금 대출 원리금 상환증명서 · 임대차계약서</span><span class="d">주택임차차입금 공제 시</span></span></label>
+    </div>
+
+    <div class="group" data-group="edu">
+      <h3>간소화 자료에 없는 교육비<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="e1"><span><span class="t">교육비 납입증명서</span><span class="d">취학 전 아동 학원·체육시설(주 1회 이상 월 단위), 초등 1~2학년 예체능 학원·체육시설, 국외 교육기관 등</span></span></label>
+      <label class="item"><input type="checkbox" data-id="e2"><span><span class="t">교복 구입 영수증 · 현장체험학습비</span><span class="d">교복은 중·고생 1명당 50만원, 현장체험학습은 초·중·고생 1명당 30만원 한도 — 간소화에 없을 때만</span></span></label>
+      <label class="item"><input type="checkbox" data-id="e3"><span><span class="t">장애인 특수교육비 납입증명서</span><span class="d">재활교육 시설·발달재활서비스 제공기관</span></span></label>
+    </div>
+
+    <div class="group" data-group="med">
+      <h3>간소화 자료에 없는 의료비<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="x1"><span><span class="t">안경·콘택트렌즈 구입 영수증</span><span class="d">시력교정용, 1명당 연 50만원까지 — 안경점에서 "의료비 공제용" 영수증 발급</span></span></label>
+      <label class="item"><input type="checkbox" data-id="x2"><span><span class="t">보청기·장애인 보장구 구입 영수증</span><span class="d">간소화 자료에 대부분 나오지 않습니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="x3"><span><span class="t">산후조리원 영수증</span><span class="d">출산 1회당 200만원까지 — 간소화에 없으면 제출</span></span></label>
+      <label class="item"><input type="checkbox" data-id="x4"><span><span class="t">실손보험금 수령 내역</span><span class="d">보험금으로 받은 금액은 의료비에서 빠집니다 (간소화에 함께 표시)</span></span></label>
+    </div>
+
+    <div class="group" data-group="give">
+      <h3>기부금이 있는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="g1"><span><span class="t">기부금 영수증</span><span class="d">교회·사찰 등 종교단체, 사회복지단체 — 간소화 자료에 없는 것만</span></span></label>
+      <label class="item"><input type="checkbox" data-id="g2"><span><span class="t">종교단체 소속증명서 · 고유번호증 사본</span><span class="d">영수증에 단체 고유번호가 없을 때</span></span></label>
+    </div>
+
+    <div class="group" data-group="marry">
+      <h3>2026년에 혼인신고를 한 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="w1"><span><span class="t">혼인관계증명서</span><span class="d">결혼 세액공제 50만원 (부부 각각, 생애 1회)</span></span></label>
+    </div>
+
+    <div class="btns">
+      <button class="btn" id="reset">체크 초기화</button>
+      <button class="btn" onclick="window.print()">인쇄 / PDF 저장</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>간소화 자료 받는 방법</h2>
+    <div class="steps" style="grid-template-columns:repeat(4,1fr)">
+      <div><b>1</b>홈택스·손택스 로그인</div>
+      <div><b>2</b>연말정산 간소화 메뉴</div>
+      <div><b>3</b>소득·세액공제 자료 조회</div>
+      <div class="main"><b>4</b>한 번에 내려받기 (PDF)</div>
+    </div>
+    <ul class="plain">
+      <li>로그인은 카카오·네이버·PASS 등 <b>간편인증</b>이나 공동·금융인증서로 하면 됩니다. 은행 방문은 필요 없습니다.</li>
+      <li>내려받을 때 <b>비밀번호</b>를 걸 수 있습니다. 비밀번호를 걸었다면 사무실에 따로 알려 주세요.</li>
+      <li>중도 입사자는 조회 화면에서 <b>월별 조회</b>를 선택해 내려받아 주세요.</li>
+      <li>가족 자료가 안 보이면 그 가족이 홈택스에서 근로자에게 <b>자료제공 동의</b>를 했는지 확인해 주세요. 미성년 자녀는 동의 없이 근로자가 직접 조회 신청할 수 있습니다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>공제 항목 안내</h2>
+    <p class="hint">제목을 누르면 내용이 펼쳐집니다. 2026년 귀속 현행 법령 기준입니다.</p>
+
+    <details>
+      <summary>부양가족 (기본공제) 나이 · 소득 기준</summary>
+      <div class="body">
+        <div class="tblwrap"><table>
+          <thead><tr><th>대상</th><th>나이 기준 (2026년 귀속)</th></tr></thead>
+          <tbody>
+            <tr><td>부모·조부모 (배우자 쪽 포함)</td><td>60세 이상 — <b id="b60">1966. 12. 31.</b> 이전 출생</td></tr>
+            <tr><td>자녀·손자녀</td><td>20세 이하 — <b id="b20">2006. 1. 1.</b> 이후 출생</td></tr>
+            <tr><td>형제자매</td><td>20세 이하 또는 60세 이상</td></tr>
+            <tr><td>장애인</td><td>나이 제한 없음</td></tr>
+            <tr><td>배우자</td><td>나이 제한 없음</td></tr>
+          </tbody>
+        </table></div>
+        <div class="box"><b>소득 기준</b> — 연간 소득금액 합계 <b>100만원 이하</b> (근로소득만 있으면 <b>총급여 500만원 이하</b>). 금융소득 2천만원 이하·주택 1채 양도처럼 비과세·분리과세 소득은 따지지 않지만, 사업소득·연금소득·양도소득 등은 포함됩니다. 1명당 <b>150만원</b> 공제.</div>
+        <p class="hint">한 사람을 형제끼리 중복으로 공제받으면 나중에 가산세와 함께 추징됩니다. 누가 공제받을지 미리 정해 주세요.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>추가공제 (경로우대 · 장애인 · 부녀자 · 한부모)</summary>
+      <div class="body">
+        <div class="kv"><span>경로우대 — 70세 이상 (<span id="b70">1956. 12. 31.</span> 이전 출생)</span><span>1명당 100만원</span></div>
+        <div class="kv"><span>장애인</span><span>1명당 200만원</span></div>
+        <div class="kv"><span>부녀자 — 종합소득금액 3천만원 이하 여성으로 배우자가 있거나, 배우자 없이 부양가족 있는 세대주</span><span>50만원</span></div>
+        <div class="kv"><span>한부모 — 배우자 없이 기본공제 자녀가 있는 경우</span><span>100만원</span></div>
+        <p class="hint" style="margin-top:8px">부녀자공제와 한부모공제에 모두 해당하면 한부모공제만 적용됩니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>신용카드 등 사용금액</summary>
+      <div class="body">
+        <p>총급여의 <b>25%를 넘게 쓴 금액</b>부터 공제됩니다. 배우자·부모·자녀 등 기본공제 요건(소득 기준)을 갖춘 가족 사용분은 합칠 수 있고, 형제자매 사용분은 안 됩니다.</p>
+        <div class="tblwrap"><table>
+          <thead><tr><th>사용처</th><th class="num">공제율</th></tr></thead>
+          <tbody>
+            <tr><td>신용카드</td><td class="num">15%</td></tr>
+            <tr><td>체크카드·현금영수증</td><td class="num">30%</td></tr>
+            <tr><td>도서·신문·공연·박물관·미술관·영화, 수영장·헬스장 (총급여 7천만원 이하)</td><td class="num">30%</td></tr>
+            <tr><td>전통시장</td><td class="num">40%</td></tr>
+            <tr><td>대중교통</td><td class="num">40%</td></tr>
+          </tbody>
+        </table></div>
+        <h3>공제 한도 (2026년 사용분부터)</h3>
+        <div class="tblwrap"><table>
+          <thead><tr><th>총급여</th><th class="num">기본</th><th class="num">자녀 1명</th><th class="num">자녀 2명 이상</th></tr></thead>
+          <tbody>
+            <tr><td>7천만원 이하</td><td class="num">300만원</td><td class="num">350만원</td><td class="num">400만원</td></tr>
+            <tr><td>7천만원 초과</td><td class="num">250만원</td><td class="num">275만원</td><td class="num">300만원</td></tr>
+          </tbody>
+        </table></div>
+        <p class="hint" style="margin-top:8px">자녀는 20세 이하(장애인은 나이 무관)로 소득 기준을 갖춘 자녀·손자녀이고, 다른 사람이 기본공제를 받지 않아야 합니다. 한도를 넘으면 전통시장·대중교통(총급여 7천만원 이하는 문화·체육 포함) 사용분으로 300만원(7천만원 초과 200만원)까지 추가 공제됩니다.</p>
+        <p class="hint">공제 안 되는 사용분: 보험료, 학교·어린이집 수업료, 세금·공과금, 관리비, 통신비, 상품권, 자동차 구입(중고차는 10%만), 해외 사용분 등.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>의료비</summary>
+      <div class="body">
+        <p>나이·소득에 관계없이 기본공제 대상 가족을 위해 쓴 의료비가 대상입니다. <b>총급여의 3%를 넘는 금액</b>부터 공제됩니다.</p>
+        <div class="tblwrap"><table>
+          <thead><tr><th>대상</th><th class="num">공제율</th><th class="num">한도</th></tr></thead>
+          <tbody>
+            <tr><td>본인, 6세 이하, 65세 이상, 장애인, 중증·희귀난치·결핵 환자</td><td class="num">15%</td><td class="num">없음</td></tr>
+            <tr><td>그 밖의 가족</td><td class="num">15%</td><td class="num">700만원</td></tr>
+            <tr><td>미숙아·선천성이상아</td><td class="num">20%</td><td class="num">없음</td></tr>
+            <tr><td>난임시술비</td><td class="num">30%</td><td class="num">없음</td></tr>
+          </tbody>
+        </table></div>
+        <p class="hint" style="margin-top:8px">포함: 진료·약값(한약 포함), 처방받은 의료기기, 안경·렌즈(1명당 50만원), 보청기, 장기요양 본인부담금, 산후조리원(출산 1회당 200만원). 제외: 미용·성형, 건강기능식품, 실손보험금으로 받은 금액.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>교육비</summary>
+      <div class="body">
+        <div class="tblwrap"><table>
+          <thead><tr><th>대상</th><th class="num">한도 (1명당)</th></tr></thead>
+          <tbody>
+            <tr><td>본인 (대학원·직업훈련·학자금대출 상환 포함)</td><td class="num">전액</td></tr>
+            <tr><td>취학 전 아동·초·중·고생</td><td class="num">300만원</td></tr>
+            <tr><td>대학생 (대학원 제외)</td><td class="num">900만원</td></tr>
+            <tr><td>장애인 특수교육비</td><td class="num">전액</td></tr>
+          </tbody>
+        </table></div>
+        <p class="hint" style="margin-top:8px">공제율 15%. 부모님(직계존속) 교육비는 장애인 특수교육비 말고는 공제되지 않습니다. 학원비는 <b>취학 전 아동</b>과 <b>초등 1~2학년(9세 미만)의 예체능 학원·체육시설</b>만 해당하고(주 1회 이상 월 단위 과정), 초등 3학년 이상 학원비는 안 됩니다. 장학금·회사 학자금으로 낸 금액은 빠집니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>보험료 · 연금저축 · 퇴직연금</summary>
+      <div class="body">
+        <div class="kv"><span>보장성 보험료 (기본공제 가족이 피보험자)</span><span>100만원 한도 × 12%</span></div>
+        <div class="kv"><span>장애인전용 보장성 보험료</span><span>100만원 한도 × 15%</span></div>
+        <div class="kv"><span>연금저축 납입액</span><span>600만원 한도</span></div>
+        <div class="kv"><span>연금저축 + 퇴직연금(IRP 등) 합계</span><span>900만원 한도</span></div>
+        <div class="kv"><span>연금계좌 공제율 — 총급여 5,500만원 이하</span><span>15%</span></div>
+        <div class="kv"><span>연금계좌 공제율 — 총급여 5,500만원 초과</span><span>12%</span></div>
+        <p class="hint" style="margin-top:8px">회사가 부담하는 DC형 퇴직연금은 해당하지 않고, 본인이 추가로 넣은 금액만 공제됩니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>월세 세액공제</summary>
+      <div class="body">
+        <div class="kv"><span>대상</span><span>무주택 세대주 (세대주가 공제 안 받으면 세대원)</span></div>
+        <div class="kv"><span>소득 기준</span><span>총급여 8천만원 이하</span></div>
+        <div class="kv"><span>주택</span><span>전용 85㎡ 이하 또는 기준시가 4억원 이하</span></div>
+        <div class="kv"><span>공제율 — 총급여 5,500만원 이하</span><span>17%</span></div>
+        <div class="kv"><span>공제율 — 5,500만원 초과 ~ 8천만원 이하</span><span>15%</span></div>
+        <div class="kv"><span>한도</span><span>연 월세 1,000만원</span></div>
+        <div class="box">오피스텔·고시원도 됩니다. <b>계약서 주소로 전입신고</b>가 되어 있어야 합니다. 기본공제 자녀가 3명 이상이면 전용 100㎡ 이하까지 인정됩니다. 2026년부터는 직장 때문에 <b>다른 시·군·구에 따로 사는 배우자</b>도 요건을 갖추면 부부 합계 1,000만원 안에서 추가로 공제받을 수 있습니다.</div>
+        <p class="hint">총급여 외에 다른 소득이 있어 종합소득금액이 7천만원(17% 구간은 4,500만원)을 넘으면 제외되거나 낮은 공제율이 적용됩니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>주택자금 · 주택청약</summary>
+      <div class="body">
+        <h3>주택청약저축</h3>
+        <div class="kv"><span>대상</span><span>총급여 7천만원 이하 무주택 세대주 또는 그 배우자</span></div>
+        <div class="kv"><span>공제</span><span>납입액(연 300만원 한도) × 40%</span></div>
+        <h3>전세자금 대출 원리금 상환액</h3>
+        <div class="kv"><span>대상</span><span>무주택 세대주, 전용 85㎡ 이하 주택(주거용 오피스텔 포함)</span></div>
+        <div class="kv"><span>공제</span><span>상환액 × 40% (청약저축과 합쳐 400만원 한도)</span></div>
+        <h3>장기주택저당차입금 이자</h3>
+        <div class="kv"><span>대상</span><span>무주택 또는 1주택 세대주, 취득 당시 기준시가 6억원 이하 주택</span></div>
+        <div class="kv"><span>한도 — 15년 이상, 고정금리 + 비거치 분할상환</span><span>2,000만원</span></div>
+        <div class="kv"><span>한도 — 15년 이상, 고정금리 또는 비거치 분할상환</span><span>1,800만원</span></div>
+        <div class="kv"><span>한도 — 15년 이상, 그 밖의 경우</span><span>800만원</span></div>
+        <div class="kv"><span>한도 — 10년 이상, 고정금리 또는 비거치 분할상환</span><span>600만원</span></div>
+        <p class="hint" style="margin-top:8px">세대주가 아니면 실제 거주해야 하고, 연말 현재 세대가 2주택 이상이면 공제되지 않습니다. 대출이 본인 명의이고 주택도 본인 명의여야 합니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>자녀 · 출산 · 결혼 세액공제</summary>
+      <div class="body">
+        <h3>자녀세액공제 (8세 이상 기본공제 자녀·손자녀)</h3>
+        <div class="kv"><span>1명</span><span>25만원</span></div>
+        <div class="kv"><span>2명</span><span>55만원</span></div>
+        <div class="kv"><span>3명 이상</span><span>55만원 + 2명 초과 1명당 40만원</span></div>
+        <h3>출산·입양 (2026년에 출생·입양신고)</h3>
+        <div class="kv"><span>첫째 / 둘째 / 셋째 이상</span><span>30만 / 50만 / 70만원</span></div>
+        <h3>결혼 세액공제</h3>
+        <div class="kv"><span>2024~2026년 혼인신고 (생애 1회, 부부 각각)</span><span>50만원</span></div>
+        <p class="hint" style="margin-top:8px">8세 이상은 <span id="b8">2018. 12. 31.</span> 이전 출생 자녀입니다. 자녀장려금을 받으면 자녀세액공제와 중복되지 않을 수 있습니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>기부금 · 고향사랑기부금</summary>
+      <div class="body">
+        <div class="kv"><span>일반·특례 기부금</span><span>1천만원까지 15%, 초과분 30%</span></div>
+        <div class="kv"><span>고향사랑기부금 10만원까지</span><span>전액 (110분의 100)</span></div>
+        <div class="kv"><span>고향사랑기부금 10만원 초과 ~ 20만원</span><span>40%</span></div>
+        <div class="kv"><span>고향사랑기부금 20만원 초과 ~ 2천만원</span><span>15%</span></div>
+        <p class="hint" style="margin-top:8px">배우자·부양가족(나이 제한 없음, 소득 기준은 적용) 명의 기부금도 공제됩니다. 종교단체 기부금은 소득금액의 일정 비율 한도가 있고, 한도를 넘은 금액은 10년간 이월됩니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>자주 묻는 질문</summary>
+      <div class="body faq">
+        <b>Q. 맞벌이 부부는 누가 공제받는 게 유리한가요?</b>
+        <p>의료비는 총급여가 낮은 쪽이 3% 문턱을 넘기 쉽고, 신용카드도 총급여가 낮은 쪽으로 모으면 공제가 커지는 경우가 많습니다. 부양가족은 세율이 높은(급여가 많은) 쪽이 유리한 편입니다. 다만 한 사람만 받을 수 있으니 서류를 보내실 때 말씀해 주세요.</p>
+        <b>Q. 연말정산 때 빠뜨린 공제가 있어요.</b>
+        <p>5월 종합소득세 신고 때 추가로 반영하거나, 이후 5년 안에 경정청구로 돌려받을 수 있습니다.</p>
+        <b>Q. 세금을 더 내야 하는데 한 번에 내기 부담스러워요.</b>
+        <p>추가 납부세액이 10만원을 넘으면 2월~4월 급여에서 나누어 낼 수 있습니다. 서류 보내실 때 분납 희망이라고 적어 주세요.</p>
+        <b>Q. 간소화 자료를 수정해서 보내도 되나요?</b>
+        <p>PDF는 고치지 말고 원본 그대로 보내 주세요. 빼야 할 항목(다른 가족이 공제받는 부분 등)은 메모로 알려 주시면 사무실에서 반영합니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>적용 법령 근거</summary>
+      <div class="body"><div class="laws">
+        <span>소득세법 §50 기본공제</span><span>§51 추가공제</span><span>§52 특별소득공제</span><span>§59의2 자녀세액공제</span><span>§59의3 연금계좌세액공제</span><span>§59의4 특별세액공제</span><span>§137 연말정산</span><span>§164 지급명세서</span><span>시행령 §118의5 의료비</span><span>시행령 §118의6 교육비</span><span>조특법 §58 고향사랑기부금</span><span>조특법 §87 주택청약</span><span>조특법 §92 혼인 세액공제</span><span>조특법 §95의2 월세</span><span>조특법 §126의2 신용카드</span><span>조특령 §95·§121의2</span><span>국세기본법 §5 기한의 특례</span>
+      </div></div>
+    </details>
+  </section>
+
+  <section>
+    <h2>서류 보내는 방법</h2>
+    <div class="send">
+      <a href="mailto:nooae1385@daum.net"><span>✉️</span><span><b>이메일</b><br>nooae1385@daum.net</span></a>
+      <div><span>📠</span><span><b>팩스</b><br>051-314-1386</span></div>
+      <div><span>📮</span><span><b>우편 (등기·택배)</b><br>(47821) 부산 동래구 충렬대로 84, 803호 (온천동, 영남빌딩)</span></div>
+      <a href="tel:0513141384"><span>☎️</span><span><b>전화 문의</b><br>051-314-1384~5</span></a>
+    </div>
+    <div class="box">자료가 다 모이지 않았어도 준비된 근로자부터 먼저 보내 주세요. 빠진 자료는 담당자가 확인해서 다시 안내드립니다.</div>
+  </section>
+
+</div>
+
+<div class="wrap navwrap">
+  <section>
+    <h2>다른 안내 바로가기</h2>
+    <div class="links">
+      <a href="sugim.html"><span class="ic">🤝</span><span><b>거래처 수임등록 안내</b><small>처음 기장을 맡기실 때</small></span><span class="go">›</span></a>
+      <a href="bugase.html"><span class="ic">🧾</span><span><b>부가가치세 안내</b><small>신고 일정 · 준비서류</small></span><span class="go">›</span></a>
+      <a href="jongso.html"><span class="ic">📒</span><span><b>종합소득세 안내</b><small>5월 신고 준비서류</small></span><span class="go">›</span></a>
+      <a href="beopin.html"><span class="ic">🏢</span><span><b>법인세 안내</b><small>결산 · 신고 준비서류</small></span><span class="go">›</span></a>
+      <a href="myeonse.html"><span class="ic">🏥</span><span><b>면세사업장 현황신고 안내</b><small>병의원·학원·주택임대 2월 신고</small></span><span class="go">›</span></a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="in">
+    <b>해인세무회계</b> · 대표세무사 김윤완<br>
+    ☎ <a href="tel:0513141384">051-314-1384~5</a> · 팩스 051-314-1386<br>
+    ✉ <a href="mailto:nooae1385@daum.net">nooae1385@daum.net</a><br>
+    📮 (47821) 부산 동래구 충렬대로 84, 803호 (온천동, 영남빌딩)
+    <div class="note">이 안내는 일반적인 내용이며, 근로자별 상황에 따라 추가 서류를 요청드릴 수 있습니다.</div>
+  </div>
+</footer>
+
+<script>
+
+
+// ---- 공통: 날짜·휴일·체크리스트 ----
+var WD = ["일","월","화","수","목","금","토"];
+var FIXED = ["01-01","03-01","05-01","05-05","06-06","08-15","10-03","10-09","12-25"];
+var HOL = ["2026-01-01", "2026-02-16", "2026-02-17", "2026-02-18", "2026-03-01", "2026-03-02", "2026-05-01", "2026-05-05", "2026-05-24", "2026-05-25", "2026-06-03", "2026-06-06", "2026-08-15", "2026-08-17", "2026-09-24", "2026-09-25", "2026-09-26", "2026-10-03", "2026-10-05", "2026-10-09", "2026-12-25", "2027-01-01", "2027-02-06", "2027-02-07", "2027-02-08", "2027-02-09", "2027-03-01", "2027-05-01", "2027-05-03", "2027-05-05", "2027-05-13", "2027-06-06", "2027-08-15", "2027-08-16", "2027-09-14", "2027-09-15", "2027-09-16", "2027-10-03", "2027-10-04", "2027-10-09", "2027-10-11", "2027-12-25", "2027-12-27", "2028-01-01", "2028-01-26", "2028-01-27", "2028-01-28", "2028-03-01", "2028-04-12", "2028-05-01", "2028-05-02", "2028-05-05", "2028-06-06", "2028-08-15", "2028-10-02", "2028-10-03", "2028-10-04", "2028-10-05", "2028-10-09", "2028-12-25", "2029-01-01", "2029-02-12", "2029-02-13", "2029-02-14", "2029-03-01", "2029-05-01", "2029-05-05", "2029-05-07", "2029-05-20", "2029-05-21", "2029-06-06", "2029-08-15", "2029-09-21", "2029-09-22", "2029-09-23", "2029-09-24", "2029-10-03", "2029-10-09", "2029-12-25", "2030-01-01", "2030-02-02", "2030-02-03", "2030-02-04", "2030-02-05", "2030-03-01", "2030-05-01", "2030-05-05", "2030-05-06", "2030-05-09", "2030-06-06", "2030-08-15", "2030-09-11", "2030-09-12", "2030-09-13", "2030-10-03", "2030-10-09", "2030-12-25", "2031-01-01", "2031-01-22", "2031-01-23", "2031-01-24", "2031-03-01", "2031-03-03", "2031-05-01", "2031-05-05", "2031-05-28", "2031-06-06", "2031-08-15", "2031-09-30", "2031-10-01", "2031-10-02", "2031-10-03", "2031-10-09", "2031-12-25", "2032-01-01", "2032-02-10", "2032-02-11", "2032-02-12", "2032-03-01", "2032-05-01", "2032-05-03", "2032-05-05", "2032-05-16", "2032-05-17", "2032-06-06", "2032-08-15", "2032-08-16", "2032-09-18", "2032-09-19", "2032-09-20", "2032-09-21", "2032-10-03", "2032-10-04", "2032-10-09", "2032-10-11", "2032-12-25", "2032-12-27"];  // 2026~2032 설·추석·부처님오신날·대체공휴일·선거일 (관공서의 공휴일에 관한 규정 §2·§3)
+function pad(n){ return (n < 10 ? "0" : "") + n; }
+function fmt(d){ return d.getFullYear() + "." + (d.getMonth()+1) + "." + d.getDate() + "(" + WD[d.getDay()] + ")"; }
+function isOff(d){ var w = d.getDay(); return w === 0 || w === 6 || (FIXED.indexOf(pad(d.getMonth()+1) + "-" + pad(d.getDate())) > -1 || HOL.indexOf(d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate())) > -1); }
+function shift(d){ var x = new Date(d.getTime()); while (isOff(x)) x.setDate(x.getDate() + 1); return x; }
+function today0(){ var t = new Date(); t.setHours(0,0,0,0); return t; }
+function ddayHtml(due){
+  var diff = Math.round((due - today0()) / 86400000);
+  var txt = diff > 0 ? "D-" + diff : (diff === 0 ? "D-DAY" : "지남");
+  return "<span class='dday" + (diff < 0 ? " done" : "") + "'>" + txt + "</span>";
+}
+function shiftNote(base, due){ return due.getTime() !== base.getTime() ? "<span class='shift'>원래 " + fmt(base) + " → 휴일 연장</span>" : ""; }
+function store(KEY){
+  var s = {};
+  try { s = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch(e) {}
+  s.save = function(){ try { var o = {}; for (var k in s) if (k !== "save") o[k] = s[k]; localStorage.setItem(KEY, JSON.stringify(o)); } catch(e) {} };
+  return s;
+}
+function initChecklist(st){
+  st.checks = st.checks || {}; st.groups = st.groups || [];
+  var chips = document.querySelectorAll(".chip");
+  function update(){
+    var total = 0, done = 0;
+    document.querySelectorAll(".group.on input").forEach(function(b){ total++; if (b.checked) done++; });
+    document.getElementById("count").textContent = done + " / " + total + " 준비";
+    document.getElementById("bar").style.width = (total ? done / total * 100 : 0) + "%";
+  }
+  function apply(){
+    chips.forEach(function(c){ c.classList.toggle("on", st.groups.indexOf(c.dataset.g) > -1); });
+    document.querySelectorAll(".group").forEach(function(g){ var k = g.dataset.group; g.classList.toggle("on", k === "common" || st.groups.indexOf(k) > -1); });
+    update();
+  }
+  chips.forEach(function(c){ c.addEventListener("click", function(){ var i = st.groups.indexOf(c.dataset.g); if (i > -1) st.groups.splice(i,1); else st.groups.push(c.dataset.g); st.save(); apply(); }); });
+  var boxes = document.querySelectorAll("label.item input");
+  boxes.forEach(function(b){ b.checked = !!st.checks[b.dataset.id]; b.addEventListener("change", function(){ st.checks[b.dataset.id] = b.checked; st.save(); update(); }); });
+  document.getElementById("reset").addEventListener("click", function(){ st.checks = {}; boxes.forEach(function(b){ b.checked = false; }); st.save(); update(); });
+  apply();
+  window.addEventListener("beforeprint", function(){ document.querySelectorAll("details").forEach(function(d){ d.setAttribute("open",""); }); });
+}
+
+(function(){
+  var st = store("hain-yeonmal-v1");
+  // 2026년 귀속 기준 (법령 수치가 귀속연도별로 고정되어 있어 연도는 고정)
+  var Y = 2026;
+  function lastFri(y, m){ var d = new Date(y, m + 1, 0); while (d.getDay() !== 5) d.setDate(d.getDate() - 1); return d; }
+  var due = shift(lastFri(Y + 1, 0));
+  document.getElementById("dueTxt").textContent = fmt(due);
+  var rows = [
+    {t:"국세청 간소화 자료 조회 시작", sub:"국세청 일정 (매년 1월 15일 무렵)", base:new Date(Y + 1, 0, 15), noshift:true},
+    {t:"사무실 서류 제출 마감", sub:"근로자별 서류를 모아 보내 주세요", base:lastFri(Y + 1, 0), main:true},
+    {t:"2월분 급여에 정산 반영", sub:"환급 또는 추가 징수 · 10만원 초과 시 2~4월 분납 가능 (소득세법 §137)", base:new Date(Y + 1, 1, 28)},
+    {t:"원천세 신고·납부 · 근로소득 지급명세서 제출", sub:"사무실에서 처리 (소득세법 §164)", base:new Date(Y + 1, 2, 10)}
+  ];
+  var html = "";
+  rows.forEach(function(r){
+    r.due = r.noshift ? r.base : shift(r.base);
+    var dd = r.t.indexOf("2월분") === 0 ? "<b>" + (Y + 1) + "년 2월 급여일</b>" : "<b>" + fmt(r.due) + "</b><br>" + ddayHtml(r.due) + (r.noshift ? "" : shiftNote(r.base, r.due));
+    html += "<tr" + (r.main ? " class='hl'" : "") + "><td>" + r.t + "<span class='law'>" + r.sub + "</span></td><td style='white-space:nowrap'>" + dd + "</td></tr>";
+  });
+  document.getElementById("tl").innerHTML = html;
+  initChecklist(st);
+})();
+</script>
+</body>
+</html>
