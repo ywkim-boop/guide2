@@ -183,88 +183,90 @@
   </section>
 
   <section id="list">
-    <h2>보내 주실 서류</h2>
-    <p class="hint">해당하는 항목을 선택하면 필요한 서류가 추가됩니다. 근로자 1명마다 확인해 주세요.</p>
+    <h2>사무실로 보내 주실 서류</h2>
+    <div class="box" style="background:#fff8e1;border:1px solid #f0d9a8">
+      <b>근로자분들께 미리 말씀드립니다</b><br>
+      저희 사무실은 회사를 대신하여 연말정산 <b>계산과 신고를 대행</b>하고 있습니다. 부양가족의 소득 요건이나 중복 공제 여부, 주택·월세 요건 등 <b>공제 대상에 해당하는지에 대한 판단과 제출 자료의 정확성은 근로자 본인께서 확인해 주셔야 하는 부분</b>이라는 점 양해 부탁드립니다.<br>
+      정산은 보내 주신 자료를 기준으로 진행하며, <b>자료가 제출되지 않은 공제 항목은 저희가 따로 판단하여 반영해 드리기 어렵습니다.</b> 나중에 요건이 맞지 않는 것으로 확인되면 세금과 가산세가 근로자 본인께 추징될 수 있으니, 신고서를 작성하실 때 한 번 더 살펴봐 주시면 감사하겠습니다. 빠뜨린 공제는 5월 종합소득세 신고나 경정청구로 바로잡으실 수 있습니다.
+    </div>
+    <p class="hint">해당하는 항목을 선택하면 필요한 자료가 추가됩니다. 보내 주신 서류는 <b>사무실에서 보관</b>하고, 나중에 세무서에서 확인 요청이 오면 사무실에서 대응해 드립니다. 원본 대신 사본·사진(PDF)으로 보내 주셔도 됩니다.</p>
     <div class="chips" id="chips">
+      <button class="chip" data-g="fam">부양가족·장애인 공제</button>
+      <button class="chip" data-g="marry">2026년 혼인신고</button>
       <button class="chip" data-g="mid">중도 입사자</button>
-      <button class="chip" data-g="fam">부양가족 공제</button>
-      <button class="chip" data-g="dis">장애인 가족</button>
+      <button class="chip" data-g="cut">청년 등 중소기업 취업자 감면</button>
       <button class="chip" data-g="rent">월세 거주</button>
       <button class="chip" data-g="house">주택대출·청약</button>
-      <button class="chip" data-g="edu">교육비 (자료 누락분)</button>
-      <button class="chip" data-g="med">의료비 (자료 누락분)</button>
-      <button class="chip" data-g="give">기부금</button>
-      <button class="chip" data-g="marry">2026년 혼인신고</button>
+      <button class="chip" data-g="edu">간소화에 없는 교육비</button>
+      <button class="chip" data-g="med">간소화에 없는 의료비</button>
+      <button class="chip" data-g="give">간소화에 없는 기부금</button>
     </div>
     <div class="progress"><div class="bar"><i id="bar"></i></div><span class="count" id="count">0 / 0</span></div>
 
     <div class="group on" data-group="common">
       <h3>회사에서 준비하실 것</h3>
-      <label class="item"><input type="checkbox" data-id="k1"><span><span class="t">근로자 명단 변동사항</span><span class="d">2026년 입사·퇴사자, 급여 변동(인상·상여·비과세 식대 등) — 사무실 급여자료와 다른 부분만</span></span></label>
-      <label class="item"><input type="checkbox" data-id="k2"><span><span class="t">근로자별 자료 취합</span><span class="d">아래 근로자 서류를 사람별로 묶어서 보내 주세요 (파일명에 이름)</span></span></label>
+      <label class="item"><input type="checkbox" data-id="k1"><span><span class="t">2026년 급여 변동사항</span><span class="d">입사·퇴사자, 급여 인상·상여, 비과세(식대·자가운전보조금·출산보육수당 등) 중 사무실 급여자료와 다른 부분만</span></span></label>
+      <label class="item"><input type="checkbox" data-id="k2"><span><span class="t">근로자별로 묶어서 전송</span><span class="d">파일명에 근로자 이름 — 사람별로 정리되어 있으면 처리가 빨라집니다</span></span></label>
       <h3>근로자 공통</h3>
-      <label class="item"><input type="checkbox" data-id="c1"><span><span class="t">소득·세액공제 신고서 및 부양가족 명세</span><span class="d">사무실에서 드리는 양식 — 쓰기 어려우면 비워 두고 서류만 보내셔도 됩니다</span></span></label>
-      <label class="item"><input type="checkbox" data-id="c2"><span><span class="t">국세청 연말정산 간소화 자료 (PDF)</span><span class="d">홈택스에서 <b>"한 번에 내려받기"</b>한 PDF 원본 그대로 — 사진·캡처는 안 됩니다. 아래 "간소화 자료 받는 방법" 참고</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c1"><span><span class="t">소득·세액공제 신고서 (부양가족 명세)</span><span class="d">사무실 양식 — 공제받을 가족의 이름·주민번호·관계, 가족의 소득 100만원(근로소득만 있으면 총급여 500만원) 초과 여부, 장애인·한부모 해당 여부, 2026년 혼인신고일(결혼 세액공제), 맞벌이 배우자가 공제받는 가족을 적어 주세요. 서명한 사본·사진으로 보내 주세요</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c2"><span><span class="t">국세청 연말정산 간소화 자료 (PDF)</span><span class="d">홈택스에서 <b>"한 번에 내려받기"</b>한 PDF 원본 그대로 — 사진·캡처는 안 됩니다. 보험료·연금저축·청약저축·주택자금·카드 사용액·실손보험금 등이 대부분 들어 있어 따로 증명서를 받을 필요가 없습니다</span></span></label>
+    </div>
+
+    <div class="group" data-group="fam">
+      <h3>부양가족·장애인을 공제받는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="f1"><span><span class="t">주민등록등본 (또는 가족관계증명서)</span><span class="d">함께 사는 가족은 등본, 따로 사는 부모님 등 등본에 없는 가족은 가족관계증명서 — 작년에 냈고 가족 변동이 없으면 생략 가능</span></span></label>
+      <label class="item"><input type="checkbox" data-id="f2"><span><span class="t">장애인증명서 또는 장애인등록증 사본</span><span class="d">장애인 공제를 받을 때 — 장애기간이 적힌 증명서를 이미 냈다면 그 기간 동안은 생략 가능. 암 등 중증환자는 병원에서 발급하는 소득세법상 장애인증명서</span></span></label>
+      <label class="item"><input type="checkbox" data-id="f3"><span><span class="t">수급자증명서 · 가정위탁 확인서</span><span class="d">기초생활수급자나 위탁아동을 공제받을 때만</span></span></label>
+    </div>
+
+    <div class="group" data-group="marry">
+      <h3>2026년에 혼인신고를 한 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="w1"><span><span class="t">혼인관계증명서</span><span class="d">결혼 세액공제 50만원 (부부 각각, 생애 1회) — 2026. 12. 31.까지 혼인신고분이 마지막입니다</span></span></label>
     </div>
 
     <div class="group" data-group="mid">
       <h3>2026년 중간에 입사한 경우<span class="tag must">필수</span></h3>
       <label class="item"><input type="checkbox" data-id="m1"><span><span class="t">전(前) 근무지 근로소득 원천징수영수증</span><span class="d">2026년에 다른 회사에서 받은 급여 — 없으면 합산이 안 되어 본인이 5월에 직접 종합소득세 신고를 해야 합니다</span></span></label>
-      <label class="item"><input type="checkbox" data-id="m2"><span><span class="t">간소화 자료는 월별로 출력</span><span class="d">입사 전 사용분은 공제가 안 되는 항목(카드·보험료·의료비·교육비 등)이 있어 월별 내역이 필요합니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="m2"><span><span class="t">간소화 자료는 월별로 출력</span><span class="d">보험료·의료비·교육비·카드 사용액 등은 입사 후 지출분만 공제되어 월별 내역이 필요합니다</span></span></label>
     </div>
 
-    <div class="group" data-group="fam">
-      <h3>부양가족을 공제받는 경우<span class="tag">선택</span></h3>
-      <label class="item"><input type="checkbox" data-id="f1"><span><span class="t">가족관계증명서</span><span class="d">주민등록등본에 없는 가족(따로 사는 부모님, 배우자의 부모님 등) 확인용 — 작년과 같으면 생략 가능</span></span></label>
-      <label class="item"><input type="checkbox" data-id="f2"><span><span class="t">주민등록등본</span><span class="d">함께 사는 가족, 세대주 여부 확인용</span></span></label>
-      <label class="item"><input type="checkbox" data-id="f3"><span><span class="t">가족 자료 제공 동의</span><span class="d">성인 가족의 간소화 자료는 가족이 홈택스에서 "자료제공 동의"를 해야 근로자 화면에 보입니다</span></span></label>
-      <label class="item"><input type="checkbox" data-id="f4"><span><span class="t">수급자증명서 · 가정위탁 확인서</span><span class="d">해당하는 경우만</span></span></label>
-    </div>
-
-    <div class="group" data-group="dis">
-      <h3>장애인 가족이 있는 경우<span class="tag">선택</span></h3>
-      <label class="item"><input type="checkbox" data-id="d1"><span><span class="t">장애인증명서 또는 장애인등록증 사본</span><span class="d">중증환자(암 등)로 공제받으려면 병원에서 발급하는 소득세법상 장애인증명서</span></span></label>
+    <div class="group" data-group="cut">
+      <h3>청년·60세 이상·장애인·경력단절자로 중소기업에 취업한 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="u1"><span><span class="t">중소기업 취업자 소득세 감면 신청서</span><span class="d">2026. 12. 31.까지 취업한 사람 — 소득세 70%(청년 90%, 연 200만원 한도) 감면. 이미 신청한 직원은 다시 내지 않습니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="u2"><span><span class="t">병적증명서 (청년만, 군 복무한 경우)</span><span class="d">청년 나이(15~34세)를 계산할 때 군 복무기간을 빼 주므로 필요합니다</span></span></label>
     </div>
 
     <div class="group" data-group="rent">
       <h3>월세로 사는 경우<span class="tag">선택</span></h3>
-      <label class="item"><input type="checkbox" data-id="r1"><span><span class="t">임대차계약서 사본</span><span class="d">계약서 주소와 주민등록 주소가 같아야 합니다</span></span></label>
-      <label class="item"><input type="checkbox" data-id="r2"><span><span class="t">월세 이체내역 (계좌이체 확인증 등)</span><span class="d">공공임대(LH 등) 월세는 간소화 자료에 나오기도 합니다</span></span></label>
-      <label class="item"><input type="checkbox" data-id="r3"><span><span class="t">주민등록등본</span><span class="d">무주택 세대주 여부 확인용</span></span></label>
+      <label class="item"><input type="checkbox" data-id="r1"><span><span class="t">임대차계약서 사본</span><span class="d">면적·주소·계약기간·월세액으로 공제 대상 여부와 공제액을 계산합니다. 계약서 주소로 전입신고가 되어 있어야 합니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="r2"><span><span class="t">임대인 정보</span><span class="d">임대인 이름과 주민번호(사업자번호) — 월세 공제 명세서에 적어야 합니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="r3"><span><span class="t">월세 이체내역</span><span class="d">계좌이체 확인증 또는 통장 거래내역 — 실제로 지급한 사실 확인용</span></span></label>
     </div>
 
     <div class="group" data-group="house">
       <h3>주택 대출·청약저축이 있는 경우<span class="tag">선택</span></h3>
-      <label class="item"><input type="checkbox" data-id="h1"><span><span class="t">주택자금 상환증명서 · 장기주택저당차입금 이자상환증명서</span><span class="d">은행 발급 — 간소화 자료에 나오면 생략</span></span></label>
-      <label class="item"><input type="checkbox" data-id="h2"><span><span class="t">주택 등기사항증명서 · 공시가격 확인 자료</span><span class="d">장기주택저당차입금 이자 공제를 처음 받는 경우 (취득 당시 기준시가 6억원 이하 확인)</span></span></label>
-      <label class="item"><input type="checkbox" data-id="h3"><span><span class="t">주택청약저축 납입증명서 · 무주택확인서</span><span class="d">무주택확인서는 은행에 2027년 2월 말까지 내야 공제됩니다</span></span></label>
-      <label class="item"><input type="checkbox" data-id="h4"><span><span class="t">전세자금 대출 원리금 상환증명서 · 임대차계약서</span><span class="d">주택임차차입금 공제 시</span></span></label>
+      <label class="item"><input type="checkbox" data-id="h1"><span><span class="t">상환증명서 · 이자상환증명서 (간소화에 없을 때만)</span><span class="d">전세대출 원리금 상환, 장기주택저당차입금 이자 — 대부분 간소화 자료에 나옵니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="h2"><span><span class="t">처음 공제받는 해: 대상 주택 정보</span><span class="d">장기주택저당 — 등기사항증명서 (주택 소유자·취득일 확인, 취득 당시 기준시가 6억원 이하 여부는 사무실에서 확인) · 전세대출 — 임대차계약서 사본</span></span></label>
+      <label class="item"><input type="checkbox" data-id="h3"><span><span class="t">주택청약저축은 은행에 무주택확인서 제출</span><span class="d">사무실이 아니라 <b>가입 은행</b>에 2027년 2월 말까지 내야 공제됩니다. 납입액은 간소화 자료에 나옵니다</span></span></label>
     </div>
 
     <div class="group" data-group="edu">
       <h3>간소화 자료에 없는 교육비<span class="tag">선택</span></h3>
-      <label class="item"><input type="checkbox" data-id="e1"><span><span class="t">교육비 납입증명서</span><span class="d">취학 전 아동 학원·체육시설(주 1회 이상 월 단위), 초등 1~2학년 예체능 학원·체육시설, 국외 교육기관 등</span></span></label>
-      <label class="item"><input type="checkbox" data-id="e2"><span><span class="t">교복 구입 영수증 · 현장체험학습비</span><span class="d">교복은 중·고생 1명당 50만원, 현장체험학습은 초·중·고생 1명당 30만원 한도 — 간소화에 없을 때만</span></span></label>
+      <label class="item"><input type="checkbox" data-id="e1"><span><span class="t">교육비 납입증명서</span><span class="d">취학 전 아동 학원·체육시설(주 1회 이상 월 단위), 초등 1~2학년 예체능 학원·체육시설, 국외 교육기관</span></span></label>
+      <label class="item"><input type="checkbox" data-id="e2"><span><span class="t">교복 구입 영수증</span><span class="d">중·고생 1명당 50만원까지 — 간소화에 없을 때만</span></span></label>
       <label class="item"><input type="checkbox" data-id="e3"><span><span class="t">장애인 특수교육비 납입증명서</span><span class="d">재활교육 시설·발달재활서비스 제공기관</span></span></label>
     </div>
 
     <div class="group" data-group="med">
       <h3>간소화 자료에 없는 의료비<span class="tag">선택</span></h3>
-      <label class="item"><input type="checkbox" data-id="x1"><span><span class="t">안경·콘택트렌즈 구입 영수증</span><span class="d">시력교정용, 1명당 연 50만원까지 — 안경점에서 "의료비 공제용" 영수증 발급</span></span></label>
-      <label class="item"><input type="checkbox" data-id="x2"><span><span class="t">보청기·장애인 보장구 구입 영수증</span><span class="d">간소화 자료에 대부분 나오지 않습니다</span></span></label>
-      <label class="item"><input type="checkbox" data-id="x3"><span><span class="t">산후조리원 영수증</span><span class="d">출산 1회당 200만원까지 — 간소화에 없으면 제출</span></span></label>
-      <label class="item"><input type="checkbox" data-id="x4"><span><span class="t">실손보험금 수령 내역</span><span class="d">보험금으로 받은 금액은 의료비에서 빠집니다 (간소화에 함께 표시)</span></span></label>
+      <label class="item"><input type="checkbox" data-id="x1"><span><span class="t">안경·콘택트렌즈 영수증</span><span class="d">시력교정용, 1명당 연 50만원까지 — 사용자 이름이 적힌 "의료비 공제용" 영수증</span></span></label>
+      <label class="item"><input type="checkbox" data-id="x2"><span><span class="t">보청기·장애인 보장구 영수증</span><span class="d">간소화 제출 대상이 아니어서 대부분 직접 받아야 합니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="x3"><span><span class="t">그 밖에 간소화에 빠진 병원·약국·산후조리원 영수증</span><span class="d">의료비 지급명세서에 지급처 사업자번호를 적어야 하므로 영수증에 사업자번호가 보이게 보내 주세요</span></span></label>
     </div>
 
     <div class="group" data-group="give">
-      <h3>기부금이 있는 경우<span class="tag">선택</span></h3>
-      <label class="item"><input type="checkbox" data-id="g1"><span><span class="t">기부금 영수증</span><span class="d">교회·사찰 등 종교단체, 사회복지단체 — 간소화 자료에 없는 것만</span></span></label>
-      <label class="item"><input type="checkbox" data-id="g2"><span><span class="t">종교단체 소속증명서 · 고유번호증 사본</span><span class="d">영수증에 단체 고유번호가 없을 때</span></span></label>
-    </div>
-
-    <div class="group" data-group="marry">
-      <h3>2026년에 혼인신고를 한 경우<span class="tag">선택</span></h3>
-      <label class="item"><input type="checkbox" data-id="w1"><span><span class="t">혼인관계증명서</span><span class="d">결혼 세액공제 50만원 (부부 각각, 생애 1회)</span></span></label>
+      <h3>간소화 자료에 없는 기부금<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="g1"><span><span class="t">기부금 영수증</span><span class="d">교회·사찰 등 종교단체, 사회복지단체 — 단체명·고유번호·기부 금액·기부자가 적힌 것. 가족 명의 기부금이면 누구 것인지 표시</span></span></label>
     </div>
 
     <div class="btns">
@@ -463,6 +465,8 @@
         <p>5월 종합소득세 신고 때 추가로 반영하거나, 이후 5년 안에 경정청구로 돌려받을 수 있습니다.</p>
         <b>Q. 세금을 더 내야 하는데 한 번에 내기 부담스러워요.</b>
         <p>추가 납부세액이 10만원을 넘으면 2월~4월 급여에서 나누어 낼 수 있습니다. 서류 보내실 때 분납 희망이라고 적어 주세요.</p>
+        <b>Q. 공제가 되는지 안 되는지 사무실에서 판단해 주시나요?</b>
+        <p>일반적인 기준은 이 안내와 문의로 도와드리지만, 가족의 소득이나 다른 가족의 공제 여부처럼 근로자 본인만 아는 사실은 저희가 확인할 수 없습니다. 신고서에 적어 주신 내용과 보내 주신 자료를 기준으로 정산하는 점 양해 부탁드립니다.</p>
         <b>Q. 간소화 자료를 수정해서 보내도 되나요?</b>
         <p>PDF는 고치지 말고 원본 그대로 보내 주세요. 빼야 할 항목(다른 가족이 공제받는 부분 등)은 메모로 알려 주시면 사무실에서 반영합니다.</p>
       </div>
@@ -471,7 +475,7 @@
     <details>
       <summary>적용 법령 근거</summary>
       <div class="body"><div class="laws">
-        <span>소득세법 §50 기본공제</span><span>§51 추가공제</span><span>§52 특별소득공제</span><span>§59의2 자녀세액공제</span><span>§59의3 연금계좌세액공제</span><span>§59의4 특별세액공제</span><span>§137 연말정산</span><span>§164 지급명세서</span><span>시행령 §118의5 의료비</span><span>시행령 §118의6 교육비</span><span>조특법 §58 고향사랑기부금</span><span>조특법 §87 주택청약</span><span>조특법 §92 혼인 세액공제</span><span>조특법 §95의2 월세</span><span>조특법 §126의2 신용카드</span><span>조특령 §95·§121의2</span><span>국세기본법 §5 기한의 특례</span>
+        <span>소득세법 §50 기본공제</span><span>§51 추가공제</span><span>§52 특별소득공제</span><span>§59의2 자녀세액공제</span><span>§59의3 연금계좌세액공제</span><span>§59의4 특별세액공제</span><span>§137 연말정산</span><span>§140 공제신고서</span><span>§164 지급명세서</span><span>시행령 §107 장애인증명서</span><span>시행령 §198 등본 첨부</span><span>시행령 §118의5 의료비</span><span>시행령 §118의6 교육비</span><span>조특법 §30 중소기업 취업자 감면</span><span>조특법 §58 고향사랑기부금</span><span>조특법 §87 주택청약</span><span>조특법 §92 혼인 세액공제</span><span>조특법 §95의2 월세</span><span>조특법 §126의2 신용카드</span><span>조특령 §95·§121의2</span><span>국세기본법 §5 기한의 특례</span>
       </div></div>
     </details>
   </section>
