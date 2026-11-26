@@ -148,6 +148,20 @@
     section{box-shadow:none;border:1px solid var(--line);break-inside:avoid}
     details .body{display:block}
   }
+  /* 맞춤 목록 (사무실 편집 · 링크 전송) */
+  .cust-banner{background:#eef4fb;border:1px solid #c9d8ea;border-radius:10px;padding:10px 12px;margin:0 0 12px;font-size:14px}
+  .editpanel{border:2px dashed var(--navy);border-radius:10px;padding:12px;margin:0 0 14px;background:#fbfcfe}
+  .editpanel h3{margin:0 0 6px}
+  .editpanel .row{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+  .editpanel input[type=text]{flex:1 1 180px;font:inherit;font-size:14px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:#FFF2CC}
+  .editpanel .added{margin:6px 0 0;padding:0;list-style:none}
+  .editpanel .added li{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .editpanel textarea{width:100%;font:inherit;font-size:12.5px;min-height:62px;border:1px solid var(--line);border-radius:8px;padding:6px;box-sizing:border-box}
+  .xbtn{flex:0 0 auto;margin-left:auto;font:inherit;font-size:12px;padding:3px 9px;border:1px solid #c9d1dc;border-radius:99px;background:#fff;color:#5b6472;cursor:pointer}
+  label.item.off{opacity:.45}
+  label.item.off .t{text-decoration:line-through}
+  label.item.off .xbtn{border-color:var(--navy);color:var(--navy)}
+  @media print{.editpanel,.xbtn{display:none!important}}
 </style>
 
 </head>
@@ -178,27 +192,35 @@
 
   <section id="list">
     <h2>준비하실 서류</h2>
-    <p class="hint">해당하는 경우를 선택하시면 필요한 서류가 추가됩니다.</p>
+    <p class="hint">모든 분 공통 서류를 먼저 챙기시고, 해당하는 경우를 선택하시면 필요한 서류가 추가됩니다. <span class="ty"></span>년 1월 1일 ~ 12월 31일 자료 기준입니다.</p>
     <div class="chips" id="chips">
       <button class="chip" data-g="emp">직원 있음</button>
       <button class="chip" data-g="loan">대출 있음</button>
       <button class="chip" data-g="car">차량 리스·할부</button>
-      <button class="chip" data-g="asset">차량·설비·건물 취득</button>
+      <button class="chip" data-g="asset">차량·설비·건물 취득·매각</button>
+      <button class="chip" data-g="ar">외상거래·재고 있음</button>
+      <button class="chip" data-g="bill">어음 거래</button>
+      <button class="chip" data-g="rebate">판매장려금·카드포인트</button>
       <button class="chip" data-g="office">사무실 이전·보증금 변동</button>
       <button class="chip" data-g="other">다른 소득 있음</button>
+      <button class="chip" data-g="sungsil">성실신고확인 대상</button>
+      <button class="chip" data-g="dis">부양가족 중 장애인</button>
     </div>
     <div class="progress"><div class="bar"><i id="bar"></i></div><span class="count" id="count">0 / 0</span></div>
 
     <div class="group on" data-group="common">
-      <h3>모든 분 공통</h3>
-      <label class="item"><input type="checkbox" data-id="c1"><span><span class="t">대표자 건강보험료 월별 납입내역서</span><span class="d">건강보험공단(1577-1000) 팩스 요청 또는 홈페이지 발급 — 직원이 있으면 아래 "직원 있음"을 선택하세요</span></span></label>
-      <label class="item"><input type="checkbox" data-id="c2"><span><span class="t">지방세 납부확인서 (과세증명서)</span><span class="d">구청 또는 위택스 발급 — 지방세 납부실적 증명</span></span></label>
-      <label class="item"><input type="checkbox" data-id="c3"><span><span class="t">주민등록등본</span><span class="d">부양가족 공제·배우자 소득 확인용 — 작년과 변동 없으면 생략 가능</span></span></label>
-      <label class="item"><input type="checkbox" data-id="c4"><span><span class="t">기부금 납부내역서</span><span class="d">기부한 단체에서 발급</span></span></label>
+      <h3>모든 분 공통 — 장부·경비</h3>
+      <label class="item"><input type="checkbox" data-id="c7"><span><span class="t">사업용 통장 거래내역 (엑셀)</span><span class="d"><span class="ty"></span>. 1. 1. ~ 12. 31. 전체 — 사업에 쓰는 통장이 여러 개면 모두</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c8"><span><span class="t">아직 전달하지 않은 경비 영수증</span><span class="d">공과금·관리비·수도료·가스료처럼 세금계산서가 없는 경비 증빙, 각종 세금 납부영수증, 해외카드 사용내역</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c9"><span><span class="t">대표자 본인 신용·체크카드 사용내역서</span><span class="d">사업용 카드로 등록하지 않은 개인카드로 사업 경비를 결제한 경우 — 카드사 홈페이지에서 엑셀로</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c10"><span><span class="t">보험료 영수증 · 보험증권(계약서) 사본</span><span class="d">차량보험, 사업장 화재보험, 영업배상책임보험 등 — 보험료와 보험기간을 확인합니다. <b>올해 갱신한 보험은 꼭 보내 주세요</b></span></span></label>
+      <h3>모든 분 공통 — 공과금·인적공제</h3>
+      <label class="item"><input type="checkbox" data-id="c1"><span><span class="t">대표자 건강보험료 연간 납부확인서 (지역가입자)</span><span class="d"><span class="ty"></span>. 1. 1. ~ 12. 31. 납부분 — 건강보험공단 1577-1000 전화 신청 또는 공단 홈페이지 발급. 직원이 있으면 아래 "직원 있음"을 선택하세요</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c2"><span><span class="t">지방세 과세증명서</span><span class="d">위택스 조회 또는 주민센터 발급 — 환경개선부담금은 따로 납부증명을 조회해야 합니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c3"><span><span class="t">주민등록등본 또는 가족관계증명서</span><span class="d">부양가족 공제·배우자 소득 확인용 — 따로 사는 가족은 가족관계증명서. 작년과 변동 없으면 생략 가능</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c4"><span><span class="t">기부금 영수증</span><span class="d">기부한 단체에서 발급 — 간소화자료에 나오면 생략 가능</span></span></label>
       <label class="item"><input type="checkbox" data-id="c5"><span><span class="t">연금저축·IRP·노란우산공제 납입증명서</span><span class="d">연금계좌 세액공제, 노란우산공제(소기업·소상공인 공제부금) 소득공제용 — 간소화자료에 나오면 생략 가능</span></span></label>
-      <label class="item"><input type="checkbox" data-id="c6"><span><span class="t">종합소득세 신고안내문 · 연말정산 간소화자료</span><span class="d">안내문은 다른 소득이 있을 때 필요 · 의료비·교육비·월세 공제는 성실신고확인 대상자 또는 근로소득이 함께 있는 분만 해당</span></span></label>
-      <label class="item"><input type="checkbox" data-id="c7"><span><span class="t">사업용계좌 입출금 내역 (엑셀)</span><span class="d">1~12월 전체</span></span></label>
-      <label class="item"><input type="checkbox" data-id="c8"><span><span class="t">경비 영수증 · 해외카드 사용내역</span><span class="d">홈택스에 잡히지 않는 사업 관련 지출</span></span></label>
+      <label class="item"><input type="checkbox" data-id="c6"><span><span class="t">종합소득세 신고안내문</span><span class="d">5월에 국세청에서 받은 안내문(우편·카카오톡·홈택스) — 신고 유형과 기납부세액 확인용</span></span></label>
     </div>
 
     <div class="group" data-group="emp">
@@ -207,19 +229,42 @@
     </div>
 
     <div class="group" data-group="loan">
-      <h3>대출이 있는 경우<span class="tag">선택</span></h3>
-      <label class="item"><input type="checkbox" data-id="l1"><span><span class="t">월별 이자 납입내역서</span><span class="d">은행 발급 — <b>이자율이 표기</b>된 것으로</span></span></label>
+      <h3>사업 관련 대출이 있는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="l1"><span><span class="t">대출별 이자 납입내역서</span><span class="d">은행 발급 — <b>이자율과 대출 만기일</b>이 표기된 것으로</span></span></label>
+      <label class="item"><input type="checkbox" data-id="l2"><span><span class="t">금융거래확인서 (<span class="ty"></span>. 12. 31. 현재)</span><span class="d">연말 대출 잔액 확인용 — 거래 은행에서 발급</span></span></label>
+      <label class="item"><input type="checkbox" data-id="l3"><span><span class="t">대출 부대비용 증빙</span><span class="d">신용보증료, 중도상환수수료, 인지대 등</span></span></label>
+      <label class="item"><input type="checkbox" data-id="l4"><span><span class="t">보험회사 약관대출 관련 서류</span><span class="d">사업자금으로 쓴 약관대출이 있는 경우 — 대출 내역과 이자 납입내역</span></span></label>
     </div>
 
     <div class="group" data-group="car">
       <h3>차량 리스·할부가 있는 경우<span class="tag">선택</span></h3>
       <label class="item"><input type="checkbox" data-id="v1"><span><span class="t">리스계약서 또는 할부 상환스케줄표</span><span class="d">대표자 명의 또는 사업장 명의</span></span></label>
-      <label class="item"><input type="checkbox" data-id="v2"><span><span class="t">자동차보험료 납입내역서</span><span class="d">보험사 발급</span></span></label>
+      <label class="item"><input type="checkbox" data-id="v2"><span><span class="t">자동차보험료 납입내역서</span><span class="d">보험사 발급 — 업무용 승용차는 업무전용 자동차보험 가입 여부도 확인합니다</span></span></label>
     </div>
 
     <div class="group" data-group="asset">
-      <h3>차량·설비·건물을 새로 산 경우<span class="tag">선택</span></h3>
-      <label class="item"><input type="checkbox" data-id="a1"><span><span class="t">취득·변동 현황</span><span class="d">차량, 기계설비, 건물 등 — 세금계산서 없이 개인과 거래했다면 계약서</span></span></label>
+      <h3>차량·설비·건물을 사거나 판 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="a1"><span><span class="t">취득 증빙</span><span class="d">매매계약서·세금계산서, 차량은 자동차등록증 사본 — 세금계산서 없이 개인과 거래했다면 계약서</span></span></label>
+      <label class="item"><input type="checkbox" data-id="a2"><span><span class="t">매각·폐기 증빙</span><span class="d">매각 계약서, 받은 금액 — 사업용 자산을 팔면 세금계산서 발급 대상인지 사무실에서 함께 검토합니다</span></span></label>
+    </div>
+
+    <div class="group" data-group="ar">
+      <h3>외상거래·재고가 있는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="r1"><span><span class="t">거래처별 채권·채무 잔액명세 (<span class="ty"></span>. 12. 31. 현재)</span><span class="d">외상매출금·외상매입금·미수금·미지급금을 거래처별로 — 거래처 원장 출력물도 됩니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="r2"><span><span class="t">받지 못할 외상대금 자료</span><span class="d">거래처 부도·폐업 또는 오래 못 받은 매출 채권 — 대손 처리 가능 여부를 검토합니다(부가세 대손세액공제는 별도 신청)</span></span></label>
+      <label class="item"><input type="checkbox" data-id="r3"><span><span class="t">기말 재고 실사표 (<span class="ty"></span>. 12. 31. 현재)</span><span class="d">상품·제품·재공품·원재료별 수량과 금액</span></span></label>
+    </div>
+
+    <div class="group" data-group="bill">
+      <h3>어음 거래가 있는 사업자<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="b1"><span><span class="t">어음관리대장 사본</span><span class="d">받을어음·지급어음 발행·결제 내역</span></span></label>
+      <label class="item"><input type="checkbox" data-id="b2"><span><span class="t">받을어음 할인 관련 영수증</span><span class="d">할인료·수수료 내역 — 거래 대가 없이 빌려준 융통어음은 대여금으로 처리됩니다</span></span></label>
+    </div>
+
+    <div class="group" data-group="rebate">
+      <h3>판매장려금·카드포인트가 있는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="p1"><span><span class="t">판매장려금 수령 내역</span><span class="d">거래처(제조사·도매상)에서 받은 장려금 — 금액·지급일·지급처</span></span></label>
+      <label class="item"><input type="checkbox" data-id="p2"><span><span class="t">카드포인트 사용내역 (약국·병원 등)</span><span class="d">사업 매입대금 결제 등으로 적립된 포인트를 사용한 내역 — 카드사 발급</span></span></label>
     </div>
 
     <div class="group" data-group="office">
@@ -229,9 +274,23 @@
 
     <div class="group" data-group="other">
       <h3>사업소득 외 다른 소득이 있는 경우<span class="tag">선택</span></h3>
-      <label class="item"><input type="checkbox" data-id="x1"><span><span class="t">이자·배당 원천징수영수증</span><span class="d">금융소득이 연 2천만원을 넘으면 종합소득에 합산됩니다</span></span></label>
-      <label class="item"><input type="checkbox" data-id="x2"><span><span class="t">근로소득 원천징수영수증</span><span class="d">회사에서 급여를 받은 경우</span></span></label>
-      <label class="item"><input type="checkbox" data-id="x3"><span><span class="t">기타소득·부동산임대소득 자료</span><span class="d">강의료·원고료 등 지급명세, 임대차계약서</span></span></label>
+      <label class="item"><input type="checkbox" data-id="x1"><span><span class="t">원천징수영수증 (홈택스 등에서 출력)</span><span class="d">근로·이자·배당·다른 사업소득·기타소득 — 소득별로 모두</span></span></label>
+      <label class="item"><input type="checkbox" data-id="x2"><span><span class="t">근로소득이 있으면 연말정산 간소화자료 (PDF)</span><span class="d">합산 신고 때 의료비·교육비 등 공제에 함께 반영합니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="x3"><span><span class="t">합산 대상 금융·기타소득 확인</span><span class="d">이자·배당은 연 2천만원 초과, 기타소득금액은 연 300만원 초과면 종합소득에 합산됩니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="x4"><span><span class="t">부동산임대소득 자료</span><span class="d">임대차계약서, 임대료 입금 내역</span></span></label>
+    </div>
+
+    <div class="group" data-group="sungsil">
+      <h3>성실신고확인 대상자<span class="tag">선택</span></h3>
+      <p class="hint" style="margin:4px 0 6px">성실신고확인서를 내는 사업자는 본인·부양가족의 의료비·교육비·월세 세액공제를 받을 수 있습니다 (조특법 §122의3, <span class="ty"></span>년 귀속분 기준).</p>
+      <label class="item"><input type="checkbox" data-id="s1"><span><span class="t">연말정산 간소화자료 (본인·부양가족)</span><span class="d">의료비·교육비 — 가족 자료는 가족이 홈택스에서 자료제공 동의를 해야 조회됩니다</span></span></label>
+      <label class="item"><input type="checkbox" data-id="s2"><span><span class="t">유치원·어린이집·학원 교육비 납입증명서</span><span class="d">취학 전 아동의 학원·체육시설, 초등 1~2학년(9세 미만) 예체능 학원·체육시설 등 간소화에 없는 교육비</span></span></label>
+      <label class="item"><input type="checkbox" data-id="s3"><span><span class="t">월세 임대차계약서 · 이체내역</span><span class="d">무주택 세대주로 주택 월세를 내는 경우</span></span></label>
+    </div>
+
+    <div class="group" data-group="dis">
+      <h3>부양가족 중 장애인이 있는 경우<span class="tag">선택</span></h3>
+      <label class="item"><input type="checkbox" data-id="d1"><span><span class="t">장애인등록증(수첩) 사본 또는 장애인증명서</span><span class="d">암 등 중증환자는 병원에서 발급하는 소득세법상 장애인증명서 — 장애기간이 적힌 증명서를 이미 냈으면 생략 가능</span></span></label>
     </div>
 
     <div class="btns">
@@ -383,8 +442,89 @@ function store(KEY){
   s.save = function(){ try { var o = {}; for (var k in s) if (k !== "save") o[k] = s[k]; localStorage.setItem(KEY, JSON.stringify(o)); } catch(e) {} };
   return s;
 }
+// ===== 맞춤 목록: 사무실이 서류를 넣고 빼서 링크로 보내는 기능 =====
+// 사무실 편집: 주소 끝에 #edit  /  거래처용 링크: 주소 끝에 #c=...
+function b64e(s){ return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,""); }
+function b64d(s){ s = s.replace(/-/g,"+").replace(/_/g,"/"); while (s.length % 4) s += "="; return decodeURIComponent(escape(atob(s))); }
+function hashParams(){ var o = {}; location.hash.replace(/^#/, "").split("&").forEach(function(p){ if (!p) return; var i = p.indexOf("="); o[i < 0 ? p : p.slice(0, i)] = i < 0 ? true : p.slice(i + 1); }); return o; }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function customize(st){
+  var hp = hashParams(), cfg = {n:"", h:[], a:[]};
+  if (hp.c) { try { var j = JSON.parse(b64d(hp.c)); cfg.n = j.n || ""; cfg.h = j.h || []; cfg.a = j.a || []; } catch(e) {} }
+  var edit = !!hp.edit, list = document.getElementById("list");
+  var common = list.querySelector('.group[data-group="common"]');
+  var tag = (cfg.n + "|" + JSON.stringify(cfg.a)).split("").reduce(function(h, c){ return (h * 31 + c.charCodeAt(0)) >>> 0; }, 7).toString(36);
+  // 추가 서류 묶음
+  var grp = document.createElement("div"); grp.className = "group on"; grp.dataset.group = "common"; grp.id = "custGroup";
+  function drawAdded(){
+    grp.innerHTML = cfg.a.length ? "<h3>사무실에서 추가로 요청드리는 서류<span class='tag must'>필수</span></h3>" + cfg.a.map(function(x, i){
+      return "<label class='item'><input type='checkbox' data-id='u" + tag + "_" + i + "'><span><span class='t'>" + esc(x[0]) + "</span>" + (x[1] ? "<span class='d'>" + esc(x[1]) + "</span>" : "") + "</span></label>";
+    }).join("") : "";
+  }
+  drawAdded(); common.parentNode.insertBefore(grp, common.nextSibling);
+  // 기본 항목 빼기
+  function applyHidden(){
+    list.querySelectorAll("label.item input[data-id]").forEach(function(b){
+      var lab = b.closest("label.item"), off = cfg.h.indexOf(b.dataset.id) > -1;
+      if (edit) lab.classList.toggle("off", off); else if (off) lab.remove();
+    });
+    if (!edit) list.querySelectorAll(".group").forEach(function(g){
+      if (g.id === "custGroup" || g.dataset.group === "common") return;
+      if (!g.querySelector("label.item")) { g.remove(); var c = list.querySelector('.chip[data-g="' + g.dataset.group + '"]'); if (c) c.remove(); }
+    });
+  }
+  // 거래처 화면 안내
+  if (!edit && (cfg.n || cfg.a.length || cfg.h.length)) {
+    var bn = document.createElement("div"); bn.className = "cust-banner";
+    bn.innerHTML = (cfg.n ? "<b>" + esc(cfg.n) + "</b> 님께 " : "") + "사무실에서 맞춤으로 정리해 드린 서류 목록입니다. 필요 없는 항목은 빼고, 추가로 필요한 서류를 넣어 두었습니다.";
+    list.insertBefore(bn, list.querySelector("h2").nextSibling);
+  }
+  if (!edit) { applyHidden(); return; }
+  // ===== 사무실 편집 화면 =====
+  var p = document.createElement("div"); p.className = "editpanel";
+  p.innerHTML = "<h3>사무실 편집 화면 (거래처에는 보이지 않습니다)</h3>"
+    + "<p class='hint' style='margin:0'>① 아래 서류 목록에서 필요 없는 항목은 <b>빼기</b>를 누르고 ② 추가할 서류를 적은 뒤 ③ <b>링크 만들기</b>를 눌러 복사한 주소를 카톡으로 보내세요. 모든 선택 항목을 펼쳐 두었습니다.</p>"
+    + "<div class='row'><input type='text' id='cName' placeholder='거래처명 (예: ○○상사) — 비워도 됩니다'></div>"
+    + "<div class='row'><input type='text' id='cT' placeholder='추가할 서류명 (예: 2026년 차량 리스계약서)'><input type='text' id='cD' placeholder='설명 (선택)'><button class='btn' id='cAdd'>추가</button></div>"
+    + "<ul class='added' id='cList'></ul>"
+    + "<div class='row'><button class='btn' id='cMake' style='background:var(--navy);color:#fff'>링크 만들기 · 복사</button><button class='btn' id='cClear'>처음 상태로</button></div>"
+    + "<textarea id='cOut' readonly placeholder='여기에 거래처용 주소가 만들어집니다'></textarea>";
+  list.insertBefore(p, list.querySelector("h2").nextSibling);
+  var nm = p.querySelector("#cName"); nm.value = cfg.n;
+  function drawList(){
+    p.querySelector("#cList").innerHTML = cfg.a.map(function(x, i){ return "<li><span><b>" + esc(x[0]) + "</b>" + (x[1] ? " — " + esc(x[1]) : "") + "</span><button class='xbtn' data-i='" + i + "'>삭제</button></li>"; }).join("");
+    p.querySelectorAll("#cList .xbtn").forEach(function(b){ b.onclick = function(){ cfg.a.splice(+b.dataset.i, 1); drawList(); drawAdded(); }; });
+  }
+  drawList();
+  p.querySelector("#cAdd").onclick = function(){ var t = p.querySelector("#cT").value.trim(); if (!t) return; cfg.a.push([t, p.querySelector("#cD").value.trim()]); p.querySelector("#cT").value = ""; p.querySelector("#cD").value = ""; drawList(); drawAdded(); };
+  p.querySelector("#cT").addEventListener("keydown", function(e){ if (e.key === "Enter") p.querySelector("#cAdd").click(); });
+  p.querySelector("#cClear").onclick = function(){ cfg = {n:"", h:[], a:[]}; nm.value = ""; drawList(); drawAdded(); applyHidden(); p.querySelector("#cOut").value = ""; };
+  p.querySelector("#cMake").onclick = function(){
+    cfg.n = nm.value.trim();
+    var url = location.href.split("#")[0] + "#c=" + b64e(JSON.stringify(cfg));
+    var o = p.querySelector("#cOut"); o.value = url; o.select();
+    var me = this; function done(){ me.textContent = "복사했습니다 ✓"; setTimeout(function(){ me.textContent = "링크 만들기 · 복사"; }, 1800); }
+    function fallback(){ try { document.execCommand("copy"); done(); } catch(e) {} }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, fallback); else fallback();
+  };
+  list.querySelectorAll("label.item input[data-id]").forEach(function(b){
+    if (b.closest("#custGroup")) return;
+    var x = document.createElement("button"); x.className = "xbtn"; x.type = "button"; x.textContent = "빼기";
+    x.addEventListener("click", function(e){ e.preventDefault(); e.stopPropagation(); var id = b.dataset.id, i = cfg.h.indexOf(id); if (i > -1) cfg.h.splice(i, 1); else cfg.h.push(id); x.textContent = i > -1 ? "빼기" : "되살리기"; applyHidden(); });
+    if (cfg.h.indexOf(b.dataset.id) > -1) x.textContent = "되살리기";
+    b.closest("label.item").appendChild(x);
+  });
+  list.querySelectorAll(".group").forEach(function(g){ g.classList.add("on"); });
+  st.groups = list.querySelectorAll(".chip").length ? Array.prototype.map.call(list.querySelectorAll(".chip"), function(c){ return c.dataset.g; }) : st.groups;
+  st.save = function(){};   // 편집 화면에서는 체크 상태를 저장하지 않음
+  applyHidden();
+}
+window.addEventListener("hashchange", function(){ location.reload(); });
+
 function initChecklist(st){
   st.checks = st.checks || {}; st.groups = st.groups || [];
+  customize(st);
+  document.querySelectorAll(".ty").forEach(function(e){ var t = new Date(); e.textContent = t.getMonth() >= 5 ? t.getFullYear() : t.getFullYear() - 1; });
   var chips = document.querySelectorAll(".chip");
   function update(){
     var total = 0, done = 0;

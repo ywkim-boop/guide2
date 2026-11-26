@@ -148,6 +148,20 @@
     section{box-shadow:none;border:1px solid var(--line);break-inside:avoid}
     details .body{display:block}
   }
+  /* 맞춤 목록 (사무실 편집 · 링크 전송) */
+  .cust-banner{background:#eef4fb;border:1px solid #c9d8ea;border-radius:10px;padding:10px 12px;margin:0 0 12px;font-size:14px}
+  .editpanel{border:2px dashed var(--navy);border-radius:10px;padding:12px;margin:0 0 14px;background:#fbfcfe}
+  .editpanel h3{margin:0 0 6px}
+  .editpanel .row{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+  .editpanel input[type=text]{flex:1 1 180px;font:inherit;font-size:14px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:#FFF2CC}
+  .editpanel .added{margin:6px 0 0;padding:0;list-style:none}
+  .editpanel .added li{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .editpanel textarea{width:100%;font:inherit;font-size:12.5px;min-height:62px;border:1px solid var(--line);border-radius:8px;padding:6px;box-sizing:border-box}
+  .xbtn{flex:0 0 auto;margin-left:auto;font:inherit;font-size:12px;padding:3px 9px;border:1px solid #c9d1dc;border-radius:99px;background:#fff;color:#5b6472;cursor:pointer}
+  label.item.off{opacity:.45}
+  label.item.off .t{text-decoration:line-through}
+  label.item.off .xbtn{border-color:var(--navy);color:var(--navy)}
+  @media print{.editpanel,.xbtn{display:none!important}}
 </style>
 
 </head>
@@ -398,8 +412,88 @@ function store(KEY){
   s.save = function(){ try { var o = {}; for (var k in s) if (k !== "save") o[k] = s[k]; localStorage.setItem(KEY, JSON.stringify(o)); } catch(e) {} };
   return s;
 }
+// ===== 맞춤 목록: 사무실이 서류를 넣고 빼서 링크로 보내는 기능 =====
+// 사무실 편집: 주소 끝에 #edit  /  거래처용 링크: 주소 끝에 #c=...
+function b64e(s){ return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,""); }
+function b64d(s){ s = s.replace(/-/g,"+").replace(/_/g,"/"); while (s.length % 4) s += "="; return decodeURIComponent(escape(atob(s))); }
+function hashParams(){ var o = {}; location.hash.replace(/^#/, "").split("&").forEach(function(p){ if (!p) return; var i = p.indexOf("="); o[i < 0 ? p : p.slice(0, i)] = i < 0 ? true : p.slice(i + 1); }); return o; }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function customize(st){
+  var hp = hashParams(), cfg = {n:"", h:[], a:[]};
+  if (hp.c) { try { var j = JSON.parse(b64d(hp.c)); cfg.n = j.n || ""; cfg.h = j.h || []; cfg.a = j.a || []; } catch(e) {} }
+  var edit = !!hp.edit, list = document.getElementById("list");
+  var common = list.querySelector('.group[data-group="common"]');
+  var tag = (cfg.n + "|" + JSON.stringify(cfg.a)).split("").reduce(function(h, c){ return (h * 31 + c.charCodeAt(0)) >>> 0; }, 7).toString(36);
+  // 추가 서류 묶음
+  var grp = document.createElement("div"); grp.className = "group on"; grp.dataset.group = "common"; grp.id = "custGroup";
+  function drawAdded(){
+    grp.innerHTML = cfg.a.length ? "<h3>사무실에서 추가로 요청드리는 서류<span class='tag must'>필수</span></h3>" + cfg.a.map(function(x, i){
+      return "<label class='item'><input type='checkbox' data-id='u" + tag + "_" + i + "'><span><span class='t'>" + esc(x[0]) + "</span>" + (x[1] ? "<span class='d'>" + esc(x[1]) + "</span>" : "") + "</span></label>";
+    }).join("") : "";
+  }
+  drawAdded(); common.parentNode.insertBefore(grp, common.nextSibling);
+  // 기본 항목 빼기
+  function applyHidden(){
+    list.querySelectorAll("label.item input[data-id]").forEach(function(b){
+      var lab = b.closest("label.item"), off = cfg.h.indexOf(b.dataset.id) > -1;
+      if (edit) lab.classList.toggle("off", off); else if (off) lab.remove();
+    });
+    if (!edit) list.querySelectorAll(".group").forEach(function(g){
+      if (g.id === "custGroup" || g.dataset.group === "common") return;
+      if (!g.querySelector("label.item")) { g.remove(); var c = list.querySelector('.chip[data-g="' + g.dataset.group + '"]'); if (c) c.remove(); }
+    });
+  }
+  // 거래처 화면 안내
+  if (!edit && (cfg.n || cfg.a.length || cfg.h.length)) {
+    var bn = document.createElement("div"); bn.className = "cust-banner";
+    bn.innerHTML = (cfg.n ? "<b>" + esc(cfg.n) + "</b> 님께 " : "") + "사무실에서 맞춤으로 정리해 드린 서류 목록입니다. 필요 없는 항목은 빼고, 추가로 필요한 서류를 넣어 두었습니다.";
+    list.insertBefore(bn, list.querySelector("h2").nextSibling);
+  }
+  if (!edit) { applyHidden(); return; }
+  // ===== 사무실 편집 화면 =====
+  var p = document.createElement("div"); p.className = "editpanel";
+  p.innerHTML = "<h3>사무실 편집 화면 (거래처에는 보이지 않습니다)</h3>"
+    + "<p class='hint' style='margin:0'>① 아래 서류 목록에서 필요 없는 항목은 <b>빼기</b>를 누르고 ② 추가할 서류를 적은 뒤 ③ <b>링크 만들기</b>를 눌러 복사한 주소를 카톡으로 보내세요. 모든 선택 항목을 펼쳐 두었습니다.</p>"
+    + "<div class='row'><input type='text' id='cName' placeholder='거래처명 (예: ○○상사) — 비워도 됩니다'></div>"
+    + "<div class='row'><input type='text' id='cT' placeholder='추가할 서류명 (예: 2026년 차량 리스계약서)'><input type='text' id='cD' placeholder='설명 (선택)'><button class='btn' id='cAdd'>추가</button></div>"
+    + "<ul class='added' id='cList'></ul>"
+    + "<div class='row'><button class='btn' id='cMake' style='background:var(--navy);color:#fff'>링크 만들기 · 복사</button><button class='btn' id='cClear'>처음 상태로</button></div>"
+    + "<textarea id='cOut' readonly placeholder='여기에 거래처용 주소가 만들어집니다'></textarea>";
+  list.insertBefore(p, list.querySelector("h2").nextSibling);
+  var nm = p.querySelector("#cName"); nm.value = cfg.n;
+  function drawList(){
+    p.querySelector("#cList").innerHTML = cfg.a.map(function(x, i){ return "<li><span><b>" + esc(x[0]) + "</b>" + (x[1] ? " — " + esc(x[1]) : "") + "</span><button class='xbtn' data-i='" + i + "'>삭제</button></li>"; }).join("");
+    p.querySelectorAll("#cList .xbtn").forEach(function(b){ b.onclick = function(){ cfg.a.splice(+b.dataset.i, 1); drawList(); drawAdded(); }; });
+  }
+  drawList();
+  p.querySelector("#cAdd").onclick = function(){ var t = p.querySelector("#cT").value.trim(); if (!t) return; cfg.a.push([t, p.querySelector("#cD").value.trim()]); p.querySelector("#cT").value = ""; p.querySelector("#cD").value = ""; drawList(); drawAdded(); };
+  p.querySelector("#cT").addEventListener("keydown", function(e){ if (e.key === "Enter") p.querySelector("#cAdd").click(); });
+  p.querySelector("#cClear").onclick = function(){ cfg = {n:"", h:[], a:[]}; nm.value = ""; drawList(); drawAdded(); applyHidden(); p.querySelector("#cOut").value = ""; };
+  p.querySelector("#cMake").onclick = function(){
+    cfg.n = nm.value.trim();
+    var url = location.href.split("#")[0] + "#c=" + b64e(JSON.stringify(cfg));
+    var o = p.querySelector("#cOut"); o.value = url; o.select();
+    var me = this; function done(){ me.textContent = "복사했습니다 ✓"; setTimeout(function(){ me.textContent = "링크 만들기 · 복사"; }, 1800); }
+    function fallback(){ try { document.execCommand("copy"); done(); } catch(e) {} }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, fallback); else fallback();
+  };
+  list.querySelectorAll("label.item input[data-id]").forEach(function(b){
+    if (b.closest("#custGroup")) return;
+    var x = document.createElement("button"); x.className = "xbtn"; x.type = "button"; x.textContent = "빼기";
+    x.addEventListener("click", function(e){ e.preventDefault(); e.stopPropagation(); var id = b.dataset.id, i = cfg.h.indexOf(id); if (i > -1) cfg.h.splice(i, 1); else cfg.h.push(id); x.textContent = i > -1 ? "빼기" : "되살리기"; applyHidden(); });
+    if (cfg.h.indexOf(b.dataset.id) > -1) x.textContent = "되살리기";
+    b.closest("label.item").appendChild(x);
+  });
+  list.querySelectorAll(".group").forEach(function(g){ g.classList.add("on"); });
+  st.groups = list.querySelectorAll(".chip").length ? Array.prototype.map.call(list.querySelectorAll(".chip"), function(c){ return c.dataset.g; }) : st.groups;
+  st.save = function(){};   // 편집 화면에서는 체크 상태를 저장하지 않음
+  applyHidden();
+}
+window.addEventListener("hashchange", function(){ location.reload(); });
+
 function initChecklist(st){
   st.checks = st.checks || {}; st.groups = st.groups || [];
+  customize(st);
   var chips = document.querySelectorAll(".chip");
   function update(){
     var total = 0, done = 0;
